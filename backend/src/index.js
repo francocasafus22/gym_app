@@ -1,8 +1,13 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
+import userRouter from "./routes/userRouter.js";
+import membresiaRouter from "./routes/membresiaRouter.js";
 
 dotenv.config();
+
+connectDB();
 
 const PORT = process.env.PORT || 3000;
 
@@ -16,10 +21,11 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.json({ message: "hola mundo" });
+app.use("/api/user", userRouter);
+app.use("/api/membresia", membresiaRouter);
+app.use("/", (req, res) => {
+  res.json({ message: "Spartan Gym" });
 });
-
 app.use(cors(corsOptions));
 
 app.listen(PORT, () => {
