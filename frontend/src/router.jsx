@@ -1,15 +1,22 @@
 import { Routes, BrowserRouter, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Perfil from "./pages/Perfil";
-import Tienda from "./pages/Tienda";
+
+// Páginas admin
+import DashboardPage from "./pages/admin/DashboardPage";
+import UsuariosPage from "./pages/admin/UsuariosPage";
+import RutinasPage from "./pages/admin/RutinasPage";
+import MembresiasPage from "./pages/admin/MembresiasPage";
+import VentasPage from "./pages/admin/VentasPage";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/perfil" element={<Perfil></Perfil>}></Route>
-        <Route path="/tienda" element={<Tienda></Tienda>}></Route>
+
+        <Route path="/membresias" element={<MembresiasPage />} />
+        <Route path="/rutinas" element={<RutinasPage />} />
+        <Route path="/ventas" element={<VentasPage />} />
+        <Route path="/usuarios" element={<UsuariosPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
   );
