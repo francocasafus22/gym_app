@@ -5,17 +5,7 @@ export default function Home() {
         <div className="min-h-screen bg-black text-white">
             {/* Header */}
             <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/20">
-                <nav className="container mx-auto px-6 py-4 flex items-center justify-between">
-                    <div className="text-xl font-bold">SPARTAN GYM</div>
-                    <div className="flex items-center gap-8">
-                        <a href="#contacto" className="hover:text-red-500 transition-colors">Contacto</a>
-                        <a href="#ubicacion" className="hover:text-red-500 transition-colors">Ubicación</a>
-                        <a href="#planes" className="hover:text-red-500 transition-colors">Planes</a>
-                    </div>
-                    <button className="border border-white text-white hover:bg-white hover:text-black bg-transparent px-4 py-2 rounded">
-                        Login
-                    </button>
-                </nav>
+
             </header>
 
             {/* panel */}
