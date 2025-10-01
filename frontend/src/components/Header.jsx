@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { X, Menu } from "lucide-react";
 import { useState } from "react";
+import Logo from "./Logo";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -18,12 +19,12 @@ export default function Header() {
   }
 
   return (
-    <header className="shadow-md w-full py-3 bg-transparent">
+    <header className="shadow-md w-full py-3 bg-transparent border-b border-border">
       <div className="flex items-center justify-between px-5">
         {/* Logo */}
-        {/*Falta agregar el logo imagen*/}
-        <div className="flex items-center fixed">
-          <span className="text-xl font-bold">Spartan Gym</span>
+        <div className="flex items-center fixed space-x-2">
+          <Logo />
+          <span className="text-2xl font-bold text-accent">Spartan Gym</span>
         </div>
 
         {/* Links del nav*/}
