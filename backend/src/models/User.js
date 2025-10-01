@@ -32,20 +32,9 @@ const userSchema = new Schema(
       required: true,
       default: "usuario",
     },
-    estado: {
-      type: String,
-      enum: ["activo", "inactivo"],
-      default: "activo",
-    },
     membresia: {
       type: Types.ObjectId,
       ref: "Membresia",
-    },
-    fechaInicioMembresia: {
-      type: Date,
-    },
-    fechaFinMembresia: {
-      type: Date,
     },
   },
   {

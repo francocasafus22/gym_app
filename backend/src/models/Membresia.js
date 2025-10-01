@@ -16,6 +16,16 @@ const membresiaSchema = new Schema(
       type: String,
       default: "",
     },
+    fechaInicio: {
+      type: Date,
+    },
+    fechaFin: {
+      type: Date,
+    },
+    estado: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
