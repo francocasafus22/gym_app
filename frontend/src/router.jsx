@@ -14,25 +14,34 @@ import LandingPage from "./pages/LandingPage";
 // Páginas user
 import MiMembresiaPage from "./pages/user/MiMembresiaPage";
 import MiRutinaPage from "./pages/user/MiRutinaPage";
+import FeedPage from "./pages/user/FeedPage";
+import AppLayout from "./layouts/AppLayout";
+import PublicLayout from "./layouts/PublicLayout";
 
 export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Página principal */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
 
-        {/* Admin */}
-        <Route path="/membresias" element={<MembresiasPage />} />
-        <Route path="/rutinas" element={<RutinasPage />} />
-        <Route path="/ventas" element={<VentasPage />} />
-        <Route path="/usuarios" element={<UsuariosPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+        </Route>
 
-        {/* Usuario */}
-        <Route path="/mi-membresia" element={<MiMembresiaPage />} />
-        <Route path="/mi-rutina" element={<MiRutinaPage />} />
+        <Route element={<AppLayout />}>
+          {/* Admin */}
+          <Route path="/membresias" element={<MembresiasPage />} />
+          <Route path="/rutinas" element={<RutinasPage />} />
+          <Route path="/ventas" element={<VentasPage />} />
+          <Route path="/usuarios" element={<UsuariosPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+
+          {/* Usuario */}
+
+          <Route path="/mi-membresia" element={<MiMembresiaPage />} />
+          <Route path="/mi-rutina" element={<MiRutinaPage />} />
+          <Route path="/feed" element={<FeedPage />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

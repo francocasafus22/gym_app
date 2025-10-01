@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 export default function UserNavigation() {
   const tabs = [
-    { name: "Usuarios", href: "/" },
+    { name: "Usuarios", href: "/usuarios" },
     { name: "Membresias", href: "/mi-membresia" },
     { name: "Rutinas", href: "/mi-rutina" },
-    { name: "Dashboard", href: "/mi-rutina" },
+    { name: "Ventas", href: "/ventas" },
+    { name: "Dashboard", href: "/dashboard" },
   ];
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

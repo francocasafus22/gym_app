@@ -1,55 +1,63 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { X, Menu } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import UserNavigation from "./nav/UserNavigation";
 import AdminNavigation from "./nav/AdminNavigation";
 
-export default function Header() {
+export default function Header({ isLogin, setIsLogin, isAdmin }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const [isLogin, setIsLogin] = useState(true);
-  const [isAdmin, SetIsAdmin] = useState(false);
+  const navigate = useNavigate();
 
-  const tabs = [
-    { name: "Home", href: "/" },
-    { name: "Membresía", href: "/mi-membresia" },
-    { name: "Rutina", href: "/mi-rutina" },
-  ];
+  const isLandingPage = location.pathname === "/";
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
+  const handleAuthButton = () => {
+    if (isLogin) {
+      // simula cerrar la sesión
+      setIsLogin(false);
+      navigate("/"); // volver a landing
+    } else {
+      // smiula iniciar la sesión
+      setIsLogin(true);
+      navigate("/feed"); // ir al feed
+    }
+  };
 
   return (
     <header className="shadow-lg w-full py-3 bg-transparent border-b border-border">
       <div className="flex items-center justify-between px-5">
         {/* Logo */}
-        <div className="flex items-center  space-x-2">
+        <div className="flex items-center space-x-2">
           <Logo />
           <span className="text-2xl font-bold text-accent">Spartan Gym</span>
         </div>
 
-        {/* Links del nav*/}
-        <nav className="hidden lg:flex gap-3  mx-auto">
-          {isAdmin ? <AdminNavigation /> : <UserNavigation />}
-        </nav>
+        {/* Links del nav */}
+        {!isLandingPage || isLogin ? (
+          <nav className="hidden lg:flex gap-3 mx-auto">
+            {isAdmin ? <AdminNavigation /> : <UserNavigation />}
+          </nav>
+        ) : null}
 
+        {/* Botón Login/Logout */}
         <div>
-          <button className="px-5 py-2 border-2 border-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300  cursor-pointer hidden lg:block">
-            {isLogin ? "Cerrar Sesion" : "Iniciar Sesión"}
+          <button
+            className="px-5 py-2 border-2 border-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300 cursor-pointer hidden lg:block"
+            onClick={handleAuthButton}
+          >
+            {isLogin ? "Cerrar Sesión" : "Iniciar Sesión"}
           </button>
         </div>
 
         {/* Toggle menú celular */}
         <div className="lg:hidden flex items-center justify-end mr-5 gap-3 ml-auto hover:text-accent transition-colors duration-150 ease-in-out">
-          {/* Botón menú */}
-          <button className=" z-50 " onClick={() => setOpen(!open)}>
+          <button className="z-50" onClick={() => setOpen(!open)}>
             {open ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* Menú desplegable de celular */}
+        {/* Menú desplegable móvil */}
         <div
           className={`lg:hidden fixed top-20 left-2 right-2 bg-black/20 backdrop-blur-xl shadow-lg rounded-lg p-4 flex flex-col gap-2 transition-all duration-300 ease-in-out ${
             open
@@ -57,9 +65,14 @@ export default function Header() {
               : "opacity-0 scale-95 pointer-events-none"
           }`}
         >
-          {isAdmin ? <AdminNavigation /> : <UserNavigation />}
-          <button className="px-5 py-2 border-2 border-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300  cursor-pointer ">
-            {isLogin ? "Cerrar Sesion" : "Iniciar Sesión"}
+          {!isLandingPage &&
+            (isAdmin ? <AdminNavigation /> : <UserNavigation />)}
+
+          <button
+            className="px-5 py-2 border-2 border-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            {isLogin ? "Cerrar Sesión" : "Iniciar Sesión"}
           </button>
         </div>
       </div>

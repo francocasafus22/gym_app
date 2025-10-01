@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Home() {
     return (
+    <>
         <div className="min-h-screen bg-black text-white">
             {/* Header */}
             <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/20">
@@ -64,5 +65,6 @@ export default function Home() {
 
             <div className="h-20"></div>
         </div>
+    </>
     );
 }
