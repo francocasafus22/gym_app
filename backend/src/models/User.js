@@ -32,10 +32,12 @@ const userSchema = new Schema(
       required: true,
       default: "usuario",
     },
-    membresia: {
-      type: Types.ObjectId,
-      ref: "Membresia",
-    },
+    membresia: [
+      {
+        type: Types.ObjectId,
+        ref: "Membresia",
+      },
+    ],
   },
   {
     timestamps: true,
