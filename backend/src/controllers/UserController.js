@@ -30,7 +30,7 @@ export default class UserController {
 
       res.json({ token });
     } catch (error) {
-      console.log(res.status(500).json({ error: "Error al iniciar sesión" }));
+      res.status(500).json({ error: "Error al iniciar sesión" });
     }
   }
 

@@ -17,6 +17,7 @@ import MiRutinaPage from "./pages/user/MiRutinaPage";
 import FeedPage from "./pages/user/FeedPage";
 import AppLayout from "./layouts/AppLayout";
 import PublicLayout from "./layouts/PublicLayout";
+import LoginPage from "./pages/publicas/LoginPage";
 
 export default function Router() {
   return (
@@ -27,6 +28,8 @@ export default function Router() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
         </Route>
+
+        <Route path="/auth/login" element={<LoginPage />}></Route>
 
         <Route element={<AppLayout />}>
           {/* Admin */}
