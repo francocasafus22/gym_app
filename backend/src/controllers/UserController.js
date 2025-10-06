@@ -13,16 +13,16 @@ export default class UserController {
       const user = await User.findOne({ email });
 
       if (!user) {
-        res
-          .status(404)
-          .json({ message: "No existe ningun usuario con ese email" });
+        const error = new Error("No existe ningun usuario con ese email");
+        res.status(404).json({ error: error.message });
         return;
       }
 
       const isPasswordCorrect = await checkPassword(password, user.password);
 
       if (!isPasswordCorrect) {
-        res.status(401).json({ message: "Contraseña incorrecta" });
+        const error = new Error("Contraseña incorrecta");
+        res.status(401).json({ error: error.message });
         return;
       }
 
@@ -53,6 +53,15 @@ export default class UserController {
       res.status(201).json({ message: "Usuario creado correctamente" });
     } catch (error) {
       res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async getUser(req, res) {
+    try {
+      const user = await User.findById(req.user.id).select("-password -_id");
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: "Hubo un error" });
     }
   }
 }
