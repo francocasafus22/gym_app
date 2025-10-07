@@ -1,7 +1,12 @@
+import { useOutletContext } from "react-router-dom";
+import Loading from "../../components/Loading";
 import NewsCard from "../../components/NewsCard";
-
+import useAuth from "../../hooks/useAuth";
 
 export default function HomePage() {
+  // Recibe el user del layout
+  const { user } = useOutletContext();
+
   const newsItems = [
     {
       id: 1,
@@ -28,33 +33,55 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen bg-[#111] text-white overflow-hidden">
-
       {/* Fondos decorativos (más visibles y variados) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Grupo de logos distribuidos */}
         <div className="absolute -left-20 top-10 w-72 h-72 opacity-20 rotate-6">
-          <img src="/logoSolo.png" alt="Logo Spartan" className="w-full h-full object-contain" />
+          <img
+            src="/logoSolo.png"
+            alt="Logo Spartan"
+            className="w-full h-full object-contain"
+          />
         </div>
 
         <div className="absolute right-16 top-32 w-80 h-80 opacity-15 -rotate-12">
-          <img src="/logoSolo.png" alt="Logo Spartan" className="w-full h-full object-contain" />
+          <img
+            src="/logoSolo.png"
+            alt="Logo Spartan"
+            className="w-full h-full object-contain"
+          />
         </div>
 
         <div className="absolute left-1/3 top-1/2 w-64 h-64 opacity-10 rotate-3">
-          <img src="/logoSolo.png" alt="Logo Spartan" className="w-full h-full object-contain" />
+          <img
+            src="/logoSolo.png"
+            alt="Logo Spartan"
+            className="w-full h-full object-contain"
+          />
         </div>
 
         <div className="absolute right-1/4 bottom-16 w-96 h-96 opacity-15 rotate-12">
-          <img src="/logoSolo.png" alt="Logo Spartan" className="w-full h-full object-contain" />
+          <img
+            src="/logoSolo.png"
+            alt="Logo Spartan"
+            className="w-full h-full object-contain"
+          />
         </div>
 
         <div className="absolute left-8 bottom-24 w-60 h-60 opacity-20 -rotate-6">
-          <img src="/logoSolo.png" alt="Logo Spartan" className="w-full h-full object-contain" />
+          <img
+            src="/logoSolo.png"
+            alt="Logo Spartan"
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
 
       {/* Contenido principal */}
       <div className="relative z-10 container mx-auto px-4 py-12 md:py-16 max-w-2xl">
+        <h1 className="text-4xl font-bold mb-8 text-center">
+          Hola, {user.firstName} {user.lastName} !
+        </h1>
         <div className="flex flex-col gap-8">
           {newsItems.map((item) => (
             <NewsCard key={item.id} title={item.title} image={item.image} />

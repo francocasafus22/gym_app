@@ -5,23 +5,17 @@ import Logo from "./Logo";
 import UserNavigation from "./nav/UserNavigation";
 import AdminNavigation from "./nav/AdminNavigation";
 
-export default function Header({ isLogin, setIsLogin, isAdmin }) {
+export default function Header({ user = null, logout }) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const [isLogin] = useState(user ? true : false);
+  const [isAdmin] = useState(user?.rol === "administrador" ? true : false);
 
   const isLandingPage = location.pathname === "/";
 
   const handleAuthButton = () => {
-    if (isLogin) {
-      // simula cerrar la sesión
-      setIsLogin(false);
-      navigate("/"); // volver a landing
-    } else {
-      // smiula iniciar la sesión
-      setIsLogin(true);
-      navigate("/feed"); // ir al feed
-    }
+    isLogin ? logout() : navigate("/auth/login");
   };
 
   return (
@@ -36,7 +30,11 @@ export default function Header({ isLogin, setIsLogin, isAdmin }) {
         {/* Links del nav */}
         {!isLandingPage || isLogin ? (
           <nav className="hidden lg:flex gap-3 mx-auto">
-            {isAdmin ? <AdminNavigation /> : <UserNavigation />}
+            {user.rol === "administrador" ? (
+              <AdminNavigation />
+            ) : (
+              <UserNavigation />
+            )}
           </nav>
         ) : null}
 
@@ -70,7 +68,7 @@ export default function Header({ isLogin, setIsLogin, isAdmin }) {
 
           <button
             className="px-5 py-2 border-2 border-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300 cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => handleAuthButton()}
           >
             {isLogin ? "Cerrar Sesión" : "Iniciar Sesión"}
           </button>

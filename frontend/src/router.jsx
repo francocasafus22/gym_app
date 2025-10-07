@@ -15,37 +15,37 @@ import LandingPage from "./pages/LandingPage";
 import MiMembresiaPage from "./pages/user/MiMembresiaPage";
 import MiRutinaPage from "./pages/user/MiRutinaPage";
 import FeedPage from "./pages/user/FeedPage";
-import AppLayout from "./layouts/AppLayout";
+import AppLayout from "./layouts/ProtectedLayout";
 import PublicLayout from "./layouts/PublicLayout";
 import LoginPage from "./pages/publicas/LoginPage";
+import ProtectedLayout from "./layouts/ProtectedLayout";
 
 export default function Router() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Página principal */}
+    <Routes>
+      {/* Página principal */}
 
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-        </Route>
+      <Route element={<PublicLayout />}>
+        <Route path="/" element={<Home />} />
+      </Route>
 
-        <Route path="/auth/login" element={<LoginPage />}></Route>
+      <Route path="/auth/login" element={<LoginPage />}></Route>
 
-        <Route element={<AppLayout />}>
-          {/* Admin */}
-          <Route path="/membresias" element={<MembresiasPage />} />
-          <Route path="/rutinas" element={<RutinasPage />} />
-          <Route path="/ventas" element={<VentasPage />} />
-          <Route path="/usuarios" element={<UsuariosPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+      <Route element={<ProtectedLayout roles={["administrador"]} />}>
+        {/* Admin */}
+        <Route path="/membresias" element={<MembresiasPage />} />
+        <Route path="/rutinas" element={<RutinasPage />} />
+        <Route path="/ventas" element={<VentasPage />} />
+        <Route path="/usuarios" element={<UsuariosPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+      </Route>
+      {/* Usuario */}
 
-          {/* Usuario */}
-
-          <Route path="/mi-membresia" element={<MiMembresiaPage />} />
-          <Route path="/mi-rutina" element={<MiRutinaPage />} />
-          <Route path="/feed" element={<FeedPage />}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <Route element={<ProtectedLayout roles={["usuario", "administrador"]} />}>
+        <Route path="/mi-membresia" element={<MiMembresiaPage />} />
+        <Route path="/mi-rutina" element={<MiRutinaPage />} />
+        <Route path="/feed" element={<FeedPage />}></Route>
+      </Route>
+    </Routes>
   );
 }

@@ -3,7 +3,18 @@ import api from "../config/axios";
 
 export async function login(formData) {
   try {
-    const { data } = await api.post("/api/user/login", formData);
+    const { data } = await api.post("/user/login", formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function getUser() {
+  try {
+    const { data } = await api.get("/user/me");
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
