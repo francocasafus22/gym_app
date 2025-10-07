@@ -18,7 +18,9 @@ export default function Login() {
         localStorage.setItem("AUTH_TOKEN", data.token);
         refetch();
         // Dependiendo el usuario lo redirige a la pantalla correspondiente
-        user?.rol === "administrador" ? navigate("/admin") : navigate("/feed");
+        user?.rol === "administrador"
+          ? navigate("/usuarios")
+          : navigate("/feed");
       } else {
         console.log("No recibio el token del backend");
       }
