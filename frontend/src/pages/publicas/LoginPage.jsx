@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../api/GymAPI";
+import { loginSchema } from "../../schemas/loginSchema";
+
 export default function Login() {
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const { refetch, user } = useAuth();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -30,12 +33,21 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const email = emailInput;
-    const password = passwordInput;
-    console.log({ email, password });
+    const formData = { email: emailInput, password: passwordInput };
+
+    const login = loginSchema.safeParse(formData); // Valida los errores del formulario
+    const fieldErros = {};
+    if (!login.success) {
+      login.error.issues.forEach((issue) => {
+        fieldErros[issue.path[0]] = issue.message;
+      });
+      setErrors(fieldErros);
+
+      return;
+    }
 
     // Realiza la petición POST
-    mutation.mutate({ email, password });
+    mutation.mutate(formData);
   };
 
   return (
@@ -83,6 +95,11 @@ export default function Login() {
                   name="email"
                   onChange={(e) => setEmailInput(e.target.value)}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-center mt-2 w-full bg-red-100 py-2 rounded-md">
+                    {errors.email}
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -95,6 +112,11 @@ export default function Login() {
                   name="password"
                   onChange={(e) => setPasswordInput(e.target.value)}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-center mt-2 w-full bg-red-100 py-2 rounded-md">
+                    {errors.password}
+                  </p>
+                )}
               </div>
 
               <input

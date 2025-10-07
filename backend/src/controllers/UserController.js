@@ -64,4 +64,6 @@ export default class UserController {
       res.status(500).json({ error: "Hubo un error" });
     }
   }
+
+  
 }

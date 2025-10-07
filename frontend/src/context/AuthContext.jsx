@@ -23,6 +23,7 @@ export function AuthProvider({ children }) {
   });
 
   const logout = () => {
+    // TODO: CUANDO CIERRO SESIÓN Y VA A / ME DEVUELVE A FEED
     localStorage.removeItem("AUTH_TOKEN");
 
     navigate("/");

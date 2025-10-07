@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
 
 export default function Home() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
 
-  if (user) navigate("/feed");
+  useEffect(() => {
+    if (user) {
+      user.rol === "administrador" ? navigate("/usuarios") : navigate("/feed");
+    }
+  }, [user, navigate]);
+  // Evita que se renderize Home antes de redirigir
+  if (isLoading) return <Loading />;
   return (
     <>
       <div className="min-h-screen bg-black text-white">
