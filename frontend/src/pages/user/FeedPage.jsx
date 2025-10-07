@@ -10,7 +10,7 @@ export default function HomePage() {
     },
     {
       id: 2,
-      title: "Viernes cerrado 21/09 — feriado nacional",
+      title: "Viernes cerrado 26/10 — feriado nacional",
       image: "/img2.jpg",
     },
     {
