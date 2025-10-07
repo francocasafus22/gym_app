@@ -1,12 +1,14 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getUser } from "../api/GymAPI";
+import { toast } from "sonner";
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const {
     data: user,
@@ -25,7 +27,9 @@ export function AuthProvider({ children }) {
   const logout = () => {
     // TODO: CUANDO CIERRO SESIÓN Y VA A / ME DEVUELVE A FEED
     localStorage.removeItem("AUTH_TOKEN");
-
+    // Borra el user cacheado
+    queryClient.removeQueries(["user"]);
+    toast.success("Sesion cerrada con exito");
     navigate("/");
   };
 

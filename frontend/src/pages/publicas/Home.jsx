@@ -8,6 +8,8 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(user);
+
     if (user) {
       user.rol === "administrador" ? navigate("/usuarios") : navigate("/feed");
     }

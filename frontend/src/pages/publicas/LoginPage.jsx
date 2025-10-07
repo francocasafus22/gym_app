@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../api/GymAPI";
 import { loginSchema } from "../../schemas/loginSchema";
+import { toast } from "sonner";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -24,11 +25,13 @@ export default function Login() {
         user?.rol === "administrador"
           ? navigate("/usuarios")
           : navigate("/feed");
+
+        toast.success("Iniciaste sesion con exito");
       } else {
         console.log("No recibio el token del backend");
       }
     },
-    onError: (error) => console.log("Error Login: ", error.message),
+    onError: (error) => toast.error(error.message),
   });
 
   const handleSubmit = (e) => {
