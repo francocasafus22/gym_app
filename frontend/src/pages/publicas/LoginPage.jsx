@@ -9,26 +9,31 @@ import { toast } from "sonner";
 export default function Login() {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
-  const { refetch, user } = useAuth();
+  const { refetch } = useAuth();
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
   // Realiza la petición POST al endpoint de login
   const mutation = useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       // Si la petición fue exitosa, guarda el token en el localStorage
       if (data?.token) {
         localStorage.setItem("AUTH_TOKEN", data.token);
-        refetch();
-        // Dependiendo el usuario lo redirige a la pantalla correspondiente
-        user?.rol === "administrador"
-          ? navigate("/usuarios")
-          : navigate("/feed");
+        try {
+          const result = await refetch();
 
-        toast.success("Iniciaste sesion con exito");
+          // Si el refect trae información, navega a la pantalla de inicio
+          if (result?.data) {
+            toast.success("Iniciaste sesion con exito");
+            navigate("/");
+          }
+        } catch (error) {
+          console.error("Error al hacer refetch:", error);
+          toast.error("Hubo un problema al iniciar sesión");
+        }
       } else {
-        console.log("No recibio el token del backend");
+        toast.error("No se pudo obtener la información del usuario");
       }
     },
     onError: (error) => toast.error(error.message),

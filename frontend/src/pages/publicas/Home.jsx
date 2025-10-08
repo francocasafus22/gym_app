@@ -8,14 +8,12 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user);
-
-    if (user) {
+    if (!isLoading && user) {
       user.rol === "administrador" ? navigate("/usuarios") : navigate("/feed");
     }
-  }, [user, navigate]);
+  }, [user, isLoading, navigate]);
   // Evita que se renderize Home antes de redirigir
-  if (isLoading) return <Loading />;
+  if (isLoading || user) return <Loading />;
   return (
     <>
       <div className="min-h-screen bg-black text-white">
