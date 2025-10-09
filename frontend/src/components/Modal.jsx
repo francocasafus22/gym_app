@@ -14,15 +14,6 @@ export default function Modal({ isOpen, onClose, children }) {
         </button>
 
         {children}
-
-        <div className="flex justify-center">
-          <button
-            className="bg-accent text-accent-foreground px-4 py-2 rounded w-50 mt-10"
-            onClick={() => onClose()}
-          >
-            Agregar
-          </button>
-        </div>
       </div>
     </div>
   );
