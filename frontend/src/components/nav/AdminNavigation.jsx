@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 export default function UserNavigation() {
   const tabs = [
     { name: "Usuarios", href: "/usuarios" },
-    { name: "Membresias", href: "/mi-membresia" },
-    { name: "Rutinas", href: "/mi-rutina" },
+    { name: "Membresias", href: "/membresias" },
+    { name: "Rutinas", href: "/rutinas" },
     { name: "Ventas", href: "/ventas" },
     { name: "Dashboard", href: "/dashboard" },
   ];
