@@ -58,12 +58,13 @@ export default class UserController {
 
   static async getUser(req, res) {
     try {
-      const user = await User.findById(req.user.id).select("-password -_id");
+      const user = await User.findById(req.user.id)
+        .select("-password -_id")
+        .populate("membresia");
+
       res.json(user);
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
     }
   }
-
-  
 }

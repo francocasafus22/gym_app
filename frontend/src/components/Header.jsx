@@ -57,7 +57,7 @@ export default function Header({ user = null, logout }) {
 
         {/* Menú desplegable móvil */}
         <div
-          className={`lg:hidden fixed top-20 left-2 right-2 bg-black/20 backdrop-blur-xl shadow-lg rounded-lg p-4 flex flex-col gap-2 transition-all duration-300 ease-in-out ${
+          className={`lg:hidden fixed z-150 top-20 left-2 right-2 bg-primary shadow-lg rounded-lg p-4 flex flex-col gap-2 transition-all duration-300 ease-in-out ${
             open
               ? "opacity-100 scale-100"
               : "opacity-0 scale-95 pointer-events-none"

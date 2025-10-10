@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import userRouter from "./routes/userRouter.js";
 import membresiaRouter from "./routes/membresiaRouter.js";
+import membresiaTipoRouter from "./routes/membresiaTipoRouter.js";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/api/user", userRouter);
 app.use("/api/membresia", membresiaRouter);
+app.use("/api/membresiaTipo", membresiaTipoRouter);
 app.use("/", (req, res) => {
   res.json({ message: "Spartan Gym" });
 });
