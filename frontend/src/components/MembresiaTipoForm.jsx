@@ -31,6 +31,13 @@ export default function MembresiaTipoForm({data, onClose}) {
       mutate({nombre: data.nombre, precio: precioInput, descripcion: descripcionInput});
     }
 
+    const handleInputDescripcion = (e) => {
+      if(e.target.value <= 100){
+        setDescripcionInput(e.target.value)
+      } else{
+        setDescripcionInput(e.target.value.slice(0,100))}
+    } 
+  
   return (
     <form className="p-10 flex flex-col gap-2" onSubmit={(e) => handleSubmit(e)}>
         <h1 className='text-center text-3xl font-bold border-b border-accent pb-2 mb-2'>Membresia {capitalize(data.nombre)}</h1>
@@ -38,16 +45,15 @@ export default function MembresiaTipoForm({data, onClose}) {
               <div className="flex flex-col gap-2">
                 <label className="font-bold text-xl ">Descripcion</label>
 
-                <input
+                <textarea
                   id="descripcion"
-                  type="text"
-                  placeholder="Descripción de la membresia"
-                  className="w-full border shadow-md border-gray-300 p-3 rounded-lg focus:outline-none  transition-all duration-200 focus:border-accent "
-                  name="descripcion"
-                  onChange={(e)=>setDescripcionInput(e.target.value)}
                   value={descripcionInput}
+                  placeholder="Descripción de la membresia"
+                  className="w-full border shadow-md border-gray-300 p-3 rounded-lg focus:outline-none transition-all duration-200 focus:border-accent "
+                  name="descripcion"
+                  onChange={(e)=>handleInputDescripcion(e)}
                 />
-                
+                <p>{descripcionInput.length}/100</p>
               </div>
 
               <div className="flex flex-col gap-2">
