@@ -3,11 +3,14 @@ import { editMembresiaTipo } from '../api/GymAPI';
 import { useState } from 'react'
 import { toast } from 'sonner';
 import { capitalize } from '../utils/formatText';
+import { MembresiaTipoEditSchema } from '../schemas/membresiaTipo';
+import ErrorMessage from './ErrorMessage';
 
 export default function MembresiaTipoForm({data, onClose}) {
 
     const [precioInput, setPrecioInput] = useState(data.precio);
     const [descripcionInput, setDescripcionInput] = useState(data.descripcion);
+    const [errors, setErrors] = useState({});
 
     const queryClient = useQueryClient()
 
@@ -27,8 +30,26 @@ export default function MembresiaTipoForm({data, onClose}) {
 
     const handleSubmit = (e) => {
       e.preventDefault();
+      const formData = {
+        nombre: data.nombre,
+        descripcion: descripcionInput,
+        precio: precioInput
+      }
+
+      const result = MembresiaTipoEditSchema.safeParse(formData);
       
-      mutate({nombre: data.nombre, precio: precioInput, descripcion: descripcionInput});
+      const fieldErrors = {};
+
+      if(!result.success){
+        result.error.issues.forEach((issue)=>{
+          fieldErrors[issue.path[0]] = issue.message
+        })
+        setErrors(fieldErrors)
+        return;
+      }
+
+     
+      mutate(formData);
     }
 
     const handleInputDescripcion = (e) => {
@@ -54,6 +75,7 @@ export default function MembresiaTipoForm({data, onClose}) {
                   onChange={(e)=>handleInputDescripcion(e)}
                 />
                 <p>{descripcionInput.length}/100</p>
+                {errors.descripcion && <ErrorMessage>{errors.descripcion}</ErrorMessage>}
               </div>
 
               <div className="flex flex-col gap-2">
@@ -66,17 +88,20 @@ export default function MembresiaTipoForm({data, onClose}) {
                   className="w-full border shadow-md border-gray-300 p-3 rounded-lg focus:outline-none transition-all duration-200 focus:border-accent "
                   name="precio"
                   onChange={(e)=>setPrecioInput(e.target.value)}
-                  value={precioInput}                
+                  value={precioInput} 
+                  required               
                 />
-               
+               {errors.precio && <ErrorMessage>{errors.precio}</ErrorMessage>}
               </div>
 
               <input
                 type="submit"
-                value="Editar"
+                value="Guardar Cambios"
                 className="bg-accent shadow-2xl hover:brightness-90 transition-all duration-200 w-full p-3 mt-5 rounded-lg text-white font-black  text-xl cursor-pointer"
               />
-             
+             {
+              isError && <ErrorMessage>{error}</ErrorMessage>
+             }
             </form>
   )
 }
