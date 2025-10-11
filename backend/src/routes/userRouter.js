@@ -7,6 +7,7 @@ import handleErrorsMiddleware from "../middlewares/handleErrorsMiddleware.js";
 const router = Router();
 
 router.get("/", UserController.getAll);
+
 router.post(
   "/login",
   body("email").isEmail().withMessage("El email no es valido"),

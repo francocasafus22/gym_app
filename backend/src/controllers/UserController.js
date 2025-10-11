@@ -3,8 +3,33 @@ import { checkPassword, hashPassword } from "../utils/auth.js";
 import { createToken } from "../utils/jwt.js";
 export default class UserController {
   static async getAll(req, res) {
-    const users = await User.find();
-    res.json(users);
+
+    try {
+      const {page = 1, q = ""} = req.query;
+
+    const limit = 10;
+    const skip = (Number(page) - 1) * limit;
+
+    const query = q ? {
+        $or: [
+          { firstName: { $regex: q, $options: "i" } },
+          { lastName: { $regex: q, $options: "i" } },
+          { dni: { $regex: q, $options: "i" } },
+        ],
+      } : {};
+
+    const users = await User.find(query, "-password -_id -__v").skip(skip).limit(limit).sort({ updatedAt: -1 }).populate("membresia", "estado");
+    const total = await User.countDocuments(query);
+    
+    res.json({
+      users,
+      total, 
+      totalPages: Math.ceil(total / limit),
+      currentPage: Number(page),
+    });
+    } catch (error) {
+      res.status(500).json({ message: error.message});
+    }
   }
 
   static async login(req, res) {
