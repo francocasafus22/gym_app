@@ -16,6 +16,10 @@ const membresiaSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    tipo: {
+      type: Schema.Types.ObjectId,
+      ref: "MembresiaTipo",
+    }
   },
   {
     timestamps: true,

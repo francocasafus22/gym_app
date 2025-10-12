@@ -8,6 +8,7 @@ const router = Router();
 
 router.get("/", UserController.getAll);
 
+
 router.post(
   "/login",
   body("email").isEmail().withMessage("El email no es valido"),
@@ -36,4 +37,5 @@ router.post(
 );
 router.get("/me", authMiddleware, UserController.getUser);
 
+router.post("/asignar-membresia", UserController.asignarMembresia);
 export default router;

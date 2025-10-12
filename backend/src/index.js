@@ -5,11 +5,12 @@ import { connectDB } from "./config/db.js";
 import userRouter from "./routes/userRouter.js";
 import membresiaRouter from "./routes/membresiaRouter.js";
 import membresiaTipoRouter from "./routes/membresiaTipoRouter.js";
+import {updateMembresias} from "./jobs/membresiasJobs.js";
 
 dotenv.config();
-
 connectDB();
 
+updateMembresias.start();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
