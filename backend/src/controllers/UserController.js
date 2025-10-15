@@ -22,7 +22,7 @@ export default class UserController {
       } : {};
 
       // Obtener los usuarios filtrados y con el estado y vencimiento de su ultima membresia
-    const users = await User.find(query, "-password  -__v").skip(skip).limit(limit).sort({ updatedAt: -1 }).populate("membresia", "estado fechaFin", {sort: {updatedAt: -1}, limit: 1});
+    const users = await User.find(query, "-password  -__v").skip(skip).limit(limit).sort({ updatedAt: -1 }).populate({path: "membresia", select:"tipo fechaFin estado -_id", populate: {path: "tipo", select: "nombre -_id"}});
     const total = await User.countDocuments(query);
     
     res.json({

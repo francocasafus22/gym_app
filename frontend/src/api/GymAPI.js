@@ -23,6 +23,17 @@ export async function getUser() {
   }
 }
 
+export async function getAllUsers() {
+  try {
+    const { data } = await api.get("/user");
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
 export async function getAllMembresiaTipo() {
   try {
     const { data } = await api.get("/membresiaTipo");
