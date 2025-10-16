@@ -12,14 +12,15 @@ export default class UserController {
     const limit = 10;
     const skip = (Number(page) - 1) * limit;
 
-    const query = q ? {
-      // Contenga la busqueda en firstName, lastName o dni
+    // Contenga la busqueda en firstName, lastName o dni y sean usuarios
+    const query = {rol:"usuario", ...(q ? {  
         $or: [
           { firstName: { $regex: q, $options: "i" } },
           { lastName: { $regex: q, $options: "i" } },
-          { dni: { $regex: q, $options: "i" } },
+          { dni: { $regex: q, $options: "i" } },          
         ],
-      } : {};
+        
+      } : {})};
 
       // Obtener los usuarios filtrados y con el estado y vencimiento de su ultima membresia
     const users = await User.find(query, "-password  -__v").skip(skip).limit(limit).sort({ updatedAt: -1 }).populate({path: "membresia", select:"tipo fechaFin estado -_id", populate: {path: "tipo", select: "nombre -_id"}});

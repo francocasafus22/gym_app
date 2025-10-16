@@ -23,9 +23,9 @@ export async function getUser() {
   }
 }
 
-export async function getAllUsers() {
+export async function getAllUsers(q = "") {
   try {
-    const { data } = await api.get("/user");
+    const { data } = await api.get(`/user?q=${q}`);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
