@@ -1,3 +1,4 @@
+import {ArrowLeft, ArrowRight} from "lucide-react"
 import { useQuery } from "@tanstack/react-query";
 import { getAllUsers } from "../../api/GymAPI";
 import { fechaDiaMesAño } from "../../utils/formatText"
@@ -5,14 +6,16 @@ import { Search } from "lucide-react";
 import Loading from "../../components/Loading";
 import CardUsers from "../../components/CardUsers";
 import { useEffect, useState } from "react";
+import Pagination from "../../components/Pagination";
 
 const UsuariosPage = () => {
-
+    
     const [queryInput, setQueryInput] = useState("")
+    const [currentPage, setCurrentPage] = useState(1)
 
     const {data, isError, error, isLoading, refetch} = useQuery({
-        queryKey: ["users"],
-        queryFn: ()=>getAllUsers(queryInput),            
+        queryKey: ["users", currentPage],
+        queryFn: ()=>getAllUsers(queryInput, currentPage),            
         retry: 1,
         refetchOnWindowFocus: false
     })  
@@ -20,8 +23,11 @@ const UsuariosPage = () => {
     const handleQuery = (e) => {
         e.preventDefault()
         refetch()
-
     }
+
+
+    console.log(data);
+    
 
     if(isLoading) return <div className="min-h-[80vh] flex justify-center"><Loading/></div>
     
@@ -50,7 +56,11 @@ const UsuariosPage = () => {
                     </div>
                 ) : <p className="text-center text-gray-500">No se encontraron usuarios</p>
                 }
-            
+            <Pagination
+                currentPage={data.currentPage}
+                totalPages={data.totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+            />
         </div>
     );
 }

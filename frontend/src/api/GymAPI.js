@@ -23,9 +23,9 @@ export async function getUser() {
   }
 }
 
-export async function getAllUsers(q = "") {
+export async function getAllUsers(q = "", currentPage = 1) {
   try {
-    const { data } = await api.get(`/user?q=${q}`);
+    const { data } = await api.get(`/user?q=${q}&page=${currentPage}`);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
