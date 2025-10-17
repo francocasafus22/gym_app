@@ -69,7 +69,7 @@ export default class UserController {
 
       const {userId, membresiaId} = req.body;
 
-      const user = await User.findById(userId);
+      const user = await User.findById(userId).populate({path: "membresia", select:"estado", options:{sort:{fechaInicio: -1}, limit:1}});
       if(!user){
         const error = new Error("No existe el usuario con ese id");
         res.status(404).json({ error: error.message });
@@ -83,6 +83,13 @@ export default class UserController {
         return
       }
       
+      // Si su ultima membresia tiene el estado en pago no te dejará asignarle una nueva membresia
+      if(user.membresia[0]?.estado == true){
+        const error = new Error("El usuario ya tiene una membresia activa");
+        res.status(401).json({error: error.message})
+        return
+      }
+
       const fechaInicio = new Date()
       const fechaFin = new Date(fechaInicio);
       fechaFin.setDate(fechaFin.getDate() + tipoMembresia.duracionDias)

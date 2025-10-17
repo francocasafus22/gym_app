@@ -46,13 +46,20 @@ export async function getAllMembresiaTipo() {
 }
 
 export async function editMembresiaTipo({nombre, precio, descripcion}) {
-  try {
-    console.log(nombre);
-    
+  try {    
     const {data} = await api.patch(`/membresiaTipo/${nombre}`, {precio, descripcion});
-   
-    
     return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function asignarMembresia(formData){
+  try {
+    const {data} = await api.post("/user/asignar-membresia", formData)
+    return data
   } catch (error) {
     if (isAxiosError(error) && error.response) {
       throw new Error(error.response.data.error);

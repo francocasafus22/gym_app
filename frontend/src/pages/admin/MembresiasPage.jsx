@@ -1,7 +1,7 @@
 import React from "react";
 import { Plus } from "lucide-react";
 import useMembresiasTipo from "../../hooks/useMembresiasTipo";
-import MembresiaTipoCard from "../../components/MembresiaTipoCard";
+import MembresiaTipoCard from "../../components/MembresiaTipoCard.jsx"
 import Loading from "../../components/Loading";
 
 const MembresiasPage = () => {

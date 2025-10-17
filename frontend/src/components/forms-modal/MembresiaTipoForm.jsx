@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { editMembresiaTipo } from '../api/GymAPI';
+import { editMembresiaTipo } from '../../api/GymAPI';
 import { useState } from 'react'
 import { toast } from 'sonner';
-import { capitalize } from '../utils/formatText';
-import { MembresiaTipoEditSchema } from '../schemas/membresiaTipo';
-import ErrorMessage from './ErrorMessage';
+import { capitalize } from '../../utils/formatText';
+import { MembresiaTipoEditSchema } from '../../schemas/membresiaTipo';
+import ErrorMessage from '../ErrorMessage';
 
 export default function MembresiaTipoForm({data, onClose}) {
 
@@ -18,7 +18,6 @@ export default function MembresiaTipoForm({data, onClose}) {
       mutationFn: editMembresiaTipo,
       onSuccess: (data) => {
         queryClient.invalidateQueries(["membresiasTipo"]);
- 
         
         toast.success(data.message)
         onClose()

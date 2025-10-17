@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Modal from "./Modal";
-import MembresiaTipoForm from "./MembresiaTipoForm";
+import MembresiaTipoForm from "./forms-modal/MembresiaTipoForm";
 import {capitalize} from '../utils/formatText'
 import {fechaDiaMesAño} from "../utils/formatText"
 
