@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/Loading";
+import HomeBenefits from "../../components/HomeBenefits";
+
 
 // hook y componente de membresías
 import useMembresiasTipo from "../../hooks/useMembresiasTipo";
@@ -25,20 +27,30 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-zinc-950 text-white">
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/20"></header>
 
-        {/* panel principal */}
-        <section className="pt-32 pb-20 px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-            EL MEJOR GIMNASIO
-            <br />
-            DE DORREGO
-          </h1>
-          <button className="mt-12 bg-red-500 hover:bg-red-600 text-white px-8 py-6 text-lg font-semibold rounded">
-            Inscríbete ahora
-          </button>
+        {/* panel principal con banner */}
+        <section
+          className="relative h-[85vh] flex flex-col justify-center items-center text-center bg-cover bg-center bg-no-repeat"
+
+          style={{ backgroundImage: "url('/SPARTAN_4.jpg')" }}
+        >
+          {/* Overlay oscuro para resaltar el texto */}
+          <div className="absolute inset-0 bg-black/60"></div>
+
+          {/* Contenido centrado encima del overlay */}
+          <div className="relative z-10">
+            <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+              EL MEJOR GIMNASIO
+              <br />
+              DE DORREGO
+            </h1>
+            <button className="mt-12 bg-red-500 hover:bg-red-600 text-white px-8 py-6 text-lg font-semibold rounded">
+              Inscríbete ahora
+            </button>
+          </div>
         </section>
 
         <svg className="w-full h-16" viewBox="0 0 1200 100" preserveAspectRatio="none">
@@ -78,41 +90,7 @@ export default function Home() {
         </svg>
 
         {/* galería mejorada */}
-        <section className="py-24 px-6">
-          <div className="max-w-7xl mx-auto space-y-20">
-
-            {/* Bloque 1 - Imagen Izquierda */}
-            <div className="flex flex-col md:flex-row items-center gap-10">
-              <img
-                src="/public/SPARTAN_4.jpg"
-                alt="Gym weights"
-                className="w-full md:w-3/5 h-[500px] object-cover rounded-xl shadow-lg border border-white/10"
-              />
-              <div className="md:w-2/5 space-y-4 text-center md:text-left">
-                <h3 className="text-3xl font-bold">Máquinas de Alta Calidad</h3>
-                <p className="text-lg leading-relaxed text-gray-300">
-                  Contamos con máquinas de última generación diseñadas para brindarte la mejor experiencia de entrenamiento posible.
-                </p>
-              </div>
-            </div>
-
-            {/* Bloque 2 - Imagen Derecha */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-10">
-              <img
-                src="/public/SPARTAN_6.jpg"
-                alt="Gym interior"
-                className="w-full md:w-3/5 h-[500px] object-cover rounded-xl shadow-lg border border-white/10"
-              />
-              <div className="md:w-2/5 space-y-4 text-center md:text-left">
-                <h3 className="text-3xl font-bold">Luces Nuevas</h3>
-                <p className="text-lg leading-relaxed text-gray-300">
-                  Nuestro espacio se renueva constantemente con una iluminación moderna que realza cada detalle del gimnasio.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </section>
+        <HomeBenefits />
 
         <div className="h-20"></div>
       </div>
