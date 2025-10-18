@@ -5,7 +5,8 @@ import { connectDB } from "./config/db.js";
 import userRouter from "./routes/userRouter.js";
 import membresiaRouter from "./routes/membresiaRouter.js";
 import membresiaTipoRouter from "./routes/membresiaTipoRouter.js";
-import {updateMembresias} from "./jobs/membresiasJobs.js";
+import ejercicioRouter from "./routes/ejercicioRouter.js";
+import { updateMembresias } from "./jobs/membresiasJobs.js";
 
 dotenv.config();
 connectDB();
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use("/api/user", userRouter);
 app.use("/api/membresia", membresiaRouter);
 app.use("/api/membresiaTipo", membresiaTipoRouter);
+app.use("/api/ejercicio", ejercicioRouter);
 app.use("/", (req, res) => {
   res.json({ message: "Spartan Gym" });
 });
