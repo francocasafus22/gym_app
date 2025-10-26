@@ -15,9 +15,10 @@ const userSchema = new Schema(
     dni: {
       type: String,
       required: true,
+      unique: true,
     },
-    image:{
-      type: String, 
+    image: {
+      type: String,
       required: false,
     },
     email: {
@@ -46,7 +47,7 @@ const userSchema = new Schema(
   {
     timestamps: true,
     collection: "users",
-  }
+  },
 );
 
 const User = model("User", userSchema);

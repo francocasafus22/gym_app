@@ -45,9 +45,12 @@ export async function getAllMembresiaTipo() {
   }
 }
 
-export async function editMembresiaTipo({nombre, precio, descripcion}) {
-  try {    
-    const {data} = await api.patch(`/membresiaTipo/${nombre}`, {precio, descripcion});
+export async function editMembresiaTipo({ nombre, precio, descripcion }) {
+  try {
+    const { data } = await api.patch(`/membresiaTipo/${nombre}`, {
+      precio,
+      descripcion,
+    });
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -56,10 +59,21 @@ export async function editMembresiaTipo({nombre, precio, descripcion}) {
   }
 }
 
-export async function asignarMembresia(formData){
+export async function asignarMembresia(formData) {
   try {
-    const {data} = await api.post("/user/asignar-membresia", formData)
-    return data
+    const { data } = await api.post("/user/asignar-membresia", formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function createUser(formData) {
+  try {
+    const { data } = await api.post("/user/register", formData);
+    return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
       throw new Error(error.response.data.error);
