@@ -67,30 +67,32 @@ export default function MembresiaTipoForm({ data, onClose }) {
       </h1>
 
       <div className="flex flex-col gap-2">
-        <label className="font-bold text-xl ">Descripcion</label>
+        <label className="text-md text-gray-400 text-start">Descripcion</label>
 
         <textarea
           id="descripcion"
           value={descripcionInput}
           placeholder="Descripción de la membresia"
-          className="w-full border shadow-md border-gray-300 p-3 rounded-lg focus:outline-none transition-all duration-200 focus:border-accent "
+          className="w-full border shadow-md border-border p-3 rounded-lg focus:outline-none transition-all duration-200 focus:border-accent "
           name="descripcion"
           onChange={(e) => handleInputDescripcion(e)}
         />
-        <p>{descripcionInput.length}/100</p>
+        <p className="text-start text-zinc-500">
+          {descripcionInput.length}/100
+        </p>
         {errors.descripcion && (
           <ErrorMessage>{errors.descripcion}</ErrorMessage>
         )}
       </div>
 
       <div className="flex flex-col gap-2">
-        <label className="font-bold text-xl">Precio</label>
+        <label className="text-md text-start text-gray-400">Precio</label>
 
         <input
           type="number"
           id="precio"
           placeholder="Precio de la membresia"
-          className="w-full border shadow-md border-gray-300 p-3 rounded-lg focus:outline-none transition-all duration-200 focus:border-accent "
+          className="w-full border shadow-md border-border p-3 rounded-lg focus:outline-none transition-all duration-200 focus:border-accent "
           name="precio"
           onChange={(e) => setPrecioInput(e.target.value)}
           value={precioInput}

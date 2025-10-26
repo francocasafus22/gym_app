@@ -14,6 +14,10 @@ export default function Header({ user = null, logout }) {
 
   const isLandingPage = location.pathname === "/";
 
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
   const handleAuthButton = () => {
     isLogin ? logout() : navigate("/auth/login");
   };
