@@ -1,9 +1,21 @@
 import { isAxiosError } from "axios";
 import api from "../config/axios";
 
+/* Usuarios */
 export async function login(formData) {
   try {
     const { data } = await api.post("/user/login", formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function createUser(formData) {
+  try {
+    const { data } = await api.post("/user/register", formData);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -34,6 +46,18 @@ export async function getAllUsers(q = "", currentPage = 1) {
   }
 }
 
+export async function asignarMembresia(formData) {
+  try {
+    const { data } = await api.post("/user/asignar-membresia", formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+/* Membresias Tipo */
 export async function getAllMembresiaTipo() {
   try {
     const { data } = await api.get("/membresiaTipo");
@@ -59,9 +83,10 @@ export async function editMembresiaTipo({ nombre, precio, descripcion }) {
   }
 }
 
-export async function asignarMembresia(formData) {
+/* Rutinas */
+export async function getAllRutinas() {
   try {
-    const { data } = await api.post("/user/asignar-membresia", formData);
+    const { data } = await api.get("/rutina");
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -70,9 +95,20 @@ export async function asignarMembresia(formData) {
   }
 }
 
-export async function createUser(formData) {
+export async function createRutina(formData) {
   try {
-    const { data } = await api.post("/user/register", formData);
+    const { data } = await api.post("/rutina", formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function assignEjercicioToRutina(ejercicioId, rutinaId, formData) {
+  try {
+    const { data } = await api.post(`/rutina/${rutinaId}/ejercicio/${ejercicioId}`, formData);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

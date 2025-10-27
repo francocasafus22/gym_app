@@ -24,9 +24,8 @@ export default class RutinasController {
   }
 
   static async asignarEjercicio(req, res) {
-    try {
-      const { ejercicioId } = req.body;
-      const { rutinaId } = req.params;
+    try {    
+      const { rutinaId, ejercicioId } = req.params;
 
       const rutina = await Rutina.findById(rutinaId);
       if (!rutina) {

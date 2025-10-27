@@ -35,7 +35,7 @@ const UsuariosPage = () => {
 
   return (
     <div className="min-h-screen  p-10 max-w-7xl mx-auto">
-      <h1 className="text-center mb-5 text-5xl font-bold ">Socios</h1>
+      <h1 className="text-center mb-5 text-5xl font-bold  ">Socios</h1>
 
       <form className="flex flex-row items-center gap-2" onSubmit={handleQuery}>
         <Search className="text-secondary" />
