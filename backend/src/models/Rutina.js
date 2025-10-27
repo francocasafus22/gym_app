@@ -11,10 +11,10 @@ const RutinaSchema = new Schema(
       required: true,
       maxlength: 255,
     },
-    tipo:{
+    tipo: {
       type: String,
       required: true,
-      enum: ["Plantilla", "Personalizada"]
+      enum: ["Plantilla", "Personalizada"],
     },
     nivel: {
       type: String,
@@ -32,6 +32,7 @@ const RutinaSchema = new Schema(
         ejercicioId: {
           type: Schema.Types.ObjectId,
           ref: "Ejercicio",
+          required: true,
         },
         nombre: {
           type: String,
@@ -57,8 +58,9 @@ const RutinaSchema = new Schema(
         },
         peso: {
           type: Number,
-          required: true,
+          required: false,
           min: 0,
+          default: 0,
           max: 1000,
         },
         dia: {
