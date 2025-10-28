@@ -21,7 +21,12 @@ export default function CardUsers({ user }) {
           className="w-32 h-32 rounded-full object-cover shadow-md"
         />
       </div>
-
+      <p>
+        Rutina:{" "}
+        <span className="text-accent">
+          {user.rutina ? user.rutina.nombre : "No tiene rutina"}
+        </span>
+      </p>
       {user.membresia[0] ? (
         <>
           <p>
@@ -83,7 +88,10 @@ export default function CardUsers({ user }) {
 
       {isOpenRutina && (
         <Modal isOpen={isOpenRutina} onClose={() => setIsOpenRutina(false)}>
-          <AsignarRutinaForm user_id={user._id}></AsignarRutinaForm>
+          <AsignarRutinaForm
+            userId={user._id}
+            onClose={() => setIsOpenRutina(false)}
+          ></AsignarRutinaForm>
         </Modal>
       )}
     </div>

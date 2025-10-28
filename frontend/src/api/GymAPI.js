@@ -57,6 +57,17 @@ export async function asignarMembresia(formData) {
   }
 }
 
+export async function asignarRutina(formData) {
+  try {
+    const { data } = await api.post("/user/asignar-rutina", formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
 /* Membresias Tipo */
 export async function getAllMembresiaTipo() {
   try {
@@ -108,7 +119,10 @@ export async function createRutina(formData) {
 
 export async function assignEjercicioToRutina(ejercicioId, rutinaId, formData) {
   try {
-    const { data } = await api.post(`/rutina/${rutinaId}/ejercicio/${ejercicioId}`, formData);
+    const { data } = await api.post(
+      `/rutina/${rutinaId}/ejercicio/${ejercicioId}`,
+      formData,
+    );
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

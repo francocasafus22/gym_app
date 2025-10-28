@@ -11,7 +11,7 @@ const MembresiasPage = () => {
   }
 
   return (
-    <div className="min-h-screen  p-10 max-w-7xl mx-auto">
+    <div className="min-h-screen  container p-10 max-w-7xl mx-auto">
       <h1 className="text-5xl font-bold text-center mb-10 pb-5 border-b border-accent">
         Membresias
       </h1>

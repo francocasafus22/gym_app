@@ -21,8 +21,8 @@ const RutinasPage = () => {
   if (isError) return <div>Error: {error.message}</div>;
   console.log(rutinas);
   return (
-    <div className="min-h-screen container mx-auto">
-      <h1 className="text-5xl font-bold mt-10 text-center border-b border-accent pb-5">
+    <div className="min-h-screen container p-10 max-w-7xl mx-auto">
+      <h1 className="text-5xl font-bold text-center border-b border-accent pb-5">
         Rutinas
       </h1>
 
@@ -33,7 +33,7 @@ const RutinasPage = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500">No hay rutinas</p>
+        <p className="text-center text-gray-500 mt-10">No hay rutinas</p>
       )}
     </div>
   );
