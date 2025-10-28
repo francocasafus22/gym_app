@@ -13,7 +13,8 @@ export default function Home() {
   const navigate = useNavigate();
 
   // hook para traer membresías reales
-  const { data: membresias, isLoading: isLoadingMembresias } = useMembresiasTipo();
+  const { data: membresias, isLoading: isLoadingMembresias } =
+    useMembresiasTipo();
 
   useEffect(() => {
     if (!isLoading && user) {
@@ -26,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-zinc-950 text-white">
+      <div className="min-h-screen bg-transparent text-white">
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/20"></header>
 
@@ -43,7 +44,9 @@ export default function Home() {
 
         {/* Sección de membresías reales */}
         <section id="planes" className="py-20 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-10">Planes de Membresía</h2>
+          <h2 className="text-3xl font-bold text-center mb-10">
+            Planes de Membresía
+          </h2>
           {isLoadingMembresias ? (
             <div className="flex justify-center items-center">
               <Loading />
