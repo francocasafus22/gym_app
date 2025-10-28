@@ -38,4 +38,7 @@ router.post(
 router.get("/me", authMiddleware, UserController.getUser);
 
 router.post("/asignar-membresia", UserController.asignarMembresia);
+
+router.post("/asignar-rutina", UserController.asignarRutina);
+
 export default router;

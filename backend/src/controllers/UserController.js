@@ -1,5 +1,6 @@
 import MembresiaTipo from "../models/MembresiaTipo.js";
 import User from "../models/User.js";
+import Rutina from "../models/Rutina.js";
 import { checkPassword, hashPassword } from "../utils/auth.js";
 import { createToken } from "../utils/jwt.js";
 import Membresia from "../models/Membresia.js";
@@ -162,6 +163,31 @@ export default class UserController {
       res.json(user);
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });
+    }
+  }
+
+  static async asignarRutina(req, res) {
+    const { rutinaId, userId } = req.body;
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        res.status(404).json({ error: "Usuario no encontrado" });
+        return;
+      }
+      const rutina = await Rutina.findById(rutinaId);
+
+      if (!rutina) {
+        res.status(404).json({ error: "Rutina no encontrada" });
+        return;
+      }
+
+      user.rutina.rutinaId = rutina._id;
+      user.rutina.nombre = rutina.nombre;
+      await user.save();
+
+      res.json({ message: "Rutina asignada correctamente" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
   }
 }

@@ -43,6 +43,15 @@ const userSchema = new Schema(
         ref: "Membresia",
       },
     ],
+    rutina: {
+      rutinaId: {
+        type: Types.ObjectId,
+        ref: "Rutina",
+      },
+      nombre: {
+        type: String,
+      },
+    },
   },
   {
     timestamps: true,
