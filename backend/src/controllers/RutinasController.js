@@ -18,13 +18,12 @@ export default class RutinasController {
       await rutina.save();
       res.status(201).json({ message: "Rutina creada exitosamente" });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: error.message });
+      res.status(500).json({ error: "Hubo un error al crear la rutina" });
     }
   }
 
   static async asignarEjercicio(req, res) {
-    try {    
+    try {
       const { rutinaId, ejercicioId } = req.params;
 
       const rutina = await Rutina.findById(rutinaId);
@@ -49,16 +48,41 @@ export default class RutinasController {
         dia,
       };
 
-      if(rutina.ejercicios.some(e=>e.ejercicioId.toString() === ejercicioId.toString() && e.dia === dia)){
+      if (
+        rutina.ejercicios.some(
+          (e) =>
+            e.ejercicioId.toString() === ejercicioId.toString() &&
+            e.dia === dia,
+        )
+      ) {
         res.status(400).json({ error: "Ejercicio ya asignado en ese día" });
         return;
       }
-      
+
       rutina.ejercicios.push(ejercicioCompleto);
       await rutina.save();
       res.status(200).json({ message: "Ejercicio asignado exitosamente" });
     } catch (error) {
       console.error(error);
+      res.status(500).json({ error: "Hubo un error al asignar la rutina" });
+    }
+  }
+
+  static async update(req, res) {
+    try {
+      const { rutinaId } = req.params;
+      let rutina = await Rutina.findById(rutinaId);
+      if (!rutina) {
+        const error = new Error("Rutina no encontrada");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      rutina.set(req.body);
+      await rutina.save();
+
+      res.json({ message: "Rutina actualizada exitosamente" });
+    } catch (error) {
       res.status(500).json({ error: error.message });
     }
   }
