@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import { fechaDiaMesAño } from "../utils/formatText";
+import EditarRutina from "./forms-modal/EditarRutina";
 
 export default function RutinaCard({ rutina }) {
   const [isRutinaOpen, setIsRutinaOpen] = useState(false);
@@ -32,9 +33,7 @@ export default function RutinaCard({ rutina }) {
       <div className="flex flex-col xs:flex-row w-full justify-between px-5 gap-5">
         <button
           className="px-6 py-2 w-full  bg-accent text-accent-foreground rounded-lg hover:brightness-80  transition-all duration-200 cursor-pointer"
-          onClick={() => {
-            setIsRutinaOpen(!isRutinaOpen);
-          }}
+          onClick={() => setIsRutinaOpen(!isRutinaOpen)}
         >
           Editar Rutina
         </button>
@@ -50,7 +49,7 @@ export default function RutinaCard({ rutina }) {
 
       {isRutinaOpen && (
         <Modal isOpen={isRutinaOpen} onClose={() => setIsRutinaOpen(false)}>
-          <p>Editando rutina {rutina._id}</p>
+          <EditarRutina data={rutina} onClose={() => setIsRutinaOpen(false)} />
         </Modal>
       )}
       {isEjercicioOpen && (

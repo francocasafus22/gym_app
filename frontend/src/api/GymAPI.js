@@ -130,3 +130,15 @@ export async function assignEjercicioToRutina(ejercicioId, rutinaId, formData) {
     }
   }
 }
+
+export async function editRutina({ rutinaId, formData }) {
+  try {
+    const { data } = await api.patch(`/rutina/${rutinaId}`, formData);
+    console.log(formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}

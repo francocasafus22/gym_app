@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "../../api/GymAPI";
 import { loginSchema } from "../../schemas/loginSchema";
 import { toast } from "sonner";
+import Loading from "../../components/Loading";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ export default function Login() {
         {/* Lado izquierdo con fondo */}
         <div className=" flex justify-center items-center  border-accent pt-5 md:py-0 ">
           <div
-            className=" w-2/4 
+            className=" w-2/4
            md:w-1/2 overflow-hidden "
           >
             <img
@@ -127,11 +128,17 @@ export default function Login() {
                 )}
               </div>
 
-              <input
+              <button
                 type="submit"
-                value="Iniciar Sesión"
                 className="bg-accent shadow-2xl hover:brightness-90 transition-all duration-200 w-full p-3 mt-5 rounded-lg text-white font-black  text-xl cursor-pointer"
-              />
+              >
+                {mutation.isPending ? (
+                  <Loading color="white" />
+                ) : (
+                  "Iniciar Sesión"
+                )}
+              </button>
+
               {mutation.error && (
                 <p className="text-red-500 text-center mt-2">
                   {mutation.error.message}
