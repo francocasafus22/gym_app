@@ -1,10 +1,17 @@
 import { Schema, model } from "mongoose";
+import slug from "slug";
 
 const RutinaSchema = new Schema(
   {
     nombre: {
       type: String,
       required: true,
+      unique: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
     },
     descripcion: {
       type: String,
@@ -29,7 +36,7 @@ const RutinaSchema = new Schema(
     },
     ejercicios: [
       {
-        ejercicioId: {
+        ejercicio: {
           type: Schema.Types.ObjectId,
           ref: "Ejercicio",
           required: true,
@@ -82,6 +89,11 @@ const RutinaSchema = new Schema(
     collection: "rutinas",
   },
 );
+
+RutinaSchema.pre("save", function (next) {
+  this.slug = slug(this.nombre, { lower: true });
+  next();
+});
 
 const Rutina = model("Rutina", RutinaSchema);
 

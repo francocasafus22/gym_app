@@ -142,3 +142,14 @@ export async function editRutina({ rutinaId, formData }) {
     }
   }
 }
+
+export async function getRutinaBySlug(slug) {
+  try {
+    const { data } = await api.get(`/rutina/${slug}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}

@@ -2,10 +2,11 @@ import { useState } from "react";
 import Modal from "./Modal";
 import { fechaDiaMesAño } from "../utils/formatText";
 import EditarRutina from "./forms-modal/EditarRutina";
+import { useNavigate } from "react-router-dom";
 
 export default function RutinaCard({ rutina }) {
   const [isRutinaOpen, setIsRutinaOpen] = useState(false);
-  const [isEjercicioOpen, setIsEjercicioOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="bg-zinc-800 shadow-2xl h-auto py-10 flex flex-col  text-center rounded-3xl">
@@ -40,7 +41,7 @@ export default function RutinaCard({ rutina }) {
         <button
           className="px-6 py-2 w-full bg-accent text-accent-foreground rounded-lg hover:brightness-80  transition-all duration-200 cursor-pointer"
           onClick={() => {
-            setIsEjercicioOpen(!isEjercicioOpen);
+            navigate(`/rutinas/${rutina.slug}`);
           }}
         >
           Editar Ejercicios
@@ -50,14 +51,6 @@ export default function RutinaCard({ rutina }) {
       {isRutinaOpen && (
         <Modal isOpen={isRutinaOpen} onClose={() => setIsRutinaOpen(false)}>
           <EditarRutina data={rutina} onClose={() => setIsRutinaOpen(false)} />
-        </Modal>
-      )}
-      {isEjercicioOpen && (
-        <Modal
-          isOpen={isEjercicioOpen}
-          onClose={() => setIsEjercicioOpen(false)}
-        >
-          <p>Editando Ejercicio de rutina {rutina._id}</p>
         </Modal>
       )}
     </div>
