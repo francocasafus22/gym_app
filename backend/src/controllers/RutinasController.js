@@ -65,7 +65,7 @@ export default class RutinasController {
 
       const { series, repeticiones, descanso, peso, dia } = req.body;
       const ejercicioCompleto = {
-        ejercicioId,
+        ejercicio: ejercicioId,
         nombre: ejercicioExist.nombre,
         series,
         repeticiones,
@@ -77,8 +77,7 @@ export default class RutinasController {
       if (
         rutina.ejercicios.some(
           (e) =>
-            e.ejercicioId.toString() === ejercicioId.toString() &&
-            e.dia === dia,
+            e.ejercicio.toString() === ejercicioId.toString() && e.dia === dia,
         )
       ) {
         res.status(400).json({ error: "Ejercicio ya asignado en ese día" });
