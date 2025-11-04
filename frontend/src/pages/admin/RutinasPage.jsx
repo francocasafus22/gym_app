@@ -19,7 +19,7 @@ const RutinasPage = () => {
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error: {error.message}</div>;
-  console.log(rutinas);
+
   return (
     <div className="min-h-screen container p-10 max-w-7xl mx-auto">
       <h1 className="text-5xl font-bold text-center border-b border-accent pb-5">

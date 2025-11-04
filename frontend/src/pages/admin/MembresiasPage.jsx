@@ -6,9 +6,6 @@ import Loading from "../../components/Loading";
 
 const MembresiasPage = () => {
   const { data, isLoading } = useMembresiasTipo();
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <div className="min-h-screen  container p-10 max-w-7xl mx-auto">

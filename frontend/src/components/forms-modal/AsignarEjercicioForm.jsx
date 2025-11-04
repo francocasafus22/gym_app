@@ -176,7 +176,7 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
             type="submit"
             className="bg-accent shadow-2xl hover:brightness-90 transition-all duration-200 w-full p-3 mt-5 rounded-lg text-white font-black  text-xl cursor-pointer"
           >
-            {"Asignar Ejercicio"}
+            {isPending ? <Loading color="white" /> : "Asignar Ejercicio"}
           </button>
         </form>
       </div>

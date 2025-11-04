@@ -7,17 +7,13 @@ import DeleteEjercicioForm from "../../components/forms-modal/DeleteEjercicioFor
 import EjercicioCard from "../../components/EjercicioCard";
 import AsignarEjercicioForm from "../../components/forms-modal/AsignarEjercicioForm.jsx";
 import Modal from "../../components/Modal";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 export default function RutinaEditPage() {
   const { slug } = useParams();
   const [dia, setDia] = useState(null);
   const [isOpenAddRutina, setIsOpenAddRutina] = useState(false);
   const [isOpenDeleteEjercicio, setIsOpenDeleteEjercicio] = useState(false);
-
-  useEffect(() => {
-    console.log(isOpenDeleteEjercicio);
-  }, [isOpenDeleteEjercicio]);
 
   const {
     data: rutina,

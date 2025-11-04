@@ -134,7 +134,6 @@ export async function assignEjercicioToRutina(ejercicioId, rutinaId, formData) {
 export async function editRutina({ rutinaId, formData }) {
   try {
     const { data } = await api.patch(`/rutina/${rutinaId}`, formData);
-    console.log(formData);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -174,7 +173,6 @@ export async function addEjercicioToRutina({
 
 export async function deleteExerciseInRutina({ rutinaId, ejercicioId }) {
   try {
-    console.log({ rutinaId, ejercicioId });
     const { data } = await api.delete(
       `/rutina/${rutinaId}/ejercicio/${ejercicioId}`,
     );
