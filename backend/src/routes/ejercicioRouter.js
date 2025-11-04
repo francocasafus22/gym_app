@@ -4,7 +4,8 @@ import EjercicioController from "../controllers/EjercicioController.js";
 const router = Router();
 
 router.post("/", EjercicioController.create);
-router.get("/", EjercicioController.getAll);
+router.get("/", EjercicioController.getByName);
+router.get("/all", EjercicioController.getAll);
 router.patch("/:id", EjercicioController.update);
 router.get("/:id", EjercicioController.getById);
 router.delete("/:id", EjercicioController.delete);

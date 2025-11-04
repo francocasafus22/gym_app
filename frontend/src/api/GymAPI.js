@@ -153,3 +153,39 @@ export async function getRutinaBySlug(slug) {
     }
   }
 }
+
+export async function addEjercicioToRutina(rutinaId, ejercicioId, formData) {
+  try {
+    const { data } = await api.post(
+      `/rutina/${rutinaId}/ejercicio/${ejercicioId}`,
+      formData,
+    );
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function getByName(name, page) {
+  try {
+    const { data } = await api.get(`/ejercicio/?q=${name}&page=${page}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function getAll() {
+  try {
+    const { data } = await api.get(`/ejercicio/all`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}

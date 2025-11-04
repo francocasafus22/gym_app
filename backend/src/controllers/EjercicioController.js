@@ -31,6 +31,41 @@ export default class EjercicioController {
       res.status(500).json({ error: "Hubo un error" });
     }
   }
+
+  static async getByName(req, res) {
+    try {
+      const { q = "", page = 1 } = req.query;
+
+      const limit = 4;
+      const skip = (Number(page) - 1) * limit;
+
+      const ejercicios = await Ejercicio.find(
+        { nombre: { $regex: q, $options: "i" } },
+        { _id: 1, nombre: 1 }, // proyección explícita
+      )
+        .skip(skip)
+        .limit(limit);
+
+      const total = await Ejercicio.countDocuments({
+        nombre: { $regex: q, $options: "i" },
+      });
+
+      if (!ejercicios || ejercicios.length === 0) {
+        return res.status(404).json({ error: "Ejercicio no encontrado" });
+      }
+
+      res.status(200).json({
+        ejercicios,
+        total,
+        currentPage: Number(page),
+        totalPages: Math.ceil(total / limit),
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Hubo un error" });
+    }
+  }
+
   static async getById(req, res) {
     try {
       const { id } = req.params;

@@ -9,7 +9,7 @@ export default function Modal({ isOpen, onClose, children }) {
       onClick={() => onClose()}
     >
       <div
-        className="bg-primary border-1 border-border rounded-lg w-full max-w-xl   mx-5 relative flex flex-col justify-between"
+        className="bg-primary border-1 border-border rounded-lg w-full max-w-xl max-h-[90vh] overflow-y-auto  mx-5 relative flex flex-col justify-between"
         onClick={(e) => e.stopPropagation()}
       >
         <button
