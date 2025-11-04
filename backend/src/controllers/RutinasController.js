@@ -93,6 +93,37 @@ export default class RutinasController {
     }
   }
 
+  static async deleteExercise(req, res) {
+    try {
+      const { rutinaId, ejercicioId } = req.body;
+
+      let rutina = await Rutina.findById(rutinaId);
+
+      if (!rutina) {
+        const error = new Error("Rutina no encontrada");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      const ejercicioIndex = rutina.ejercicios.findIndex(
+        (e) => e.ejercicio.toString() === ejercicioId.toString(),
+      );
+
+      if (ejercicioIndex === -1) {
+        const error = new Error("Ejercicio no encontrado en la rutina");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      rutina.ejercicios.splice(ejercicioIndex, 1);
+      await rutina.save();
+      res.status(200).json({ message: "Ejercicio eliminado exitosamente" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Hubo un error al eliminar el ejercicio" });
+    }
+  }
+
   static async update(req, res) {
     try {
       const { rutinaId } = req.params;

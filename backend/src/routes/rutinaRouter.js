@@ -11,5 +11,6 @@ router.post(
   RutinasController.asignarEjercicio,
 );
 router.patch("/:rutinaId", RutinasController.update);
+router.delete("/ejercicios", RutinasController.deleteExercise);
 
 export default router;
