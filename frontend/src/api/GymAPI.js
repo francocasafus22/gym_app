@@ -172,6 +172,20 @@ export async function addEjercicioToRutina({
   }
 }
 
+export async function deleteExerciseInRutina({ rutinaId, ejercicioId }) {
+  try {
+    console.log({ rutinaId, ejercicioId });
+    const { data } = await api.delete(
+      `/rutina/${rutinaId}/ejercicio/${ejercicioId}`,
+    );
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
 export async function getByName(name, page) {
   try {
     const { data } = await api.get(`/ejercicio/?q=${name}&page=${page}`);

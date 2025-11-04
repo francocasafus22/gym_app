@@ -3,15 +3,21 @@ import { useQuery } from "@tanstack/react-query";
 import { getRutinaBySlug } from "../../api/GymAPI";
 import { Plus } from "lucide-react";
 import Loading from "../../components/Loading";
+import DeleteEjercicioForm from "../../components/forms-modal/DeleteEjercicioForm.jsx";
 import EjercicioCard from "../../components/EjercicioCard";
 import AsignarEjercicioForm from "../../components/forms-modal/AsignarEjercicioForm.jsx";
 import Modal from "../../components/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RutinaEditPage() {
   const { slug } = useParams();
   const [dia, setDia] = useState(null);
   const [isOpenAddRutina, setIsOpenAddRutina] = useState(false);
+  const [isOpenDeleteEjercicio, setIsOpenDeleteEjercicio] = useState(false);
+
+  useEffect(() => {
+    console.log(isOpenDeleteEjercicio);
+  }, [isOpenDeleteEjercicio]);
 
   const {
     data: rutina,
@@ -59,7 +65,11 @@ export default function RutinaEditPage() {
               {rutina.ejercicios
                 .filter((ejercicio) => ejercicio.dia === dia)
                 .map((ejercicio) => (
-                  <EjercicioCard key={ejercicio._id} ejercicio={ejercicio} />
+                  <EjercicioCard
+                    key={ejercicio._id}
+                    ejercicio={ejercicio}
+                    setIsOpenDeleteEjercicio={setIsOpenDeleteEjercicio}
+                  />
                 ))}{" "}
               <button className="bg-zinc-800 shadow-2xl h-80 flex flex-col  text-center rounded-3xl hover:brightness-90 cursor-pointer transition-all duration-300 ease-in-out">
                 <div
@@ -72,6 +82,19 @@ export default function RutinaEditPage() {
             </div>
           </div>
         ),
+      )}
+
+      {isOpenDeleteEjercicio && (
+        <Modal
+          isOpen={isOpenDeleteEjercicio}
+          onClose={() => setIsOpenDeleteEjercicio(null)}
+        >
+          <DeleteEjercicioForm
+            ejercicioId={isOpenDeleteEjercicio}
+            onClose={() => setIsOpenDeleteEjercicio(null)}
+            rutinaId={rutina._id}
+          />
+        </Modal>
       )}
 
       {isOpenAddRutina && (
