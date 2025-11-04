@@ -154,7 +154,11 @@ export async function getRutinaBySlug(slug) {
   }
 }
 
-export async function addEjercicioToRutina(rutinaId, ejercicioId, formData) {
+export async function addEjercicioToRutina({
+  rutinaId,
+  ejercicioId,
+  formData,
+}) {
   try {
     const { data } = await api.post(
       `/rutina/${rutinaId}/ejercicio/${ejercicioId}`,

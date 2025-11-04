@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getByName, addEjercicioToRutina } from "../../api/GymAPI";
+import { assignExerciseSchema } from "../../schemas/assignExercise.js";
 import { toast } from "sonner";
 import Loading from "../Loading";
 import Pagination from "../Pagination.jsx";
@@ -27,18 +28,42 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
     },
   });
 
-  /*
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: addEjercicioToRutina,
     onSuccess: (data) => {
       queryClient.invalidateQueries(["rutina"]);
       toast.success(data.message);
+      onClose();
     },
     onError: (error) => {
       toast.error(error.message);
     },
   });
-*/
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      series: Number(seriesInput),
+      repeticiones: Number(repsInput),
+      descanso: Number(descansoInput),
+      dia,
+    };
+
+    const result = assignExerciseSchema.safeParse({
+      ejercicioId: ejercicioSelected,
+      rutinaId,
+      formData,
+    });
+
+    if (!result.success) {
+      result.error.issues.map((issue) => toast.error(issue.message));
+      return;
+    }
+
+    mutate({ rutinaId, ejercicioId: ejercicioSelected, formData });
+  };
+
   return (
     <>
       <div className="p-10 flex flex-col">
@@ -98,9 +123,7 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
 
         <form
           className="flex flex-col gap-2 mt-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
+          onSubmit={(e) => handleSubmit(e)}
         >
           <div className="flex flex-col gap-2">
             <label className="text-md text-start text-gray-400">Series</label>
@@ -134,7 +157,9 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label className="text-md text-start text-gray-400">Descanso</label>
+            <label className="text-md text-start text-gray-400">
+              Descanso (minutos)
+            </label>
             <input
               type="number"
               id="descanso"

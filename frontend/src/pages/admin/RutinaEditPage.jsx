@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getRutinaBySlug } from "../../api/GymAPI";
 import { Plus } from "lucide-react";
 import Loading from "../../components/Loading";
@@ -43,17 +43,6 @@ export default function RutinaEditPage() {
       </div>
     );
 
-  if (isOpenAddRutina)
-    return (
-      <Modal isOpen={isOpenAddRutina} onClose={() => setIsOpenAddRutina(false)}>
-        <AsignarEjercicioForm
-          rutinaId={rutina.id}
-          dia={dia}
-          onClose={() => setIsOpenAddRutina(false)}
-        />
-      </Modal>
-    );
-
   return (
     <div className="px-5 pb-10">
       <h1 className="text-center text-3xl md:text-5xl font-bold mt-10">
@@ -83,6 +72,19 @@ export default function RutinaEditPage() {
             </div>
           </div>
         ),
+      )}
+
+      {isOpenAddRutina && (
+        <Modal
+          isOpen={isOpenAddRutina}
+          onClose={() => setIsOpenAddRutina(false)}
+        >
+          <AsignarEjercicioForm
+            rutinaId={rutina._id}
+            dia={dia}
+            onClose={() => setIsOpenAddRutina(false)}
+          />
+        </Modal>
       )}
     </div>
   );
