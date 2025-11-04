@@ -95,7 +95,7 @@ export default class RutinasController {
 
   static async deleteExercise(req, res) {
     try {
-      const { rutinaId, ejercicioId } = req.body;
+      const { rutinaId, ejercicioId } = req.params;
 
       let rutina = await Rutina.findById(rutinaId);
 
@@ -106,7 +106,7 @@ export default class RutinasController {
       }
 
       const ejercicioIndex = rutina.ejercicios.findIndex(
-        (e) => e.ejercicio.toString() === ejercicioId.toString(),
+        (e) => e._id.toString() === ejercicioId.toString(),
       );
 
       if (ejercicioIndex === -1) {
