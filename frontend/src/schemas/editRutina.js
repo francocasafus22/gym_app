@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const editRutinaSchema = z.object({
+export const PostRutinaSchema = z.object({
   nombre: z.string().nonempty("El nombre es obligatorio"),
   descripcion: z
     .string()

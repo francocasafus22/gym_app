@@ -44,7 +44,7 @@ export default class RutinasController {
       await rutina.save();
       res.status(201).json({ message: "Rutina creada exitosamente" });
     } catch (error) {
-      res.status(500).json({ error: "Hubo un error al crear la rutina" });
+      res.status(500).json({ error: error.message });
     }
   }
 

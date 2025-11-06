@@ -10,7 +10,6 @@ const RutinaSchema = new Schema(
     },
     slug: {
       type: String,
-      required: true,
       unique: true,
     },
     descripcion: {

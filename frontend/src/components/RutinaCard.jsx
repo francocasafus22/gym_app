@@ -6,13 +6,26 @@ import { useNavigate } from "react-router-dom";
 
 export default function RutinaCard({ rutina }) {
   const [isRutinaOpen, setIsRutinaOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
 
   return (
-    <div className="bg-zinc-800 shadow-2xl h-auto py-10 flex flex-col  text-center rounded-3xl">
+    <div className="bg-zinc-800 shadow-2xl h-full py-10 flex flex-col  text-center rounded-3xl">
       <div className="flex flex-col justify-center items-center px-5 h-4/5  rounded-t-3xl w-full">
         <h1 className="text-5xl font-bold">{rutina.nombre}</h1>
-        <p className="text-lg font-light mt-2 w-full ">{rutina.descripcion}</p>
+        <p
+          className={`text-lg text-balance font-light mt-2 w-full ${!isExpanded ? "line-clamp-2" : ""}`}
+        >
+          {rutina.descripcion}
+        </p>
+        {rutina.descripcion.length > 50 ? (
+          <button
+            className="text-accent mt-1 text-sm hover:underline"
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? "Ver menos" : "Ver más"}
+          </button>
+        ) : null}
         <div className="grid grid-cols-2 gap-2 my-5">
           <p className="text-md font-bold border-2 border-accent rounded-xl px-2 py-1">
             Nivel: {rutina.nivel}

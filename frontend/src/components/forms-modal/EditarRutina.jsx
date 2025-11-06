@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import Loading from "../Loading";
 import { editRutina } from "../../api/GymAPI";
-import { editRutinaSchema } from "../../schemas/editRutina";
+import { PostRutinaSchema } from "../../schemas/editRutina";
 
 export default function EditarRutina({ data, onClose }) {
   const [nombreInput, setnombreInput] = useState(data.nombre);
@@ -37,7 +37,7 @@ export default function EditarRutina({ data, onClose }) {
       diasPorSemana: diasInput,
     };
 
-    const result = editRutinaSchema.safeParse(formData);
+    const result = PostRutinaSchema.safeParse(formData);
 
     if (!result.success) {
       result.error.issues.map((issue) => toast.error(issue.message));
