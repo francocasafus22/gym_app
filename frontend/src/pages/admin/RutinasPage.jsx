@@ -38,7 +38,7 @@ const RutinasPage = () => {
             <RutinaCard key={rutina._id} rutina={rutina}></RutinaCard>
           ))}
           <button
-            className="bg-zinc-800 shadow-2xl h-full flex flex-col  text-center rounded-3xl hover:brightness-90 cursor-pointer transition-all duration-300 ease-in-out"
+            className="border border-border shadow-xl h-full flex flex-col  text-center rounded-3xl hover:brightness-90 cursor-pointer transition-all duration-300 ease-in-out"
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
             <div className="flex flex-col justify-center items-center h-full p-5 rounded-t-3xl ">

@@ -5,10 +5,12 @@
     --color-primary: #d3dad9;
     --color-secondary: #37353e;
     --color-accent: #c50d08;
-    --color-accent-foreground: #37353e;
+    --color-accent-hover: #9e0a06;
+    --color-accent-foreground: #ffffff;
     --color-primary-foreground: #37353e;
     --color-secondary-foreground: #0c0e0b;
-    --color-border: #ffffff1a;
+    --color-border: #aeb7b6;
+    --color-placeholder: #9aa3a1;
     --font-outfit: "Outfit", sans-serif;
 }
 
