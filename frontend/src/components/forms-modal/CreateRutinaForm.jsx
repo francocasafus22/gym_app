@@ -20,6 +20,7 @@ export default function CreateRutinaForm({ onClose }) {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["rutinas"]);
       toast.success(data.message);
+      onClose();
     },
     onError: (data) => {
       toast.error(data.error);

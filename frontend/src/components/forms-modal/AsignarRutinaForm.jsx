@@ -23,6 +23,7 @@ export default function AsignarRutinaForm({ userId, onClose }) {
     mutationFn: asignarRutina,
     onSuccess: (data) => {
       toast.success(data.message);
+      queryClient.invalidateQueries(["users"]);
       onClose();
     },
     onError: (error) => {
@@ -33,7 +34,6 @@ export default function AsignarRutinaForm({ userId, onClose }) {
   const handleSubmit = () => {
     if (!option) return toast.error("Selecciona una rutina");
     mutate({ userId, rutinaId: option });
-    queryClient.invalidateQueries(["users"]);
   };
 
   return (
