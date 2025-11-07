@@ -4,6 +4,7 @@ import { fechaDiaMesAño, capitalize } from "../../utils/formatText.js";
 
 export default function MiMembresiaPage() {
   const { user } = useOutletContext();
+  const cantidadMembresias = user.membresia.length;
 
   return (
     <div className="min-h-screen container p-10 max-w-7xl mx-auto">
@@ -14,18 +15,20 @@ export default function MiMembresiaPage() {
         <p>
           Estado de tu membresia:{" "}
           <span className="text-accent">
-            {user.membresia[0].estado ? "Activa" : "Vencida"}
+            {user.membresia[cantidadMembresias - 1].estado
+              ? "Activa"
+              : "Vencida"}
           </span>
         </p>
         <p>
           Fecha de vencimiento:{" "}
           <span className="text-accent">
-            {fechaDiaMesAño(user.membresia[0].fechaFin)}
+            {fechaDiaMesAño(user.membresia[cantidadMembresias - 1].fechaFin)}
           </span>
         </p>
         <p>
           Meses inscripto:{" "}
-          <span className="text-accent">{user.membresia.length}</span>
+          <span className="text-accent">{cantidadMembresias}</span>
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-10">

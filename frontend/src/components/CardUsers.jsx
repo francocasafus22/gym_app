@@ -7,6 +7,7 @@ import RenovarMembresiaForm from "./forms-modal/RenovarMembresiaForm";
 export default function CardUsers({ user }) {
   const [isOpenRutina, setIsOpenRutina] = useState(false);
   const [isOpenMembresia, setIsOpenMembresia] = useState(false);
+  const ultimaMembresia = user.membresia.length - 1;
 
   return (
     <div className="flex flex-col text-center  rounded-xl shadow-2xl bg-transparent border-1  border-border">
@@ -27,18 +28,18 @@ export default function CardUsers({ user }) {
           {user.rutina ? user.rutina.nombre : "No tiene rutina"}
         </span>
       </p>
-      {user.membresia[0] ? (
+      {user.membresia.length >= 1 ? (
         <>
           <p>
             Fecha vencimiento:{" "}
             <span className="text-accent">
-              {fechaDiaMesAño(user.membresia[0].fechaFin)}
+              {fechaDiaMesAño(user.membresia[ultimaMembresia].fechaFin)}
             </span>
           </p>
           <p>
             Estado:{" "}
             <span className="text-accent">
-              {user.membresia[0]?.estado ? "En pago" : "Vencida"}
+              {user.membresia[ultimaMembresia]?.estado ? "En pago" : "Vencida"}
             </span>
           </p>
         </>
