@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-transparent text-white">
+      <div className="min-h-screen bg-transparent text-black">
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-black border-b border-white/20"></header>
 

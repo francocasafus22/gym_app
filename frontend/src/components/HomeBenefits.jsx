@@ -51,7 +51,7 @@ export default function HomeBenefits() {
       {/* Lado Izquierdo - Fijo */}
       <div className="flex items-center justify-center bg-transparent lg:sticky lg:top-0 lg:h-screen lg:w-1/2">
         <div className="px-8 py-16 text-center lg:px-12">
-          <h1 className="font-sans text-4xl font-black uppercase leading-tight tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="font-sans text-4xl font-black uppercase leading-tight tracking-tight text-black md:text-5xl lg:text-6xl xl:text-7xl">
             Explora todos los{" "}
             <span className="bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
               beneficios
