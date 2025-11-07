@@ -6,6 +6,8 @@ export default function MiMembresiaPage() {
   const { user } = useOutletContext();
   const cantidadMembresias = user.membresia.length;
 
+  console.log(user);
+
   return (
     <div className="min-h-screen container p-10 max-w-7xl mx-auto">
       <h1 className="text-center text-5xl font-bold border-b border-accent pb-5">
@@ -15,15 +17,13 @@ export default function MiMembresiaPage() {
         <p>
           Estado de tu membresia:{" "}
           <span className="text-accent">
-            {user.membresia[cantidadMembresias - 1].estado
-              ? "Activa"
-              : "Vencida"}
+            {user.membresia[0].estado ? "Activa" : "Vencida"}
           </span>
         </p>
         <p>
           Fecha de vencimiento:{" "}
           <span className="text-accent">
-            {fechaDiaMesAño(user.membresia[cantidadMembresias - 1].fechaFin)}
+            {fechaDiaMesAño(user.membresia[0].fechaFin)}
           </span>
         </p>
         <p>
@@ -33,7 +33,7 @@ export default function MiMembresiaPage() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 pt-10">
         {user.membresia.map((membresia) => (
-          <div className="bg-zinc-800 shadow-2xl h-90 flex flex-col text-center rounded-3xl">
+          <div className="border border-border shadow-2xl h-90 flex flex-col text-center rounded-3xl">
             <div className="flex flex-col justify-center items-center h-full rounded-t-3xl w-full gap-5">
               <div className="flex flex-col">
                 <h1 className="text-5xl font-bold">

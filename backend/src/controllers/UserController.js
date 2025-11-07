@@ -161,8 +161,10 @@ export default class UserController {
         .populate({
           path: "membresia",
           populate: { path: "tipo", select: "-_id nombre" },
+          options: { sort: { fechaInicio: -1 } },
         });
 
+      console.log(user);
       res.json(user);
     } catch (error) {
       res.status(500).json({ error: "Hubo un error" });

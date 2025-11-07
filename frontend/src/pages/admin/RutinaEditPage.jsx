@@ -7,13 +7,22 @@ import DeleteEjercicioForm from "../../components/forms-modal/DeleteEjercicioFor
 import EjercicioCard from "../../components/EjercicioCard";
 import AsignarEjercicioForm from "../../components/forms-modal/AsignarEjercicioForm.jsx";
 import Modal from "../../components/Modal";
-import {  useState } from "react";
+import { useState } from "react";
 
 export default function RutinaEditPage() {
   const { slug } = useParams();
   const [dia, setDia] = useState(null);
   const [isOpenAddRutina, setIsOpenAddRutina] = useState(false);
   const [isOpenDeleteEjercicio, setIsOpenDeleteEjercicio] = useState(false);
+
+  const dias_semana = {
+    1: "Lunes",
+    2: "Martes",
+    3: "Miércoles",
+    4: "Jueves",
+    5: "Viernes",
+    6: "Sábado",
+  };
 
   const {
     data: rutina,
@@ -55,7 +64,9 @@ export default function RutinaEditPage() {
       {Array.from({ length: rutina.diasPorSemana }, (_, i) => i + 1).map(
         (dia) => (
           <div key={dia}>
-            <p className="text-2xl font-bold mt-6 mb-3">Día {dia}</p>
+            <p className="text-2xl font-bold mt-6 mb-3">
+              Día {dias_semana[dia]}
+            </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
               {rutina.ejercicios
@@ -67,7 +78,7 @@ export default function RutinaEditPage() {
                     setIsOpenDeleteEjercicio={setIsOpenDeleteEjercicio}
                   />
                 ))}{" "}
-              <button className="bg-zinc-800 shadow-2xl h-80 flex flex-col  text-center rounded-3xl hover:brightness-90 cursor-pointer transition-all duration-300 ease-in-out">
+              <button className="border border-border shadow-xl hover:shadow-2xl h-80 flex flex-col  text-center rounded-3xl hover:brightness-90 cursor-pointer transition-all duration-300 ease-in-out">
                 <div
                   className="flex flex-col justify-center items-center h-full p-5 rounded-t-3xl"
                   onClick={() => handleOpenAddEjercicio(dia)}
