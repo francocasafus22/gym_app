@@ -158,7 +158,10 @@ export default class UserController {
     try {
       const user = await User.findById(req.user.id)
         .select("-password -_id")
-        .populate("membresia");
+        .populate({
+          path: "membresia",
+          populate: { path: "tipo", select: "-_id nombre" },
+        });
 
       res.json(user);
     } catch (error) {
