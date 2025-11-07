@@ -65,7 +65,33 @@ export default function Home() {
         <HomeBenefits />
 
         <div className="h-20"></div>
+        {/* Sección de ubicación */}
+        <section className="py-20 bg-black text-center">
+          <h1 className="font-sans text-4xl font-black uppercase leading-tight tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
+            UBICACION{" "}
+            <span className="bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
+              SPARTAN GYM
+            </span>{" "}
+          </h1>
+
+          <div className="flex justify-center">
+            <div className="overflow-hidden rounded-2xl shadow-2xl w-[90%] md:w-[70%] transform transition duration-500 hover:scale-105 hover:shadow-red-600/40">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1321.6099663586351!2d-58.61256659630211!3d-34.77470688560493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc4ef9311e623%3A0x87e13c53943281ef!2sSPARTAN%20GYM!5e0!3m2!1ses-419!2sar!4v1762531811297!5m2!1ses-419!2sar"
+                width="100%"
+                height="550"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
 }
+
+
+
