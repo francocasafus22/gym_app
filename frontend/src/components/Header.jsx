@@ -23,7 +23,7 @@ export default function Header({ user = null, logout }) {
   };
 
   return (
-    <header className="shadow-lg w-full py-3 bg-transparent border-b border-border">
+    <header className="shadow-md w-full py-3 bg-transparent border-b border-border">
       <div className="flex items-center justify-between px-5">
         {/* Logo */}
         <div className="flex items-center space-x-2">
@@ -45,7 +45,7 @@ export default function Header({ user = null, logout }) {
         {/* Botón Login/Logout */}
         <div>
           <button
-            className="px-5 py-2 border-2 border-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300 cursor-pointer hidden lg:block"
+            className="px-5 py-2  bg-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300 cursor-pointer hidden lg:block"
             onClick={handleAuthButton}
           >
             {isLogin ? "Cerrar Sesión" : "Iniciar Sesión"}
@@ -71,7 +71,7 @@ export default function Header({ user = null, logout }) {
             (isAdmin ? <AdminNavigation /> : <UserNavigation />)}
 
           <button
-            className="px-5 py-2 border-2 border-accent rounded-lg text-accent-foreground hover:bg-accent transition-all duration-300 cursor-pointer"
+            className="px-5 py-2 border-2 border-accent rounded-lg text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300 cursor-pointer"
             onClick={() => handleAuthButton()}
           >
             {isLogin ? "Cerrar Sesión" : "Iniciar Sesión"}

@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../api/GymAPI";
@@ -77,7 +77,7 @@ export default function Login() {
         </div>
 
         {/* Lado derecho con contenido */}
-        <div className=" px-10 flex md:items-center  bg-gradient-to-b md:bg-gradient-to-r from-primary to-accent">
+        <div className=" px-10 flex md:items-center  bg-accent">
           <div
             className="w-full
          max-w-2xl mx-auto py-10 md:py-0 "
@@ -87,20 +87,22 @@ export default function Login() {
             </h1>
             <p className="text-2xl  text-accent-foreground">
               accede a tu cuenta de{" "}
-              <span className="bg-gradient-to-b font-bold from-[#ff0000] to-accent bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-red-400 via-red-500 to-orange-500 bg-clip-text text-transparent font-bold">
                 Spartan-Gym
               </span>
             </p>
 
             <form className="mt-5 flex flex-col gap-2" onSubmit={handleSubmit}>
               <div className="flex flex-col gap-2">
-                <label className="font-bold text-2xl">Email</label>
+                <label className="font-bold text-2xl text-accent-foreground">
+                  Email
+                </label>
 
                 <input
                   id="email"
                   type="email"
-                  placeholder="Email de Registro"
-                  className="w-full border border-gray-300 p-3 rounded-lg"
+                  placeholder="usuario@gmail.com"
+                  className="w-full border-b border-border bg-transparent text-accent-foreground placeholder:text-white/50 p-3 focus:outline-none focus:ring-2 focus:ring-accent  transition-all "
                   name="email"
                   onChange={(e) => setEmailInput(e.target.value)}
                 />
@@ -112,12 +114,14 @@ export default function Login() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-bold text-2xl">Password</label>
+                <label className="font-bold text-2xl text-accent-foreground">
+                  Password
+                </label>
 
                 <input
                   type="password"
-                  placeholder="Password de Registro"
-                  className="w-full border border-gray-300 p-3 rounded-lg"
+                  placeholder="******"
+                  className="w-full border-b border-border bg-transparent text-accent-foreground  placeholder:text-white/50 p-3 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
                   name="password"
                   onChange={(e) => setPasswordInput(e.target.value)}
                 />
@@ -130,7 +134,7 @@ export default function Login() {
 
               <button
                 type="submit"
-                className="bg-accent shadow-2xl hover:brightness-90 transition-all duration-200 w-full p-3 mt-5 rounded-lg text-white font-black  text-xl cursor-pointer"
+                className="bg-primary text-accent shadow-2xl hover:brightness-90 transition-all duration-200 w-full p-3 mt-5 rounded-lg font-black  text-xl cursor-pointer"
               >
                 {mutation.isPending ? (
                   <Loading color="white" />

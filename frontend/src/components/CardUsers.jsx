@@ -7,10 +7,9 @@ import RenovarMembresiaForm from "./forms-modal/RenovarMembresiaForm";
 export default function CardUsers({ user }) {
   const [isOpenRutina, setIsOpenRutina] = useState(false);
   const [isOpenMembresia, setIsOpenMembresia] = useState(false);
-  const ultimaMembresia = user.membresia.length - 1;
 
   return (
-    <div className="flex flex-col text-center  rounded-xl shadow-2xl bg-transparent border-1  border-border">
+    <div className="flex flex-col text-center  rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 bg-transparent border-1  border-border">
       <p className="mt-5 text-2xl font-bold">
         {user.firstName} {user.lastName}
       </p>
@@ -33,13 +32,13 @@ export default function CardUsers({ user }) {
           <p>
             Fecha vencimiento:{" "}
             <span className="text-accent">
-              {fechaDiaMesAño(user.membresia[ultimaMembresia].fechaFin)}
+              {fechaDiaMesAño(user.membresia[0].fechaFin)}
             </span>
           </p>
           <p>
             Estado:{" "}
             <span className="text-accent">
-              {user.membresia[ultimaMembresia]?.estado ? "En pago" : "Vencida"}
+              {user.membresia[0]?.estado ? "En pago" : "Vencida"}
             </span>
           </p>
         </>
@@ -51,7 +50,7 @@ export default function CardUsers({ user }) {
 
       <div className="flex flex-row justify-center gap-5 mx-5 ">
         <button
-          className="px-6 py-2 w-full my-5 bg-accent text-accent-foreground rounded-lg hover:brightness-80  transition-all duration-200 cursor-pointer"
+          className="px-6 py-2 w-full my-5 bg-accent text-accent-foreground rounded-lg hover:bg-accent-hover  transition-all duration-200 cursor-pointer"
           onClick={() => {
             setIsOpenMembresia(!isOpenMembresia);
           }}
@@ -59,7 +58,7 @@ export default function CardUsers({ user }) {
           Renovar Membresia
         </button>
         <button
-          className="px-6 py-2 w-full my-5  bg-accent text-accent-foreground rounded-lg hover:brightness-80  transition-all duration-200 cursor-pointer"
+          className="px-6 py-2 w-full my-5  bg-accent text-accent-foreground rounded-lg hover:bg-accent-hover  transition-all duration-200 cursor-pointer"
           onClick={() => {
             setIsOpenRutina(!isOpenRutina);
           }}
@@ -67,7 +66,7 @@ export default function CardUsers({ user }) {
           Asignar Rutina
         </button>
       </div>
-      <p className="text-border text-center mb-2 ml-5">
+      <p className="text-center mb-2 ml-5">
         Socio desde: {fechaDiaMesAño(user.createdAt)}
       </p>
 

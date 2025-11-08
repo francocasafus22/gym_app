@@ -10,7 +10,7 @@ export default function RutinaCard({ rutina }) {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-zinc-800 shadow-2xl h-full py-10 flex flex-col  text-center rounded-3xl">
+    <div className="border border-border shadow-xl h-full py-10 flex flex-col  text-center rounded-3xl">
       <div className="flex flex-col justify-center items-center px-5 h-4/5  rounded-t-3xl w-full">
         <h1 className="text-5xl font-bold">{rutina.nombre}</h1>
         <p
@@ -41,7 +41,7 @@ export default function RutinaCard({ rutina }) {
           </p>
         </div>
       </div>
-      <p className="text-md font-light text-gray-400 mb-5">
+      <p className="text-md font-light text-secondary mb-5">
         Actualizado: {fechaDiaMesAño(rutina.updatedAt)}
       </p>
       <div className="flex flex-col xs:flex-row w-full justify-between px-5 gap-5">

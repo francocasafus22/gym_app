@@ -73,7 +73,7 @@ export default function HomeBenefits() {
           {benefits.map((benefit) => (
             <div
               key={benefit.id}
-              className="group overflow-hidden rounded-2xl bg-zinc-800 shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/20"
+              className="group overflow-hidden rounded-2xl border borde-border bg-gradient-to-r from-red-600 to-orange-500 shadow-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/20"
             >
               <div className="relative h-64 w-full overflow-hidden md:h-80">
                 <img
@@ -84,10 +84,10 @@ export default function HomeBenefits() {
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50 to-transparent" />
               </div>
               <div className="p-6 md:p-8">
-                <h2 className="mb-3 font-sans text-2xl font-bold text-white md:text-3xl">
+                <h2 className="mb-3 font-sans text-2xl font-bold text-primary md:text-3xl">
                   {benefit.title}
                 </h2>
-                <p className="font-sans leading-relaxed text-zinc-300">
+                <p className="font-sans leading-relaxed text-primary">
                   {benefit.description}
                 </p>
               </div>

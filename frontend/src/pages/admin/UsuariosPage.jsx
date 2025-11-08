@@ -46,7 +46,7 @@ const UsuariosPage = () => {
           onChange={(e) => setQueryInput(e.target.value)}
         />
         <button
-          className="bg-accent rounded-xl w-1/4 py-2 hover:brightness-90 transition-all duration-150 cursor-pointer text-secondary"
+          className="bg-accent rounded-xl w-1/4 py-2 hover:brightness-90 transition-all duration-150 cursor-pointer text-accent-foreground"
           type="submit"
         >
           Buscar
@@ -54,7 +54,7 @@ const UsuariosPage = () => {
       </form>
 
       <button
-        className="w-full bg-accent rounded-lg py-2 mb-5 hover:brightness-90 shadow-xl hover:shadow-2xl cursor-pointer transition-all duration-200"
+        className="w-full bg-accent rounded-lg py-2 mb-5 hover:brightness-90 shadow-xl hover:shadow-2xl cursor-pointer transition-all duration-200 text-accent-foreground"
         onClick={() => {
           setIsOpenNewUserModal(true);
         }}
@@ -69,7 +69,7 @@ const UsuariosPage = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500">No se encontraron usuarios</p>
+        <p className="text-center text-secondary">No se encontraron usuarios</p>
       )}
       <Pagination
         currentPage={data.currentPage}

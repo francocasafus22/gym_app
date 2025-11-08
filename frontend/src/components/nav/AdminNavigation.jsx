@@ -19,7 +19,7 @@ export default function UserNavigation() {
           className={classNames(
             location.pathname === tab.href
               ? "bg-accent text-accent-foreground py-2 px-5 rounded-lg transition"
-              : " hover:bg-accent hover:text-primary-foreground py-2 px-5 rounded-lg transition",
+              : " hover:bg-accent hover:text-accent-foreground py-2 px-5 rounded-lg transition",
           )}
         >
           {tab.name}
