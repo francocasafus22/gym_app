@@ -14,6 +14,7 @@ import LandingPage from "./pages/LandingPage";
 
 // Páginas user
 import MiMembresiaPage from "./pages/user/MiMembresiaPage";
+import EntrenamientoPage from "./pages/user/EntrenamientoPage";
 import MiRutinaPage from "./pages/user/MiRutinaPage";
 import FeedPage from "./pages/user/FeedPage";
 import AppLayout from "./layouts/ProtectedLayout";
@@ -47,6 +48,7 @@ export default function Router() {
         <Route path="/mi-membresia" element={<MiMembresiaPage />} />
         <Route path="/mi-rutina" element={<MiRutinaPage />} />
         <Route path="/feed" element={<FeedPage />}></Route>
+        <Route path="/entrenamiento" element={<EntrenamientoPage />}></Route>
       </Route>
     </Routes>
   );

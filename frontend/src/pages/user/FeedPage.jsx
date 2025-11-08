@@ -107,9 +107,12 @@ export default function HomePage() {
             <button className="mt-4 bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all">
               Ver rutina completa
             </button>
-            <button className=" bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all">
+            <Link
+              className=" bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all"
+              to={"/entrenamiento"}
+            >
               Comenzar entrenamiento
-            </button>
+            </Link>
           </div>
         </section>
 
