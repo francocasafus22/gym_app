@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { getRutinaBySlug } from "../../api/GymAPI";
+import { getRutina } from "../../api/GymAPI";
 import { Plus } from "lucide-react";
 import Loading from "../../components/Loading";
 import DeleteEjercicioForm from "../../components/forms-modal/DeleteEjercicioForm.jsx";
@@ -30,7 +30,7 @@ export default function RutinaEditPage() {
     isError,
   } = useQuery({
     queryKey: ["rutina", slug],
-    queryFn: () => getRutinaBySlug(slug),
+    queryFn: () => getRutina(slug),
     retry: 1,
     refetchOnWindowFocus: false,
   });

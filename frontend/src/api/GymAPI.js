@@ -142,9 +142,13 @@ export async function editRutina({ rutinaId, formData }) {
   }
 }
 
-export async function getRutinaBySlug(slug) {
+export async function getRutina(slug, id) {
   try {
-    const { data } = await api.get(`/rutina/${slug}`);
+    const params = new URLSearchParams();
+    if (slug) params.append("slug", slug);
+    if (id) params.append("id", id);
+
+    const { data } = await api.get(`/rutina/one/?${params.toString()}`);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
