@@ -23,7 +23,7 @@ export default function Header({ user = null, logout }) {
   };
 
   return (
-    <header className="shadow-lg w-full py-3 bg-transparent border-b border-border">
+    <header className="shadow-md w-full py-3 bg-transparent border-b border-border">
       <div className="flex items-center justify-between px-5">
         {/* Logo */}
         <div className="flex items-center space-x-2">
