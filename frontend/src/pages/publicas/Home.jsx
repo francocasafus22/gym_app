@@ -44,7 +44,7 @@ export default function Home() {
 
         {/* Sección de membresías reales */}
         <section id="planes" className="py-20 px-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-10">
+          <h2 className="text-6xl font-bold text-center mb-10 bg-gradient-to-r text-accent ">
             Planes de Membresía
           </h2>
           {isLoadingMembresias ? (
@@ -67,7 +67,7 @@ export default function Home() {
         <div className="h-20"></div>
         {/* Sección de ubicación */}
         <section className="py-20 bg-black text-center">
-          <h1 className="font-sans text-4xl font-black uppercase leading-tight tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="font-sans text-4xl font-black uppercase leading-tight tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl pb-5">
             UBICACION{" "}
             <span className="bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
               SPARTAN GYM
@@ -92,6 +92,3 @@ export default function Home() {
     </>
   );
 }
-
-
-
