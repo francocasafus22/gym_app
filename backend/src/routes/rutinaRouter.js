@@ -4,7 +4,7 @@ import RutinasController from "../controllers/RutinasController.js";
 const router = Router();
 
 router.get("/", RutinasController.getAll);
-router.get("/:slug", RutinasController.getOneBySlug);
+router.get("/one", RutinasController.getOne);
 router.post("/", RutinasController.create);
 router.post(
   "/:rutinaId/ejercicio/:ejercicioId",

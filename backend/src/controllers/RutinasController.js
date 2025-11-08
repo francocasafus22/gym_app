@@ -12,12 +12,19 @@ export default class RutinasController {
     }
   }
 
-  static async getOneBySlug(req, res) {
+  static async getOne(req, res) {
     try {
-      const rutina = await Rutina.findOne(
-        { slug: req.params.slug },
-        "-descripcion -tipo -nivel -activa",
-      ).populate("ejercicios.ejercicio");
+      const { slug, id } = req.query;
+
+      const rutina = id
+        ? await Rutina.findById(
+            id,
+            "-descripcion -tipo -nivel -activa",
+          ).populate("ejercicios.ejercicio")
+        : await Rutina.findOne(
+            { slug },
+            "-descripcion -tipo -nivel -activa",
+          ).populate("ejercicios.ejercicio");
 
       if (!rutina) {
         res.status(404).json({ error: "Rutina no encontrada" });
