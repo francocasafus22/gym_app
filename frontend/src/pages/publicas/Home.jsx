@@ -40,10 +40,7 @@ export default function Home() {
 
         {/* Sección de membresías reales */}
         <section id="planes" className="py-20 px-6 max-w-7xl mx-auto">
-          <MembresiasBenefits />
-
-
-          <h2 className="text-6xl font-bold text-center mb-10 bg-gradient-to-r text-accent ">
+          <h2 className="text-6xl text-accent font-bold text-center mb-10">
             Planes de Membresía
           </h2>
           {isLoadingMembresias ? (
@@ -51,12 +48,7 @@ export default function Home() {
               <Loading />
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {membresias &&
-                membresias.map((membresia) => (
-                  <MembresiaCardHome data={membresia} />
-                ))}
-            </div>
+            <MembresiasBenefits data={membresias} />
           )}
         </section>
 
