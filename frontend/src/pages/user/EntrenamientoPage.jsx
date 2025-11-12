@@ -4,14 +4,16 @@ import { getRutina } from "../../api/GymAPI";
 import Loading from "../../components/Loading";
 import EjercicioEntrenamientoCard from "../../components/EjercicioEntrenamientoCard";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function EntrenamientoPage() {
   const { user } = useOutletContext();
   const [ejercicioIndex, setEjercicioIndex] = useState(0);
+  const [segundos, setSegundos] = useState(0);
   // Estado del entrenamiento que se actualizará cada vez que se complete un ejercicio
   const [entrenamiento, setEntrenamiento] = useState({
     rutinaId: user.rutina.rutinaId,
-    fecha: new Date(),
+    fecha: new Date().toISOString(),
     pesos_ejercicios: [],
   });
   const [finRutina, setFinRutina] = useState(false);
@@ -41,6 +43,23 @@ export default function EntrenamientoPage() {
     (ejercicio) => ejercicio.dia === diaHoy,
   );
 
+  useEffect(() => {
+    let intervalo;
+    if (!finRutina) {
+      intervalo = setInterval(() => {
+        setSegundos((prev) => prev + 1);
+      }, 1000);
+    }
+
+    return () => clearInterval(intervalo);
+  }, [finRutina]);
+
+  const minutos = Math.floor((segundos % 3600) / 60);
+  const segundosRestantes = segundos % 60;
+  const horas = Math.floor(segundos / 3600);
+
+  const formato = `${horas.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}:${segundosRestantes.toString().padStart(2, "0")}`;
+
   const handleSiguiente = (seriesData) => {
     // Guardar los pesos y repeticiones de las series del ejercicio completado
     setEntrenamiento((prev) => ({
@@ -63,7 +82,13 @@ export default function EntrenamientoPage() {
     } else {
       // Si ya es el ultimo ejercicio, enviar los datos al backend
       setFinRutina(true);
+      // Establecerle la duración en segundos al entrenamiento al finalizar
+      setEntrenamiento((prev) => ({
+        ...prev,
+        duracion: segundos,
+      }));
       console.log("llamda api");
+      console.log(entrenamiento);
       // TODO: llamada a la api
     }
   };
@@ -80,6 +105,12 @@ export default function EntrenamientoPage() {
           <p className="text-center text-3xl font-bold ">
             Dia <span className="text-accent">{dias[diaHoy]}</span>
           </p>
+
+          <div className="bg-accent flex justify-center px-5 py-2 rounded-xl mx-auto">
+            <p className="text-2xl text-center text-accent-foreground">
+              Tiempo: {formato}
+            </p>
+          </div>
 
           {!finRutina && ejercicios && ejercicios[ejercicioIndex] ? (
             <EjercicioEntrenamientoCard

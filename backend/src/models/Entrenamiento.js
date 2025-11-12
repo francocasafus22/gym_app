@@ -9,14 +9,14 @@ const entrenamientoSchema = new Schema({
     nombre: String,
   },
   duracion: {
-    type: String,
+    type: Number,
     required: true,
-    default: "0m",
+    default: 0,
   },
   fecha: {
     type: Date,
     required: true,
-    default: new Date(),
+    default: Date.now,
   },
   pesos_ejercicios: [
     {
