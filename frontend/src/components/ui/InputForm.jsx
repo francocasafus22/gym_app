@@ -15,7 +15,7 @@ export default function InputForm({
         type={type}
         id={id}
         placeholder={placeholder}
-        className="w-full border shadow-md text-secondary border-border p-3 rounded-lg focus:outline-none transition-all duration-200 focus:border-accent placeholder:text-placeholder"
+        className="w-full border shadow-md  border-border p-3 rounded-lg focus:outline-none transition-all duration-200  focus:border-accent placeholder:text-border/110 text-secondary-foreground"
         name={id}
         onChange={onChange}
         value={value}

@@ -14,3 +14,11 @@ export const fechaDiaMesAño = (fecha) => {
 export const diasRestantes = (fecha) => {
   return Math.ceil((new Date(fecha) - new Date()) / (1000 * 60 * 60 * 24));
 };
+
+export const cronometro = (segundos) => {
+  const minutos = Math.floor((segundos % 3600) / 60);
+  const segundosRestantes = segundos % 60;
+  const horas = Math.floor(segundos / 3600);
+
+  return `${horas.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}:${segundosRestantes.toString().padStart(2, "0")}`;
+};

@@ -8,13 +8,12 @@ const router = Router();
 
 router.get("/", UserController.getAll);
 
-
 router.post(
   "/login",
   body("email").isEmail().withMessage("El email no es valido"),
   body("password").notEmpty().withMessage("El password no puede estar vacio"),
   handleErrorsMiddleware,
-  UserController.login
+  UserController.login,
 );
 router.post(
   "/register",
@@ -33,12 +32,18 @@ router.post(
     .withMessage("El DNI debe contener solo números"),
 
   handleErrorsMiddleware,
-  UserController.register
+  UserController.register,
 );
 router.get("/me", authMiddleware, UserController.getUser);
 
 router.post("/asignar-membresia", UserController.asignarMembresia);
 
 router.post("/asignar-rutina", UserController.asignarRutina);
+
+router.get(
+  "/entrenamientos",
+  authMiddleware,
+  UserController.getAllEntrenamientos,
+);
 
 export default router;

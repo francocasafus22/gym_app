@@ -68,6 +68,17 @@ export async function asignarRutina(formData) {
   }
 }
 
+export async function getAllEntrenamientosByUser(page = 1) {
+  try {
+    const { data } = await api.get(`/user/entrenamientos/?page=${page}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
 /* Membresias Tipo */
 export async function getAllMembresiaTipo() {
   try {
@@ -202,6 +213,19 @@ export async function getByName(name, page) {
 export async function getAll() {
   try {
     const { data } = await api.get(`/ejercicio/all`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+// Entrenamiento
+
+export async function createEntrenamiento(entrenamiento) {
+  try {
+    const { data } = await api.post("/entrenamiento", entrenamiento);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

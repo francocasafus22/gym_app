@@ -14,12 +14,14 @@ import LandingPage from "./pages/LandingPage";
 
 // Páginas user
 import MiMembresiaPage from "./pages/user/MiMembresiaPage";
+import EntrenamientoPage from "./pages/user/EntrenamientoPage";
 import MiRutinaPage from "./pages/user/MiRutinaPage";
 import FeedPage from "./pages/user/FeedPage";
 import AppLayout from "./layouts/ProtectedLayout";
 import PublicLayout from "./layouts/PublicLayout";
 import LoginPage from "./pages/publicas/LoginPage";
 import ProtectedLayout from "./layouts/ProtectedLayout";
+import MisEntrenamientosPage from "./pages/user/MisEntrenamientos";
 
 export default function Router() {
   return (
@@ -47,6 +49,11 @@ export default function Router() {
         <Route path="/mi-membresia" element={<MiMembresiaPage />} />
         <Route path="/mi-rutina" element={<MiRutinaPage />} />
         <Route path="/feed" element={<FeedPage />}></Route>
+        <Route path="/entrenamiento" element={<EntrenamientoPage />}></Route>
+        <Route
+          path="/mis-entrenamientos"
+          element={<MisEntrenamientosPage />}
+        ></Route>
       </Route>
     </Routes>
   );
