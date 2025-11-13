@@ -209,3 +209,16 @@ export async function getAll() {
     }
   }
 }
+
+// Entrenamiento
+
+export async function createEntrenamiento(entrenamiento) {
+  try {
+    const { data } = await api.post("/entrenamiento", entrenamiento);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}

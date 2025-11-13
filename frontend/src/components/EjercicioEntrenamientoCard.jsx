@@ -65,9 +65,11 @@ export default function EjercicioEntrenamientoCard({ ejercicio, onSiguiente }) {
                 placeholder={"0 Kg"}
                 required
                 value={s.peso}
-                onChange={(e) =>
-                  handleSerieChange(i, "peso", Number(e.target.value))
-                }
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  // No permite que el valor sea menor a 0
+                  handleSerieChange(i, "peso", value < 0 ? 0 : value);
+                }}
               />
               <InputForm
                 label={"Repeticiones"}
@@ -76,9 +78,11 @@ export default function EjercicioEntrenamientoCard({ ejercicio, onSiguiente }) {
                 placeholder={"0"}
                 required
                 value={s.repeticiones}
-                onChange={(e) =>
-                  handleSerieChange(i, "repeticiones", Number(e.target.value))
-                }
+                onChange={(e) => {
+                  const value = Number(e.target.value);
+                  // No permite que el valor sea menor a 0
+                  handleSerieChange(i, "repeticiones", value < 0 ? 0 : value);
+                }}
               />
             </div>
           ))}

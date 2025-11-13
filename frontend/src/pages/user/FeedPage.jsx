@@ -48,7 +48,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="container mx-auto  text-secondary p-6 flex flex-col gap-6">
+    <div className="container mx-auto  text-secondary p-6 flex flex-col gap-6 ">
       {/* Bienvenida */}
       <section>
         <h1 className="text-3xl font-bold text-center">
