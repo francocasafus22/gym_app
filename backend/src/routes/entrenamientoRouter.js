@@ -6,5 +6,6 @@ const router = Router();
 
 router.get("/", EntrenamientoController.getAll);
 router.post("/", authMiddleware, EntrenamientoController.create);
+router.get("/:id", EntrenamientoController.getById);
 
 export default router;

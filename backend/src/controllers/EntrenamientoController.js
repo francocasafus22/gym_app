@@ -28,4 +28,24 @@ export default class EntrenamientoController {
       res.status(500).json({ error: error.message });
     }
   }
+
+  static async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const entrenamiento = await Entrenamiento.findById(id).populate({
+        path: "pesos_ejercicios.ejercicio",
+        select: "nombre imagen",
+      });
+
+      if (!entrenamiento) {
+        const error = new Error("Entenamiento no encontrado");
+        res.status(404).json({ error: error.message });
+        return;
+      }
+
+      res.json(entrenamiento);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }

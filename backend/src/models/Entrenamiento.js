@@ -21,15 +21,8 @@ const entrenamientoSchema = new Schema({
   pesos_ejercicios: [
     {
       ejercicio: {
-        ejercicioId: {
-          type: Types.ObjectId,
-          ref: "Ejercicio",
-        },
-        nombre: {
-          type: String,
-          required: true,
-          default: "",
-        },
+        type: Types.ObjectId,
+        ref: "Ejercicio",
       },
       series: [
         {
