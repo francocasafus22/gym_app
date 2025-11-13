@@ -1,10 +1,13 @@
 import { useOutletContext } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getRutina } from "../../api/GymAPI";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { createEntrenamiento, getRutina } from "../../api/GymAPI";
 import Loading from "../../components/Loading";
 import EjercicioEntrenamientoCard from "../../components/EjercicioEntrenamientoCard";
 import { useState } from "react";
 import { useEffect } from "react";
+import { toast } from "sonner";
+import InfoEntrenamiento from "../../components/InfoEntrenamiento";
+import { cronometro } from "../../utils/formatText";
 
 export default function EntrenamientoPage() {
   const { user } = useOutletContext();
@@ -17,6 +20,16 @@ export default function EntrenamientoPage() {
     pesos_ejercicios: [],
   });
   const [finRutina, setFinRutina] = useState(false);
+
+  const { mutate } = useMutation({
+    mutationFn: createEntrenamiento,
+    onSuccess: (data) => {
+      toast.success(data.message);
+    },
+    onError: (data) => {
+      toast.error(data.error);
+    },
+  });
 
   const dias = {
     1: "Lunes",
@@ -43,22 +56,19 @@ export default function EntrenamientoPage() {
     (ejercicio) => ejercicio.dia === diaHoy,
   );
 
+  // Si no es el fin de la rutina, seguir sumando segundos al contador, sino llamar al mutation
   useEffect(() => {
     let intervalo;
     if (!finRutina) {
       intervalo = setInterval(() => {
         setSegundos((prev) => prev + 1);
       }, 1000);
+    } else {
+      mutate(entrenamiento);
     }
 
     return () => clearInterval(intervalo);
-  }, [finRutina]);
-
-  const minutos = Math.floor((segundos % 3600) / 60);
-  const segundosRestantes = segundos % 60;
-  const horas = Math.floor(segundos / 3600);
-
-  const formato = `${horas.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}:${segundosRestantes.toString().padStart(2, "0")}`;
+  }, [finRutina, entrenamiento, mutate]);
 
   const handleSiguiente = (seriesData) => {
     // Guardar los pesos y repeticiones de las series del ejercicio completado
@@ -80,21 +90,18 @@ export default function EntrenamientoPage() {
       // Pasar al siguiente ejercicio
       setEjercicioIndex((prev) => prev + 1);
     } else {
-      // Si ya es el ultimo ejercicio, enviar los datos al backend
+      // Si ya es el ultimo ejercicio marcar como finalizado el entrenamiento
       setFinRutina(true);
       // Establecerle la duración en segundos al entrenamiento al finalizar
       setEntrenamiento((prev) => ({
         ...prev,
         duracion: segundos,
       }));
-      console.log("llamda api");
-      console.log(entrenamiento);
-      // TODO: llamada a la api
     }
   };
 
   return (
-    <div className="container mx-auto  text-secondary p-6 flex flex-col gap-6">
+    <div className="container mx-auto  text-secondary p-6 flex flex-col  gap-6">
       <h1 className="text-center text-5xl mt-5 font-bold ">
         Entrenamiento <span className="text-accent">{user.rutina.nombre}</span>
       </h1>
@@ -106,21 +113,20 @@ export default function EntrenamientoPage() {
             Dia <span className="text-accent">{dias[diaHoy]}</span>
           </p>
 
-          <div className="bg-accent flex justify-center px-5 py-2 rounded-xl mx-auto">
-            <p className="text-2xl text-center text-accent-foreground">
-              Tiempo: {formato}
-            </p>
-          </div>
-
           {!finRutina && ejercicios && ejercicios[ejercicioIndex] ? (
-            <EjercicioEntrenamientoCard
-              ejercicio={ejercicios[ejercicioIndex]}
-              onSiguiente={handleSiguiente}
-            />
+            <>
+              <div className="bg-accent flex justify-center px-5 py-2 rounded-xl mx-auto">
+                <p className="text-2xl text-center text-accent-foreground">
+                  Tiempo: {cronometro(segundos)}
+                </p>
+              </div>
+              <EjercicioEntrenamientoCard
+                ejercicio={ejercicios[ejercicioIndex]}
+                onSiguiente={handleSiguiente}
+              />
+            </>
           ) : (
-            <p className="text-2xl text-center text-accent font-bold mt-10">
-              Finalizaste
-            </p>
+            <InfoEntrenamiento entrenamiento={entrenamiento} />
           )}
         </>
       )}
