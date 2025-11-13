@@ -21,6 +21,7 @@ import AppLayout from "./layouts/ProtectedLayout";
 import PublicLayout from "./layouts/PublicLayout";
 import LoginPage from "./pages/publicas/LoginPage";
 import ProtectedLayout from "./layouts/ProtectedLayout";
+import MisEntrenamientosPage from "./pages/user/MisEntrenamientos";
 
 export default function Router() {
   return (
@@ -49,6 +50,10 @@ export default function Router() {
         <Route path="/mi-rutina" element={<MiRutinaPage />} />
         <Route path="/feed" element={<FeedPage />}></Route>
         <Route path="/entrenamiento" element={<EntrenamientoPage />}></Route>
+        <Route
+          path="/mis-entrenamientos"
+          element={<MisEntrenamientosPage />}
+        ></Route>
       </Route>
     </Routes>
   );

@@ -68,6 +68,17 @@ export async function asignarRutina(formData) {
   }
 }
 
+export async function getAllEntrenamientosByUser(page = 1) {
+  try {
+    const { data } = await api.get(`/user/entrenamientos/?page=${page}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
 /* Membresias Tipo */
 export async function getAllMembresiaTipo() {
   try {
