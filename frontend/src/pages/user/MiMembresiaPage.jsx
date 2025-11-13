@@ -10,7 +10,7 @@ export default function MiMembresiaPage() {
 
   return (
     <div className="min-h-screen container p-10 max-w-7xl mx-auto">
-      <h1 className="text-center text-5xl font-bold border-b border-accent pb-5">
+      <h1 className="text-center text-5xl font-bold border-b-3 border-accent pb-5">
         Mis Membresias
       </h1>
       <div className="flex flex-col md:flex-row justify-center text-center md:gap-5 pt-5 font-bold">

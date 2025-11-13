@@ -1,13 +1,19 @@
 import { X } from "lucide-react";
 
-export default function EjercicioCard({ ejercicio, setIsOpenDeleteEjercicio }) {
+export default function EjercicioCard({
+  ejercicio,
+  setIsOpenDeleteEjercicio,
+  canDelete,
+}) {
   return (
-    <div className="border-border border text-white shadow-xl hover:shadow-2xl transition-all duration-300 rounded-xl p-5 flex flex-col items-center justify-center gap-5 relative">
-      <X
-        className="absolute top-2 right-2  text-border hover:text-accent cursor-pointer transition-all duration-300"
-        size={24}
-        onClick={() => setIsOpenDeleteEjercicio(ejercicio._id)}
-      />
+    <div className="border-border border text-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl p-5 flex flex-col items-center justify-center gap-5 relative">
+      {canDelete && (
+        <X
+          className="absolute top-2 right-2  text-border hover:text-accent cursor-pointer transition-all duration-300"
+          size={24}
+          onClick={() => setIsOpenDeleteEjercicio(ejercicio._id)}
+        />
+      )}
       <h2 className="text-xl font-bold text-center text-secondary">
         {ejercicio.nombre}
       </h2>

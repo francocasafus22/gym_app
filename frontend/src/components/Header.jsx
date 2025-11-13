@@ -26,10 +26,10 @@ export default function Header({ user = null, logout }) {
     <header className="shadow-md w-full py-3 bg-transparent border-b border-border">
       <div className="flex items-center justify-between px-5">
         {/* Logo */}
-        <div className="flex items-center space-x-2">
+        <Link className="flex items-center space-x-2" to={"/"}>
           <Logo />
           <span className="text-2xl font-bold text-accent">Spartan Gym</span>
-        </div>
+        </Link>
 
         {/* Links del nav */}
         {!isLandingPage || isLogin ? (

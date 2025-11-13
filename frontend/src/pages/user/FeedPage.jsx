@@ -8,7 +8,7 @@ import {
   LineChart,
   Newspaper,
   User,
-  Icon,
+  BicepsFlexed,
   HelpCircle,
 } from "lucide-react";
 import {
@@ -164,10 +164,14 @@ export default function HomePage() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {[
             { icon: Dumbbell, text: "Mi Rutina", href: "/mi-rutina" },
+            {
+              icon: BicepsFlexed,
+              text: "Entrenamientos",
+              href: "/mis-entrenamientos",
+            },
             { icon: CreditCard, text: "Membresía", href: "/mi-membresia" },
             { icon: Newspaper, text: "Publicaciones", href: "/publicaciones" },
             { icon: User, text: "Perfil", href: "/mi-perfil" },
-            { icon: HelpCircle, text: "Soporte", href: "/soporte" },
           ].map(({ icon: Icon, text, href }, i) => (
             <Link
               key={i}

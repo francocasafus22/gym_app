@@ -35,7 +35,7 @@ export default function AsignarEjercicioForm({
         </h1>
         <button
           onClick={handleSubmit}
-          className="border-accent border hover:bg-accent cursor-pointer transition-all duration-300 ease-in-out rounded-lg py-2"
+          className="bg-accent text-accent-foreground hover:bg-accent-hover cursor-pointer transition-all duration-300 ease-in-out rounded-lg py-2"
         >
           {isPending ? <Loading color="white" /> : "Eliminar"}
         </button>

@@ -76,6 +76,7 @@ export default function RutinaEditPage() {
                     key={ejercicio._id}
                     ejercicio={ejercicio}
                     setIsOpenDeleteEjercicio={setIsOpenDeleteEjercicio}
+                    canDelete={true}
                   />
                 ))}{" "}
               <button className="border border-border shadow-xl hover:shadow-2xl h-80 flex flex-col  text-center rounded-3xl hover:brightness-90 cursor-pointer transition-all duration-300 ease-in-out">
