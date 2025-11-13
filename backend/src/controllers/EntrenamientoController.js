@@ -15,5 +15,17 @@ export default class EntrenamientoController {
       res.json({ error: error.message });
     }
   }
-}
 
+  static async create(req, res) {
+    try {
+      const entrenamiento = await Entrenamiento.create(req.body);
+      const user = req.user;
+      user.entrenamientos.push(entrenamiento._id);
+      await user.save();
+
+      res.status(201).json({ message: "Entrenamiento guardado correctamente" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+}
