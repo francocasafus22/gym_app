@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import InfoEntrenamiento from "../../components/InfoEntrenamiento";
 import { cronometro } from "../../utils/formatText";
+import { Link } from "react-router-dom";
 
 export default function EntrenamientoPage() {
   const { user } = useOutletContext();
@@ -15,7 +16,10 @@ export default function EntrenamientoPage() {
   const [segundos, setSegundos] = useState(0);
   // Estado del entrenamiento que se actualizará cada vez que se complete un ejercicio
   const [entrenamiento, setEntrenamiento] = useState({
-    rutinaId: user.rutina.rutinaId,
+    rutina: {
+      rutinaId: user.rutina.rutinaId,
+      nombre: user.rutina.nombre,
+    },
     fecha: new Date().toISOString(),
     pesos_ejercicios: [],
   });
@@ -52,9 +56,8 @@ export default function EntrenamientoPage() {
   });
 
   // Filtrar los ejercicios de la rutina que sean del dia de hoy
-  const ejercicios = rutina?.ejercicios.filter(
-    (ejercicio) => ejercicio.dia === diaHoy,
-  );
+  const ejercicios =
+    rutina?.ejercicios.filter((ejercicio) => ejercicio.dia === diaHoy) || [];
 
   // Si no es el fin de la rutina, seguir sumando segundos al contador, sino llamar al mutation
   useEffect(() => {
@@ -77,10 +80,7 @@ export default function EntrenamientoPage() {
       pesos_ejercicios: [
         ...prev.pesos_ejercicios,
         {
-          ejercicio: {
-            ejercicioId: ejercicios[ejercicioIndex]._id,
-            nombre: ejercicios[ejercicioIndex].nombre,
-          },
+          ejercicio: ejercicios[ejercicioIndex].ejercicio,
           series: seriesData,
         },
       ],
@@ -100,9 +100,24 @@ export default function EntrenamientoPage() {
     }
   };
 
+  if (ejercicios.length <= 0)
+    return (
+      <div className="flex flex-col items-center justify-center h-[80vh]">
+        <p className="text-xl text-secondary">
+          No hay ejercicios en el dia de hoy
+        </p>
+        <Link
+          to={"/"}
+          className="bg-accent px-5 py-2 text-accent-foreground rounded-xl mt-5 hover:bg-accent-hover cursor-pointer"
+        >
+          Volver
+        </Link>
+      </div>
+    );
+
   return (
     <div className="container mx-auto  text-secondary p-6 flex flex-col  gap-6">
-      <h1 className="text-center text-5xl mt-5 font-bold ">
+      <h1 className="text-center text-4xl md:text-5xl mt-5 font-bold ">
         Entrenamiento <span className="text-accent">{user.rutina.nombre}</span>
       </h1>
       {isLoading ? (
@@ -126,7 +141,18 @@ export default function EntrenamientoPage() {
               />
             </>
           ) : (
-            <InfoEntrenamiento entrenamiento={entrenamiento} />
+            <>
+              <p className="text-center text-2xl text-accent font-bold">
+                ¡ Terminaste !
+              </p>
+              <InfoEntrenamiento entrenamiento={entrenamiento} />
+              <Link
+                className="bg-accent text-accent-foreground text-center py-3 px-5 font-bold rounded-xl hover:bg-accent-hover cursor-pointer shadow-md hover:shadow-lg transition-all duration-200"
+                to={"/mis-entrenamientos"}
+              >
+                Ver mis entrenamientos
+              </Link>
+            </>
           )}
         </>
       )}

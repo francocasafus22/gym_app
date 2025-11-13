@@ -1,14 +1,19 @@
 import InputForm from "./ui/InputForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function EjercicioEntrenamientoCard({ ejercicio, onSiguiente }) {
   // Inicializar el estado de las series dependiendo la cantidad de series del ejercicio
-  const [series, setSeries] = useState(
-    Array.from({ length: ejercicio.series }, () => ({
-      peso: 0,
-      repeticiones: 0,
-    })),
-  );
+  //
+  const [series, setSeries] = useState([]);
+
+  useEffect(() => {
+    setSeries(
+      Array.from({ length: ejercicio.series }, () => ({
+        peso: 0,
+        repeticiones: 0,
+      })),
+    );
+  }, [ejercicio]);
 
   // Index: index de la serie
   // Campo: peso o repeticiones
@@ -36,9 +41,12 @@ export default function EjercicioEntrenamientoCard({ ejercicio, onSiguiente }) {
     <>
       <div className=" text-white p-5 flex flex-col items-center justify-center gap-5">
         <div className="md:w-1/2">
-          <h2 className="text-2xl font-bold mb-5 text-center text-secondary">
-            {ejercicio.nombre}
+          <h2 className="text-2xl font-bold text-center text-secondary">
+            {ejercicio.nombre}{" "}
           </h2>
+          <p className="text-accent text-center text-2xl font-bold mb-5">
+            {ejercicio.series}x{ejercicio.repeticiones}
+          </p>
           <div className="rounded-lg flex items-center justify-center w-full">
             <img
               src={ejercicio.ejercicio.imagen}
@@ -46,6 +54,12 @@ export default function EjercicioEntrenamientoCard({ ejercicio, onSiguiente }) {
               className="max-h-80 object-contain rounded-xl"
             />
           </div>
+
+          {ejercicio.peso > 0 && (
+            <p className="text-center  text-placeholder text-xl mt-5">
+              Peso recomendado: {ejercicio.peso}kg
+            </p>
+          )}
         </div>
       </div>
       <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-2">

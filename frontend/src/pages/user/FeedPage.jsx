@@ -104,9 +104,12 @@ export default function HomePage() {
           <p className="font-medium">{user.rutina.nombre}</p>
 
           <div className="flex flex-col gap-2">
-            <button className="mt-4 bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all">
+            <Link
+              className="mt-4 bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all text-center"
+              to={"/mi-rutina"}
+            >
               Ver rutina completa
-            </button>
+            </Link>
             <Link
               className=" bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all"
               to={"/entrenamiento"}

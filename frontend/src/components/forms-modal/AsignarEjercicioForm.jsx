@@ -87,7 +87,7 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
             value={queryInput}
           />
           <button
-            className="bg-accent rounded-xl w-1/4 py-2 hover:brightness-90 transition-all duration-150 cursor-pointer text-secondary"
+            className="bg-accent text-accent-foreground rounded-xl w-1/4 py-2 hover:brightness-90 transition-all duration-150 cursor-pointer "
             type="submit"
           >
             Buscar

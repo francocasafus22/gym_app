@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
+import ScrollToTop from "../components/ScrollToTop";
 export default function ProtectedLayout({ roles }) {
   const { user, isLoading, logout } = useAuth();
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function ProtectedLayout({ roles }) {
     <div>
       <Header user={user} logout={logout} />
       {/* Se le pasa el user al outlet */}
+      <ScrollToTop />
       <Outlet context={{ user }} />
     </div>
   );

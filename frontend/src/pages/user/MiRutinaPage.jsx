@@ -23,6 +23,7 @@ export default function MiRutinaPage() {
     data: rutina,
     isLoading,
     isError,
+    error,
   } = useQuery({
     queryKey: ["rutina", user],
     queryFn: () => getRutina(null, user.rutina.rutinaId),
@@ -37,7 +38,13 @@ export default function MiRutinaPage() {
       </div>
     );
 
-  if (rutina) console.log(rutina);
+  if (isError) {
+    return (
+      <div className="flex h-[80vh] items-center justify-center ">
+        <p className="text-placeholder text-xl">Error: {error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen container  pt-10 mx-auto">

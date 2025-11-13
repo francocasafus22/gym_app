@@ -1,3 +1,4 @@
+import { Car } from "lucide-react";
 import { cronometro } from "../utils/formatText";
 import { Link } from "react-router-dom";
 
@@ -22,43 +23,25 @@ export default function InfoEntrenamiento({ entrenamiento }) {
 
   const totalEjercicios = entrenamiento.pesos_ejercicios.length;
 
+  const CardInfo = ({ label, span }) => (
+    <div className="border border-border rounded-xl px-5 h-25 flex items-center justify-center shadow-md">
+      <p className="text-center text-2xl md:text-3xl font-bold">
+        {label}: <span className="text-accent">{span}</span>
+      </p>
+    </div>
+  );
+
   return (
     <>
-      <p className="text-center text-2xl text-accent font-bold">
-        ¡ Terminaste !
-      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
-        <div className="border border-border rounded-xl px-5 h-25 flex items-center justify-center shadow-md">
-          <p className="text-center text-xl font-bold">
-            Tiempo:{" "}
-            <span className="text-accent">
-              {cronometro(entrenamiento.duracion)}
-            </span>
-          </p>
-        </div>
-        <div className="border border-border rounded-xl px-5 h-25 flex items-center justify-center shadow-md">
-          <p className="text-center text-xl font-bold">
-            Peso levantado: <span className="text-accent">{pesoTotal} kg</span>
-          </p>
-        </div>
-        <div className="border border-border rounded-xl px-5 h-25 flex items-center justify-center shadow-md">
-          <p className="text-center text-xl font-bold">
-            Series hechas: <span className="text-accent">{seriesTotales}</span>
-          </p>
-        </div>
-        <div className="border border-border rounded-xl px-5 h-25 flex items-center justify-center shadow-md">
-          <p className="text-center text-xl font-bold">
-            Ejercicios hechos:{" "}
-            <span className="text-accent">{totalEjercicios}</span>
-          </p>
-        </div>
+        <CardInfo
+          label={"Duración"}
+          span={cronometro(entrenamiento.duracion)}
+        ></CardInfo>
+        <CardInfo label={"Peso levantado"} span={pesoTotal + "kg"}></CardInfo>
+        <CardInfo label={"Series Hechas"} span={seriesTotales} />
+        <CardInfo label={"Ejercicios Hechos"} span={totalEjercicios} />
       </div>
-      <Link
-        className="bg-accent text-accent-foreground text-center py-3 px-5 font-bold rounded-xl hover:bg-accent-hover cursor-pointer shadow-md hover:shadow-lg transition-all duration-200"
-        to={"/mis-entrenamientos"}
-      >
-        Ver mis entrenamientos
-      </Link>
     </>
   );
 }

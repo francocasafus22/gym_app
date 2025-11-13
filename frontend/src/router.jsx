@@ -7,21 +7,20 @@ import RutinasPage from "./pages/admin/RutinasPage";
 import RutinaEditPage from "./pages/admin/RutinaEditPage";
 import MembresiasPage from "./pages/admin/MembresiasPage";
 import VentasPage from "./pages/admin/VentasPage";
-import Home from "./pages/publicas/Home";
 
 // Páginas públicas
-import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/publicas/LoginPage";
+import Home from "./pages/publicas/Home";
 
 // Páginas user
 import MiMembresiaPage from "./pages/user/MiMembresiaPage";
 import EntrenamientoPage from "./pages/user/EntrenamientoPage";
 import MiRutinaPage from "./pages/user/MiRutinaPage";
 import FeedPage from "./pages/user/FeedPage";
-import AppLayout from "./layouts/ProtectedLayout";
 import PublicLayout from "./layouts/PublicLayout";
-import LoginPage from "./pages/publicas/LoginPage";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import MisEntrenamientosPage from "./pages/user/MisEntrenamientos";
+import EntrenamientoDetailsPage from "./pages/user/EntrenamientoDetailsPage";
 
 export default function Router() {
   return (
@@ -53,6 +52,10 @@ export default function Router() {
         <Route
           path="/mis-entrenamientos"
           element={<MisEntrenamientosPage />}
+        ></Route>
+        <Route
+          path="/mis-entrenamientos/:id"
+          element={<EntrenamientoDetailsPage />}
         ></Route>
       </Route>
     </Routes>

@@ -233,3 +233,14 @@ export async function createEntrenamiento(entrenamiento) {
     }
   }
 }
+
+export async function getEntrenamientoById(id) {
+  try {
+    const { data } = await api.get(`/entrenamiento/${id}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}

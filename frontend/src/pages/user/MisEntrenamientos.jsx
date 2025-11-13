@@ -4,9 +4,12 @@ import Loading from "../../components/Loading";
 import { cronometro, fechaDiaMesAño } from "../../utils/formatText";
 import { useState } from "react";
 import Pagination from "../../components/Pagination";
+import { useNavigate } from "react-router-dom";
 
 export default function MisEntrenamientosPage() {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["mis-entrenamientos", currentPage],
@@ -47,6 +50,7 @@ export default function MisEntrenamientosPage() {
             <div
               className="group border border-border rounded-xl shadow-md p-5 flex flex-col items-center justify-center hover:shadow-xl cursor-pointer tratransition-all duration-300 hover:bg-accent hover:text-accent-foreground ease-in-out"
               key={e._id}
+              onClick={() => navigate(`/mis-entrenamientos/${e._id}`)}
             >
               <p className="text-xl">
                 Fecha:{" "}
