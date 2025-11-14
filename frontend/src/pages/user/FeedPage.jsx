@@ -68,25 +68,31 @@ export default function HomePage() {
           <p>
             Tipo:{" "}
             <span className="text-accent">
-              {capitalize(user.membresia[0].tipo.nombre)}
+              {user.membresia[0]
+                ? capitalize(user.membresia[0].tipo.nombre)
+                : "No tiene membresia"}
             </span>
             {" | "}
             {}
             <span
-              className={`${user.membresia[0].estado ? "bg-green-500" : "bg-red-500"} rounded-2xl px-3 text-primary`}
+              className={`${user.membresia[0]?.estado ? "bg-green-500" : "bg-red-500"} rounded-2xl px-3 text-primary`}
             >
-              {user.membresia[0].estado ? "Activa" : "Vencida"}
+              {user.membresia[0]?.estado ? "Activa" : "Vencida"}
             </span>
           </p>
 
-          <p>
-            Vence el{" "}
-            <strong>{fechaDiaMesAño(user.membresia[0].fechaFin)}</strong>
-          </p>
+          {user.membresia[0] ? (
+            <p>
+              Vence el{" "}
+              <strong>{fechaDiaMesAño(user.membresia[0].fechaFin)}</strong>
+            </p>
+          ) : null}
 
           <p>
             <span className="font-bold text-accent">
-              {diasRestantes(user.membresia[0].fechaFin)}
+              {user.membresia[0]
+                ? diasRestantes(user.membresia[0].fechaFin)
+                : 0}
             </span>{" "}
             días restantes
           </p>
@@ -101,7 +107,9 @@ export default function HomePage() {
           <h2 className="text-xl font-semibold flex items-center gap-2 mb-2">
             <Dumbbell className="text-accent" /> Rutina Actual
           </h2>
-          <p className="font-medium">{user.rutina.nombre}</p>
+          <p className="font-medium">
+            {user.rutina ? user.rutina.nombre : "No tiene rutina"}
+          </p>
 
           <div className="flex flex-col gap-2">
             <Link

@@ -12,13 +12,15 @@ import { Link } from "react-router-dom";
 
 export default function EntrenamientoPage() {
   const { user } = useOutletContext();
+
   const [ejercicioIndex, setEjercicioIndex] = useState(0);
   const [segundos, setSegundos] = useState(0);
+
   // Estado del entrenamiento que se actualizará cada vez que se complete un ejercicio
   const [entrenamiento, setEntrenamiento] = useState({
     rutina: {
-      rutinaId: user.rutina.rutinaId,
-      nombre: user.rutina.nombre,
+      rutinaId: user.rutina?.rutinaId,
+      nombre: user.rutina?.nombre,
     },
     fecha: new Date().toISOString(),
     pesos_ejercicios: [],
@@ -99,6 +101,15 @@ export default function EntrenamientoPage() {
       }));
     }
   };
+
+  if (!user.rutina)
+    return (
+      <div className="flex h-[80vh] items-center justify-center ">
+        <p className="text-placeholder text-xl text-center">
+          Necesitas tener una rutina para hacer el entrenamiento
+        </p>
+      </div>
+    );
 
   if (ejercicios.length <= 0)
     return (

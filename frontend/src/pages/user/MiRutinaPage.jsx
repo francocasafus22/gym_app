@@ -8,8 +8,6 @@ import EjercicioCard from "../../components/EjercicioCard";
 export default function MiRutinaPage() {
   const { user } = useOutletContext();
 
-  console.log(user);
-
   const dias_semana = {
     1: "Lunes",
     2: "Martes",
@@ -26,10 +24,17 @@ export default function MiRutinaPage() {
     error,
   } = useQuery({
     queryKey: ["rutina", user],
-    queryFn: () => getRutina(null, user.rutina.rutinaId),
+    queryFn: () => getRutina(null, user.rutina?.rutinaId),
     retry: 1,
     refetchOnWindowFocus: false,
   });
+
+  if (!user.rutina)
+    return (
+      <div className="flex h-[80vh] items-center justify-center ">
+        <p className="text-placeholder text-xl">No tienes una rutina</p>
+      </div>
+    );
 
   if (isLoading)
     return (

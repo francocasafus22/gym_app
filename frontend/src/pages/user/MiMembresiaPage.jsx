@@ -6,7 +6,12 @@ export default function MiMembresiaPage() {
   const { user } = useOutletContext();
   const cantidadMembresias = user.membresia.length;
 
-  console.log(user);
+  if (!user.membresia[0])
+    return (
+      <div className="flex h-[80vh] items-center justify-center ">
+        <p className="text-placeholder text-xl">No tienes una membresia</p>
+      </div>
+    );
 
   return (
     <div className="min-h-screen container p-10 max-w-7xl mx-auto">
