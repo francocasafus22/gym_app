@@ -40,10 +40,4 @@ router.post("/asignar-membresia", UserController.asignarMembresia);
 
 router.post("/asignar-rutina", UserController.asignarRutina);
 
-router.get(
-  "/entrenamientos",
-  authMiddleware,
-  UserController.getAllEntrenamientos,
-);
-
 export default router;

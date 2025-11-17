@@ -70,7 +70,7 @@ export async function asignarRutina(formData) {
 
 export async function getAllEntrenamientosByUser(page = 1) {
   try {
-    const { data } = await api.get(`/user/entrenamientos/?page=${page}`);
+    const { data } = await api.get(`/entrenamiento/me/?page=${page}`);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {
@@ -237,6 +237,17 @@ export async function createEntrenamiento(entrenamiento) {
 export async function getEntrenamientoById(id) {
   try {
     const { data } = await api.get(`/entrenamiento/${id}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function getStats() {
+  try {
+    const { data } = await api.get(`/entrenamiento/me/stats`);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

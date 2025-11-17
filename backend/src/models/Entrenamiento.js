@@ -5,8 +5,14 @@ const entrenamientoSchema = new Schema({
     rutinaId: {
       type: Types.ObjectId,
       ref: "Rutina",
+      required: true,
     },
     nombre: String,
+  },
+  userId: {
+    type: Types.ObjectId,
+    ref: "User",
+    required: true,
   },
   duracion: {
     type: Number,

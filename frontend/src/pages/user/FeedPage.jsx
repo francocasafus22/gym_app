@@ -16,12 +16,19 @@ import {
   diasRestantes,
   fechaDiaMesAño,
 } from "../../utils/formatText";
+import { useQuery } from "@tanstack/react-query";
+import { getStats } from "../../api/GymAPI";
 
 export default function HomePage() {
   // Recibe el user del layout
   const { user } = useOutletContext();
 
-  console.log(user);
+  const { data: stats, isLoading } = useQuery({
+    queryKey: ["stats"],
+    queryFn: getStats,
+    retry: 1,
+    refetchOnWindowFocus: false,
+  });
 
   const newsItems = [
     {
@@ -132,20 +139,32 @@ export default function HomePage() {
           <h2 className="text-xl font-semibold flex items-center gap-2 mb-4">
             <LineChart className="text-accent" /> Estadísticas
           </h2>
-          <div className="grid grid-cols-3 text-center">
-            <div>
-              <p className="text-3xl font-bold text-accent">{18}</p>
-              <p className="text-zinc-400 text-sm">Asistencias este mes</p>
+
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <div className="grid grid-cols-3 text-center">
+              <div>
+                <p className="text-3xl font-bold text-accent">
+                  {stats.entrenamientosMes}
+                </p>
+                <p className="text-zinc-400 text-sm">Asistencias este mes</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-accent">
+                  {user.membresia.length}
+                </p>
+                <p className="text-zinc-400 text-sm">Meses activo</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-accent">
+                  {stats.entreamientosSemana} / 5
+                </p>
+                <p className="text-zinc-400 text-sm">Asistencia esta semana</p>
+              </div>
             </div>
-            <div>
-              <p className="text-3xl font-bold text-accent">{5}</p>
-              <p className="text-zinc-400 text-sm">Meses activo</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-accent">5 / 5</p>
-              <p className="text-zinc-400 text-sm">Asistencia esta semana</p>
-            </div>
-          </div>
+          )}
+
           <button className="mt-4 bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all">
             Ver Estadísticas
           </button>

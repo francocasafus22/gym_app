@@ -169,37 +169,6 @@ export default class UserController {
       res.status(500).json({ error: "Hubo un error" });
     }
   }
-
-  static async getAllEntrenamientos(req, res) {
-    try {
-      const page = parseInt(req.query.page) || 1;
-      const limit = 30;
-      const skip = (page - 1) * limit;
-
-      const entrenamientosIds = req.user.entrenamientos;
-
-      const entrenamientos = await Entrenamiento.find({
-        _id: { $in: entrenamientosIds },
-      })
-        .sort({ fecha: -1 })
-        .skip(skip)
-        .limit(limit);
-
-      const total = entrenamientosIds.length;
-
-      res.json({
-        entrenamientos,
-        pagination: {
-          currentPage: page,
-          totalPages: Math.ceil(total / limit),
-          totalEntrenamientos: total,
-        },
-      });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
-
   static async asignarRutina(req, res) {
     const { rutinaId, userId } = req.body;
     try {

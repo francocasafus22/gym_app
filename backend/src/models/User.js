@@ -43,12 +43,6 @@ const userSchema = new Schema(
         ref: "Membresia",
       },
     ],
-    entrenamientos: [
-      {
-        type: Types.ObjectId,
-        ref: "Entrenamiento",
-      },
-    ],
     rutina: {
       rutinaId: {
         type: Types.ObjectId,
