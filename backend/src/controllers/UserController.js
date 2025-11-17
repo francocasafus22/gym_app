@@ -129,7 +129,7 @@ export default class UserController {
   }
 
   static async register(req, res) {
-    const { email, dni } = req.body;
+    const { email, dni, password } = req.body;
     try {
       const userExist = await User.findOne({ $or: [{ email }, { dni }] });
 
@@ -143,11 +143,9 @@ export default class UserController {
         }
       }
 
-      const user = await User.create(req.body);
+      const hashedPassword = await hashPassword(password);
 
-      user.password = await hashPassword(user.password);
-
-      await user.save();
+      await User.create({ ...req.body, password: hashedPassword });
 
       res.status(201).json({ message: "Usuario creado correctamente" });
     } catch (error) {

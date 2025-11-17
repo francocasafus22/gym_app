@@ -104,9 +104,12 @@ export default function HomePage() {
             días restantes
           </p>
 
-          <button className="mt-4 bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all">
-            Renovar Membresía
-          </button>
+          <Link
+            className="mt-4 bg-accent text-accent-foreground hover:bg-accent-hover font-medium px-4 py-2 rounded-xl transition-all"
+            to={"/mi-membresia"}
+          >
+            Ver mis membresías
+          </Link>
         </section>
 
         {/* Rutina actual */}
@@ -146,19 +149,19 @@ export default function HomePage() {
             <div className="grid grid-cols-3 text-center">
               <div>
                 <p className="text-3xl font-bold text-accent">
-                  {stats.entrenamientosMes}
+                  {stats.entrenamientosMes || 0}
                 </p>
                 <p className="text-zinc-400 text-sm">Asistencias este mes</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-accent">
-                  {user.membresia.length}
+                  {user.membresia.length || 0}
                 </p>
                 <p className="text-zinc-400 text-sm">Meses activo</p>
               </div>
               <div>
                 <p className="text-3xl font-bold text-accent">
-                  {stats.entreamientosSemana} / 5
+                  {stats.entreamientosSemana || 0} / 5
                 </p>
                 <p className="text-zinc-400 text-sm">Asistencia esta semana</p>
               </div>

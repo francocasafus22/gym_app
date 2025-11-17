@@ -57,13 +57,13 @@ export default function MiMembresiaPage() {
                 <p className="text-md font-bold text-gray-400">
                   Fecha Inicio:{" "}
                   <span className="text-accent">
-                    {fechaDiaMesAño(membresia.updatedAt)}
+                    {fechaDiaMesAño(membresia.fechaInicio)}
                   </span>
                 </p>
                 <p className="text-md font-bold  text-gray-400">
                   Vencimiento:{" "}
                   <span className="text-accent">
-                    {fechaDiaMesAño(membresia.updatedAt)}
+                    {fechaDiaMesAño(membresia.fechaFin)}
                   </span>
                 </p>
               </div>
