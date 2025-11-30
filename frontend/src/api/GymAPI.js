@@ -13,6 +13,17 @@ export async function login(formData) {
   }
 }
 
+export async function deleteUser({userId}){
+  try {
+    const { data } = await api.delete(`/user/${userId}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
 export async function createUser(formData) {
   try {
     const { data } = await api.post("/user/register", formData);
@@ -56,6 +67,7 @@ export async function asignarMembresia(formData) {
     }
   }
 }
+
 
 export async function asignarRutina(formData) {
   try {

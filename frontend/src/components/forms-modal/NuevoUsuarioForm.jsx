@@ -32,8 +32,7 @@ export default function NuevoUsuarioForm({ onClose }) {
       firstName: nombre,
       lastName: apellido,
       dni,
-      email,
-      password: dni,
+      email
     };
 
     const result = NuevoUsuarioSchema.safeParse(formData);
@@ -43,7 +42,7 @@ export default function NuevoUsuarioForm({ onClose }) {
       return;
     }
 
-    mutate(formData);
+    mutate({...formData, password:result.data.dni});
   };
 
   return (

@@ -3,13 +3,19 @@ import { useState } from "react";
 import Modal from "./Modal";
 import AsignarRutinaForm from "./forms-modal/AsignarRutinaForm";
 import RenovarMembresiaForm from "./forms-modal/RenovarMembresiaForm";
+import { X } from "lucide-react";
+import DeleteUserForm from "./forms-modal/DeleteUserForm";
 
 export default function CardUsers({ user }) {
   const [isOpenRutina, setIsOpenRutina] = useState(false);
   const [isOpenMembresia, setIsOpenMembresia] = useState(false);
+  const [isOpenDeleteUser, setIsOpenDeleteUser] = useState(false)
 
   return (
-    <div className="flex flex-col text-center  rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 bg-transparent border-1  border-border">
+    <div className="relative flex flex-col text-center  rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 bg-transparent border-1  border-border">
+      <button className="absolute right-0 m-2" onClick={()=>setIsOpenDeleteUser(!isOpenDeleteUser)}>
+        <X className="hover:text-accent transition-all duration-200 cursor-pointer"/>
+      </button>
       <p className="mt-5 text-2xl font-bold">
         {user.firstName} {user.lastName}
       </p>
@@ -83,6 +89,12 @@ export default function CardUsers({ user }) {
           ) : (
             <p className="p-5 font-bold">Ya tiene membresía activa</p>
           )}
+        </Modal>
+      )}
+
+      {isOpenDeleteUser && (
+        <Modal isOpen={isOpenDeleteUser} onClose={()=>setIsOpenDeleteUser(false)}>
+          <DeleteUserForm onClose={()=>setIsOpenDeleteUser(false)} userId={user._id}/>
         </Modal>
       )}
 

@@ -188,7 +188,29 @@ export default class UserController {
 
       res.json({ message: "Rutina asignada correctamente" });
     } catch (error) {
+      res.status(500).json({ error: "Hubo un error al asignar la rutina" });
+    }
+  }
+
+  static async delete(req,res){
+    try{
+
+      const {userId} = req.params;
+      const user = await User.findById(userId);
+      if (!user) {
+        res.status(404).json({ error: "Usuario no encontrado" });
+        return;
+      }
+
+      await user.deleteOne()
+
+      res.json({message: "Usuario eliminado correctamente"})
+
+    }catch(err){
+      console.log("[DELETE USER] Error:", err.message);
+      const error = new Error("Hubo un error al eliminar el usuario");
       res.status(500).json({ error: error.message });
     }
   }
+
 }
