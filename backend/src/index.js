@@ -8,6 +8,7 @@ import membresiaTipoRouter from "./routes/membresiaTipoRouter.js";
 import ejercicioRouter from "./routes/ejercicioRouter.js";
 import rutinaRouter from "./routes/rutinaRouter.js";
 import entrenamientoRouter from "./routes/entrenamientoRouter.js";
+import productoRouter from "./routes/productoRouter.js"
 import { updateMembresias } from "./jobs/membresiasJobs.js";
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api/user", userRouter);
 app.use("/api/membresia", membresiaRouter);
 app.use("/api/membresiaTipo", membresiaTipoRouter);
 app.use("/api/ejercicio", ejercicioRouter);
+app.use("/api/producto", productoRouter)
 app.use("/api/rutina", rutinaRouter);
 app.use("/api/entrenamiento", entrenamientoRouter);
 app.use("/", (req, res) => {
