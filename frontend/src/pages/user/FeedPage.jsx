@@ -80,7 +80,7 @@ export default function HomePage() {
                 : "No tiene membresia"}
             </span>
             {" | "}
-            {}
+            { }
             <span
               className={`${user.membresia[0]?.estado ? "bg-green-500" : "bg-red-500"} rounded-2xl px-3 text-primary`}
             >
@@ -186,9 +186,12 @@ export default function HomePage() {
             ))}
           </div>
         </ul>
-        <button className="mt-4 text-accent-foreground bg-accent hover:bg-accent-hover font-bold px-4 py-2 rounded-xl transition-all">
+        <Link
+          to="/publicaciones"
+          className="mt-4 text-accent-foreground bg-accent hover:bg-accent-hover font-bold px-4 py-2 rounded-xl transition-all inline-block text-center"
+        >
           Ver más publicaciones →
-        </button>
+        </Link>
       </section>
 
       {/* Accesos rápidos */}

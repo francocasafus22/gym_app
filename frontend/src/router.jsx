@@ -21,6 +21,8 @@ import PublicLayout from "./layouts/PublicLayout";
 import ProtectedLayout from "./layouts/ProtectedLayout";
 import MisEntrenamientosPage from "./pages/user/MisEntrenamientos";
 import EntrenamientoDetailsPage from "./pages/user/EntrenamientoDetailsPage";
+import NewsCard from "./components/NewsCard";
+import NewsFeed from "./components/NewsFeed";
 
 export default function Router() {
   return (
@@ -49,6 +51,7 @@ export default function Router() {
         <Route path="/mi-rutina" element={<MiRutinaPage />} />
         <Route path="/feed" element={<FeedPage />}></Route>
         <Route path="/entrenamiento" element={<EntrenamientoPage />}></Route>
+        <Route path="/publicaciones" element={<NewsFeed />}></Route>
         <Route
           path="/mis-entrenamientos"
           element={<MisEntrenamientosPage />}
