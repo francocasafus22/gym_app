@@ -12,7 +12,7 @@ export default function TablaProductos({ data }) {
     
 
     return (
-        <div className="w-full max-w-6xl mx-auto px-10 ">
+        <div className="w-full px-5 max-w-7xl mx-auto">
             
         <div className="overflow-x-auto rounded-lg shadow border border-border">
             <table className="min-w-full divide-y divide-border">
@@ -47,13 +47,13 @@ export default function TablaProductos({ data }) {
                 </tr>
                 ) : (
                 data.productos.map((p) => (
-                    <tr key={p.id} className="hover:bg-gray-50">
+                    <tr key={p.id} className="hover:bg-accent hover:text-accent-foreground transition-all duration-200">
                     <td className="px-4 py-3 flex items-center gap-3">                        
                         <div>
-                        <div className="font-medium text-gray-900">{p.nombre}</div>                        
+                        <div className="font-medium">{p.nombre}</div>                        
                         </div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700">
+                    <td className="px-4 py-3 text-sm ">
                         {p.categoria}
                     </td>
                     <td className="px-4 py-3 text-sm text-right font-medium">
@@ -64,8 +64,7 @@ export default function TablaProductos({ data }) {
                     </td>
                     <td
                         className={`px-4 py-3 text-sm text-right ${
-                        p.stock === 0 ? "text-red-500" : "text-gray-700"
-                        }`}
+                        p.stock === 0 && "text-red-500"}`}
                     >
                         {p.stock}
                     </td>
@@ -74,21 +73,21 @@ export default function TablaProductos({ data }) {
                             
                             <button
                                 type="button"
-                                className="px-3 py-1 rounded-md bg-gray-100 hover:bg-gray-200 text-sm"
+                                className="px-3 py-1 rounded-md bg-gray-100 hover:brightness-90 transition-all duration-200 text-sm text-secondary cursor-pointer"
                                 onClick={() => alert("Editar " + p.id)}
                             >
                                 Editar
                             </button>
                             <button
                                 type="button"
-                                className="px-3 py-1 rounded-md bg-red-500 text-white hover:brightness-95 text-sm"
+                                className="px-3 py-1 rounded-md bg-red-500 text-white hover:brightness-90 text-sm cursor-pointer"
                                 onClick={() => handleDelete(p.id)}
                             >
                                 Borrar
                             </button>
                             <button
                             type="button"
-                            className="px-3 py-1 rounded-md bg-secondary text-white hover:brightness-95 text-sm"
+                            className="px-3 py-1 rounded-md bg-secondary text-white hover:brightness-90 transition-all duration-200 text-sm cursor-pointer"
                             onClick={() => handleDelete(p.id)}
                             >
                                 Agregar

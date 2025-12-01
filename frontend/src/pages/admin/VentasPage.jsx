@@ -34,7 +34,7 @@ const VentasPage = () => {
             <div className='md:w-4/5 pt-10'>
                 <p className='text-5xl font-bold text-center'>Productos</p>
                 
-                <form className="flex flex-row items-center gap-2 px-10" onSubmit={(e)=>handleSubmit(e)}>
+                <form className="flex flex-row items-center gap-2 justify-center mx-auto px-5 max-w-7xl" onSubmit={(e)=>handleSubmit(e)}>
                     <Search className="text-secondary" />
                     <input
                     type="text"
