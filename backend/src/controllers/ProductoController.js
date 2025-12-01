@@ -3,6 +3,7 @@ import Producto from "../models/Producto.js";
 export default class ProductoController{
 
     static async getAll (req,res){
+        console.log("query")
         try {
             const {page = 1, q} = req.query;
             const limit = 20;

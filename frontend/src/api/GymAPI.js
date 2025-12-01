@@ -267,3 +267,16 @@ export async function getStats() {
     }
   }
 }
+
+// Ventas
+
+export async function getAllProductos (query = "", page = 1){
+  try {
+    const { data } = await api.get(`/producto?q=${query}&page=${page}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
