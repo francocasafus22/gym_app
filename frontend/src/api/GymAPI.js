@@ -13,6 +13,17 @@ export async function login(formData) {
   }
 }
 
+export async function deleteUser({userId}){
+  try {
+    const { data } = await api.delete(`/user/${userId}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
 export async function createUser(formData) {
   try {
     const { data } = await api.post("/user/register", formData);
@@ -56,6 +67,7 @@ export async function asignarMembresia(formData) {
     }
   }
 }
+
 
 export async function asignarRutina(formData) {
   try {
@@ -248,6 +260,41 @@ export async function getEntrenamientoById(id) {
 export async function getStats() {
   try {
     const { data } = await api.get(`/entrenamiento/me/stats`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+// Productos
+
+export async function agregarProducto(formData){
+  try {
+    const { data } = await api.post(`/producto`, formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function getAllProductos (query = "", page = 1){
+  try {
+    const { data } = await api.get(`/producto?q=${query}&page=${page}`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function deleteProducto(productoId){
+  try {
+    const { data } = await api.delete(`/producto/${productoId}`);
     return data;
   } catch (error) {
     if (isAxiosError(error) && error.response) {

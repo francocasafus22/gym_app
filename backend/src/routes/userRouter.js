@@ -40,4 +40,6 @@ router.post("/asignar-membresia", UserController.asignarMembresia);
 
 router.post("/asignar-rutina", UserController.asignarRutina);
 
+router.delete("/:userId", UserController.delete)
+
 export default router;

@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import InputForm from "./ui/InputForm";
 import { useEffect, useState } from "react";
 
@@ -5,6 +6,7 @@ export default function EjercicioEntrenamientoCard({ ejercicio, onSiguiente }) {
   // Inicializar el estado de las series dependiendo la cantidad de series del ejercicio
   //
   const [series, setSeries] = useState([]);
+
 
   useEffect(() => {
     setSeries(

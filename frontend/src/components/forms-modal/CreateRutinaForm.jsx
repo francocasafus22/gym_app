@@ -5,11 +5,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createRutina } from "../../api/GymAPI";
 import { toast } from "sonner";
 import { PostRutinaSchema } from "../../schemas/editRutina";
+import { useForm } from "react-hook-form";
 
 export default function CreateRutinaForm({ onClose }) {
-  const [nombre, setNombre] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [dias, setDias] = useState("");
+  const {register, handleSubmit} = useForm()
   const [nivel, setNivel] = useState(null);
   const [tipo, setTipo] = useState(null);
 
@@ -27,14 +26,11 @@ export default function CreateRutinaForm({ onClose }) {
     },
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {    
     const formData = {
-      nombre,
-      descripcion,
-      tipo,
+      ...data,
       nivel,
-      diasPorSemana: Number(dias),
+      tipo,      
       activo: true,
     };
 
@@ -50,7 +46,7 @@ export default function CreateRutinaForm({ onClose }) {
   return (
     <form
       className="p-10 flex flex-col gap-2"
-      onSubmit={(e) => handleSubmit(e)}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-center text-3xl font-bold border-b border-accent pb-2 mb-2">
         Crear Rutina
@@ -59,9 +55,9 @@ export default function CreateRutinaForm({ onClose }) {
       <InputForm
         label={"Nombre"}
         id={"nombre"}
+        name={"nombre"}
         placeholder={"Nombre de la rutina"}
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
+        register={register}
         required={true}
         type="text"
       ></InputForm>
@@ -70,18 +66,18 @@ export default function CreateRutinaForm({ onClose }) {
         label={"Descripción"}
         id={"descripcion"}
         placeholder={"Descripción de la rutina"}
-        value={descripcion}
-        onChange={(e) => setDescripcion(e.target.value)}
+        register={register}
+        name={"descripcion"}
         required={true}
         type="text"
       ></InputForm>
 
       <InputForm
         label={"Días"}
-        id={"dias"}
-        value={dias}
+        id={"diasPorSemana"}        
         placeholder={"Dias por semana"}
-        onChange={(e) => setDias(e.target.value)}
+        register={register}
+        name={"diasPorSemana"}
         required={true}
         type="number"
       ></InputForm>

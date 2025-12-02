@@ -38,17 +38,17 @@ export default function AsignarRutinaForm({ userId, onClose }) {
 
   return (
     <div className="p-5">
-      <h1 className="text-4xl font-bold border-b border-accent pb-2 mb-5">
+      <h1 className="text-4xl font-bold border-b-2 border-accent pb-2 mb-5">
         Rutinas
       </h1>
-      {isLoading && <Loading />}
+      {isLoading && <Loading/>}
       {isError && <p>Error loading rutinas</p>}
       <div className="flex flex-col gap-2">
         {rutinas &&
           rutinas.map((rutina) => (
             <div
               key={rutina._id}
-              className={`hover:bg-accent border border-border transition-all duration-200 cursor-pointer rounded-lg p-2 shadow-xl ${option === rutina._id ? "bg-accent" : ""}`}
+              className={`hover:bg-accent border border-border transition-all duration-200 cursor-pointer rounded-lg p-2 shadow-xl ${option === rutina._id ? "bg-accent text-accent-foreground" : ""}`}
               onClick={() => setOption(rutina._id)}
             >
               {rutina.nombre}
@@ -56,10 +56,10 @@ export default function AsignarRutinaForm({ userId, onClose }) {
           ))}
       </div>
       <button
-        className="bg-accent text-xl font-bold w-full rounded-lg mt-5 py-2 cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-200 hover:brightness-85"
+        className="bg-accent text-xl font-bold w-full rounded-lg mt-5 py-2 cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-200 hover:brightness-85 text-accent-foreground"
         onClick={() => handleSubmit()}
       >
-        {isPending ? <Loading /> : "Asignar"}
+        {isPending ? <Loading color="accent-foreground"/> : "Asignar"}
       </button>
     </div>
   );
