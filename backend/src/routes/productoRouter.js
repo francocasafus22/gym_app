@@ -23,4 +23,5 @@ router.post("/",
     ,handleErrorsMiddleware,ProductoController.create);
 
 router.delete("/:productoId", param("productoId").isMongoId().withMessage("Id no válido"), handleErrorsMiddleware, ProductoController.delete);
+router.put("/:productoId", ProductoController.edit );
 export default router

@@ -302,3 +302,14 @@ export async function deleteProducto(productoId){
     }
   }
 }
+
+export async function editProducto({productoId, formData}){
+  try {
+    const { data } = await api.put(`/producto/${productoId}`, formData);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
