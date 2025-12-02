@@ -9,6 +9,7 @@ import ejercicioRouter from "./routes/ejercicioRouter.js";
 import rutinaRouter from "./routes/rutinaRouter.js";
 import entrenamientoRouter from "./routes/entrenamientoRouter.js";
 import { updateMembresias } from "./jobs/membresiasJobs.js";
+import newsRouter from "./routes/newsRouter.js";
 
 dotenv.config();
 connectDB();
@@ -32,6 +33,8 @@ app.use("/api/membresiaTipo", membresiaTipoRouter);
 app.use("/api/ejercicio", ejercicioRouter);
 app.use("/api/rutina", rutinaRouter);
 app.use("/api/entrenamiento", entrenamientoRouter);
+app.use("/api/news", newsRouter);
+
 app.use("/", (req, res) => {
   res.json({ message: "Spartan Gym" });
 });

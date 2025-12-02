@@ -1,32 +1,51 @@
-// NewsFeed.jsx
-import NewsCard from "./NewsCard";
+// frontend/src/components/NewsFeed.jsx
+import React, { useState, useEffect } from 'react';
 
-export default function NewsFeed() {
-    const newsItems = [
-        { id: 1, title: "Promo 2x1 en nuevos ingresantes", image: "/img1.jpg" },
-        { id: 2, title: "Viernes cerrado 26/10 — feriado nacional", image: "/img2.jpg" },
-        { id: 3, title: "Competencia de Halloween", image: "/img3.jpg" },
-        { id: 4, title: "Nuevo equipamiento de cardio", image: "/img4.png" },
-        { id: 5, title: "Clase especial de CrossFit", image: "/img5.jpg" },
-        { id: 6, title: "Taller de nutrición deportiva", image: "/img3.jpg" },
-    ];
+const NewsFeed = () => {
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [err, setErr] = useState(null);
+
+    useEffect(() => {
+        let mounted = true;
+        const fetchNews = async () => {
+            try {
+                const res = await fetch('/api/news');
+                if (!res.ok) throw new Error('No se pudieron cargar las noticias');
+                const data = await res.json();
+                if (mounted) {
+                    setItems(data);
+                }
+            } catch (error) {
+                console.error(error);
+                if (mounted) setErr(error.message);
+            } finally {
+                if (mounted) setLoading(false);
+            }
+        };
+        fetchNews();
+        return () => (mounted = false);
+    }, []);
+
+    if (loading) return <div>Cargando noticias...</div>;
+    if (err) return <div>Error: {err}</div>;
+    if (!items.length) return <div>No hay publicaciones aún.</div>;
 
     return (
-        <div className="container mx-auto px-4 py-6 max-w-3xl">
-            <h1 className="text-3xl md:text-4xl font-bold text-accent mb-6 text-center">
-                Todas las Publicaciones
-            </h1>
-
-            {/* Feed vertical tipo Twitter */}
-            <div className="flex flex-col gap-4">
-                {newsItems.map((item) => (
-                    <NewsCard
-                        key={item.id}
-                        title={item.title}
-                        image={item.image}
-                    />
-                ))}
-            </div>
+        <div style={{ display: 'grid', gap: 12 }}>
+            {items.map((it) => (
+                <article key={it._id} style={{ border: '1px solid #ddd', padding: 12, borderRadius: 6 }}>
+                    {it.image && (
+                        <div style={{ marginBottom: 8 }}>
+                            <img src={it.image} alt={it.title} style={{ maxWidth: '100%', height: 'auto' }} />
+                        </div>
+                    )}
+                    <h3>{it.title}</h3>
+                    <small>{new Date(it.createdAt).toLocaleString()}</small>
+                </article>
+            ))}
         </div>
     );
-}
+};
+
+export default NewsFeed;
