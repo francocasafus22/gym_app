@@ -7,6 +7,7 @@ import { useState } from "react";
 import Pagination from "../../components/Pagination";
 import Modal from "../../components/Modal"
 import AgregarProductoForm from "../../components/forms-modal/AgregarProductoForm";
+import useCart from "../../hooks/useCart";
 
 const VentasPage = () => {
 
@@ -14,6 +15,7 @@ const VentasPage = () => {
     const [query, setQuery] = useState("")
     const [lastQuery, setLastQuery] = useState("")
     const [isOpenAgregar, setIsOpenAgregar] = useState(false)
+    const {cart} = useCart()
 
     const {data,isLoading, refetch} = useQuery({
         queryKey: ["productos", currentPage, lastQuery],
@@ -70,9 +72,37 @@ const VentasPage = () => {
                 </div>
             </div>
             <div className='border-l pt-10 border-border md:w-1/5'>
-                <p className='text-4xl font-bold text-center'>Carrito</p>
-            </div>
+                <p className='text-4xl font-bold text-center mb-5'>Carrito</p>
 
+                <div className="space-y-3 px-4">
+                    {cart.length === 0 && (
+                    <p className="text-center text-muted-foreground">Carrito vacío</p>
+                    )}
+
+                    {cart.map((p) => (
+                    <div 
+                        key={p.productId}
+                        className="border border-border rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow duration-200"
+                    >
+                        <div className="flex flex-col gap-1">
+                        <p className="font-semibold text-base line-clamp-1 text-secondary">
+                            {p.nombre}
+                        </p>
+
+                        <div className="flex justify-between items-center">
+                            <p className="text-accent font-bold text-lg">${p.precio * p.quantity}</p>
+
+                            <span className="text-sm text-muted-foreground">
+                            x {p.quantity}
+                            </span>
+                        </div>
+                        
+                        </div>
+                        <p className="text-border font-bold text-sm">Unidad: ${p.precio}</p>
+                    </div>
+                    ))}
+                </div>
+            </div>
 
             {
                 isOpenAgregar ? <Modal isOpen={isOpenAgregar} onClose={()=>setIsOpenAgregar(false)}>

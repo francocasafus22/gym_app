@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import DeleteProductoForm from "./forms-modal/DeleteProductoForm";
 import { useEffect, useState } from "react";
 import EditProductoForm from "./forms-modal/EditProductForm";
+import useCart from "../hooks/useCart";
 
 export default function TablaProductos({ data }) {             
     
@@ -10,6 +11,7 @@ export default function TablaProductos({ data }) {
     const [isOpenDelete, setIsOpenDelete] = useState(false)
     const [isOpenEdit, setIsOpenEdit] = useState(false)
     const [productoSeleccionado, setProductoSeleccionado]  = useState(null)    
+    const {addProduct} = useCart()
 
     return (            
             
@@ -49,6 +51,7 @@ export default function TablaProductos({ data }) {
                     <ProductoFilaTabla p={p} key={p._id} 
                     onOpenDelete={(p)=>{setProductoSeleccionado(p); setIsOpenDelete(!isOpenDelete)}} 
                     onOpenEdit={p=>{setProductoSeleccionado(p); setIsOpenEdit(!isOpenEdit)}}
+                    onOpenAdd={p=>addProduct(p)}
                     />
                 ))
                 )}
