@@ -32,7 +32,7 @@ const VentasPage = () => {
     }    
 
     return (
-        <div className='min-h-screen flex flex-col md:flex-row w-full'>
+        <div className='min-h-screen flex flex-col md:flex-row w-full mb-5'>
 
             <div className='md:w-4/5 pt-10'>
              <div className="w-full px-5 max-w-7xl mx-auto space-y-5">
@@ -87,7 +87,7 @@ const VentasPage = () => {
                         {/* BOTÓN X */}
                         <button
                             onClick={() => deleteProduct(p)}
-                            className="absolute right-0 left-0 top-0 bottom-0 opacity-0 text-3xl group-hover:opacity-100 transition-opacity duration-200 text-primary font-black"
+                            className="absolute right-0 top-0 group-hover:left-0 group-hover:bottom-0 pr-1 group-hover:p-0 text-sm opacity-100 text-secondary group-hover:text-3xl group-hover:opacity-100 transition-opacity duration-200 hover:text-primary font-black"
                         >
                             ✕
                         </button>
