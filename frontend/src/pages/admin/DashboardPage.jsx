@@ -7,7 +7,7 @@ const DashboardPage = () => {
     const [msg, setMsg] = useState(null);
     const [error, setError] = useState(null);
 
-    // ✔️ TOKEN CORRECTO (NO tocar nada más)
+
     const token = localStorage.getItem('AUTH_TOKEN');
 
     const handleSubmit = async (e) => {
@@ -23,7 +23,6 @@ const DashboardPage = () => {
         setLoading(true);
 
         try {
-            // ✔️ Esto se mantiene EXACTO como lo tenías
             const res = await fetch('http://localhost:4000/api/news', {
                 method: 'POST',
                 headers: {
