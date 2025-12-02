@@ -1,51 +1,33 @@
-// frontend/src/components/NewsFeed.jsx
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
+import NewsCard from "./NewsCard";
 
-const NewsFeed = () => {
-    const [items, setItems] = useState([]);
+export default function NewsFeed() {
+    const [newsItems, setNewsItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [err, setErr] = useState(null);
 
     useEffect(() => {
-        let mounted = true;
-        const fetchNews = async () => {
+        async function fetchNews() {
             try {
-                const res = await fetch('/api/news');
-                if (!res.ok) throw new Error('No se pudieron cargar las noticias');
+                const res = await fetch("http://localhost:4000/api/news");
                 const data = await res.json();
-                if (mounted) {
-                    setItems(data);
-                }
-            } catch (error) {
-                console.error(error);
-                if (mounted) setErr(error.message);
+                setNewsItems(data);
+            } catch (err) {
+                console.log("Error al cargar noticias", err);
             } finally {
-                if (mounted) setLoading(false);
+                setLoading(false);
             }
-        };
+        }
+
         fetchNews();
-        return () => (mounted = false);
     }, []);
 
-    if (loading) return <div>Cargando noticias...</div>;
-    if (err) return <div>Error: {err}</div>;
-    if (!items.length) return <div>No hay publicaciones aún.</div>;
+    if (loading) return <p>Cargando noticias...</p>;
 
     return (
-        <div style={{ display: 'grid', gap: 12 }}>
-            {items.map((it) => (
-                <article key={it._id} style={{ border: '1px solid #ddd', padding: 12, borderRadius: 6 }}>
-                    {it.image && (
-                        <div style={{ marginBottom: 8 }}>
-                            <img src={it.image} alt={it.title} style={{ maxWidth: '100%', height: 'auto' }} />
-                        </div>
-                    )}
-                    <h3>{it.title}</h3>
-                    <small>{new Date(it.createdAt).toLocaleString()}</small>
-                </article>
+        <div className="news-feed">
+            {newsItems.map((item) => (
+                <NewsCard key={item._id} title={item.title} image={item.image} />
             ))}
         </div>
     );
-};
-
-export default NewsFeed;
+}
