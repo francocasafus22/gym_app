@@ -5,14 +5,15 @@ import { getAllProductos } from "../../api/GymAPI";
 import Loading from "../../components/Loading";
 import { useState } from "react";
 import Pagination from "../../components/Pagination";
-import { useEffect } from "react";
+import Modal from "../../components/Modal"
+import AgregarProductoForm from "../../components/forms-modal/AgregarProductoForm";
 
 const VentasPage = () => {
 
     const [currentPage, setCurrentPage] = useState(1)   
     const [query, setQuery] = useState("")
     const [lastQuery, setLastQuery] = useState("")
-
+    const [isOpenAgregar, setIsOpenAgregar] = useState(false)
 
     const {data,isLoading, refetch} = useQuery({
         queryKey: ["productos", currentPage, lastQuery],
@@ -32,14 +33,15 @@ const VentasPage = () => {
         <div className='min-h-screen flex flex-col md:flex-row w-full'>
 
             <div className='md:w-4/5 pt-10'>
+             <div className="w-full px-5 max-w-7xl mx-auto space-y-5">
                 <p className='text-5xl font-bold text-center'>Productos</p>
                 
-                <form className="flex flex-row items-center gap-2 justify-center mx-auto px-5 max-w-7xl" onSubmit={(e)=>handleSubmit(e)}>
+                <form className="flex flex-row items-center gap-2 justify-center mx-auto max-w-7xl" onSubmit={(e)=>handleSubmit(e)}>
                     <Search className="text-secondary" />
                     <input
                     type="text"
                     placeholder="Busqueda por nombre"
-                    className="flex-1 w-full bg-transparent outline-none flex items-center my-5 px-3 py-2 gap-2 rounded-xl border border-border focus-within:ring-2 focus-within:ring-accent"
+                    className="flex-1 w-full bg-transparent outline-none flex items-center px-3 py-2 gap-2 rounded-xl border border-border focus-within:ring-2 focus-within:ring-accent"
                     onChange={(e)=>{setQuery(e.target.value)}}
                     />
                     <button
@@ -53,9 +55,10 @@ const VentasPage = () => {
                 {
                     isLoading  
                     ? 
-                    <div className="flex items-center justify-center h-[60vh]"><Loading/></div> 
+                    <div className="flex items-center justify-center"><Loading/></div> 
                     :
                     <>
+                    <button onClick={()=>setIsOpenAgregar(!isOpenAgregar)} className="text-accent-foreground bg-accent w-full rounded-md py-1 cursor-pointer hover:brightness-90 transition-all duration-200">Crear Producto</button>
                     <TablaProductos data={data}/>
                     <Pagination
                     currentPage={data.currentPage}
@@ -64,12 +67,18 @@ const VentasPage = () => {
                     />
                     </>
                 }
-                
+                </div>
             </div>
             <div className='border-l pt-10 border-border md:w-1/5'>
                 <p className='text-4xl font-bold text-center'>Carrito</p>
             </div>
-                
+
+
+            {
+                isOpenAgregar ? <Modal isOpen={isOpenAgregar} onClose={()=>setIsOpenAgregar(false)}>
+                    <AgregarProductoForm onClose={()=>setIsOpenAgregar(false)}/>
+                </Modal> : null
+            }  
         </div>
     );
 }

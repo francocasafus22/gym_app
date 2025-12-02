@@ -41,4 +41,23 @@ export default class ProductoController{
         }
     }
 
+    static async delete(req,res){
+        try {
+            const {productoId} = req.params
+            const product = await Producto.findById(productoId);
+            if(!product){
+                const error = new Error("Producto no encontrado");
+                res.status(404).json({error: error.message})
+                return
+            }
+
+            await product.deleteOne();
+
+            res.json({message: "Producto eliminado correctamente"})
+        } catch (error) {
+            console.error("[CREATE PRODUCTO] Error: ", error.message);
+            res.status(500).json({error: "Hubo un error al crear el producto"})
+        }
+    }
+
 }

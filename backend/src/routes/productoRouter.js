@@ -1,6 +1,6 @@
 import { Router } from "express";
 import ProductoController from "../controllers/ProductoController.js";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import handleErrorsMiddleware from "../middlewares/handleErrorsMiddleware.js";
 
 const router = Router()
@@ -22,4 +22,5 @@ router.post("/",
         .withMessage("Categoría inválida")
     ,handleErrorsMiddleware,ProductoController.create);
 
+router.delete("/:productoId", param("productoId").isMongoId().withMessage("Id no válido"), handleErrorsMiddleware, ProductoController.delete);
 export default router
