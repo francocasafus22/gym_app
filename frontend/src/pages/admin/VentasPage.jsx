@@ -15,7 +15,7 @@ const VentasPage = () => {
     const [query, setQuery] = useState("")
     const [lastQuery, setLastQuery] = useState("")
     const [isOpenAgregar, setIsOpenAgregar] = useState(false)
-    const {cart} = useCart()
+    const {cart, deleteProduct} = useCart()
 
     const {data,isLoading, refetch} = useQuery({
         queryKey: ["productos", currentPage, lastQuery],
@@ -82,15 +82,22 @@ const VentasPage = () => {
                     {cart.map((p) => (
                     <div 
                         key={p.productId}
-                        className="border border-border rounded-xl p-3 shadow-sm hover:shadow-md transition-shadow duration-200"
+                        className="relative group border border-border rounded-xl p-3 shadow-sm transition-all duration-300 hover:bg-accent hover:text-primary"
                     >
+                        {/* BOTÓN X */}
+                        <button
+                            onClick={() => deleteProduct(p)}
+                            className="absolute right-0 left-0 top-0 bottom-0 opacity-0 text-3xl group-hover:opacity-100 transition-opacity duration-200 text-primary font-black"
+                        >
+                            ✕
+                        </button>
                         <div className="flex flex-col gap-1">
-                        <p className="font-semibold text-base line-clamp-1 text-secondary">
+                        <p className="font-semibold text-base line-clamp-1">
                             {p.nombre}
                         </p>
 
                         <div className="flex justify-between items-center">
-                            <p className="text-accent font-bold text-lg">${p.precio * p.quantity}</p>
+                            <p className="text-accent group-hover:text-primary font-bold text-lg">${p.precio * p.quantity}</p>
 
                             <span className="text-sm text-muted-foreground">
                             x {p.quantity}
