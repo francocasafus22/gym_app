@@ -20,7 +20,7 @@ updateMembresias.start();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: process.env.FRONTEND,
+  origin: `${process.env.FRONTEND}`,
   methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
