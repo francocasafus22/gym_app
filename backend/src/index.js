@@ -19,6 +19,8 @@ connectDB();
 updateMembresias.start();
 const PORT = process.env.PORT || 3000;
 
+console.log("FRONTEND desde ENV:", `"${process.env.FRONTEND}"`);
+
 const corsOptions = {
   origin: `${process.env.FRONTEND}`,
   methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
