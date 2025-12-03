@@ -1,8 +1,7 @@
 import {useState } from "react";
 
 
-export default function ProductoFilaTabla({ p, onOpenDelete, onOpenEdit, onOpenAdd }) {
-    
+export default function ProductoFilaTabla({ p, onOpenDelete, onOpenEdit, onOpenAdd }) {    
 
     return (    
         <tr className="hover:bg-accent hover:text-accent-foreground transition-all duration-200">
@@ -43,8 +42,9 @@ export default function ProductoFilaTabla({ p, onOpenDelete, onOpenEdit, onOpenA
                 </button>
                 <button
                 type="button"
-                className="px-3 py-1 rounded-md bg-secondary text-white hover:brightness-90 transition-all duration-200 text-sm cursor-pointer"
+                className="px-3 py-1 disabled:brightness-50 disabled:cursor-auto rounded-md bg-secondary text-white hover:brightness-90 transition-all duration-200 text-sm cursor-pointer"
                 onClick={() => onOpenAdd(p)}
+                disabled={p.stock <= 0}
                 >
                 Agregar
                 </button>

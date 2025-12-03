@@ -22,7 +22,6 @@ export default class VentaController {
                 _id: {$in: ids}
             })
 
-
             const venta = {
                 productos: productosDB.map(p=>{
                     const item = productos.find(i=>i.productoId === p._id.toString());
@@ -43,6 +42,21 @@ export default class VentaController {
                 }, 0),
                 metodoPago: metodo
             }
+
+            // Actualizar stock de cada producto
+            const updates = productosDB.map(p => {
+                const item = productos.find(i => i.productoId === p._id.toString());
+
+                return {
+                    updateOne: {
+                        filter: { _id: p._id },
+                        update: { $inc: { stock: -item.cantidad } }
+                    }
+                };
+            });
+
+            
+            await Producto.bulkWrite(updates);
 
             await Venta.create(venta)
 
