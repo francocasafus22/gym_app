@@ -20,5 +20,15 @@ export const cronometro = (segundos) => {
   const segundosRestantes = segundos % 60;
   const horas = Math.floor(segundos / 3600);
 
-  return `${horas.toString().padStart(2, "0")}:${minutos.toString().padStart(2, "0")}:${segundosRestantes.toString().padStart(2, "0")}`;
+  return `${horas.toString().padStart(2, "0")}:${minutos
+    .toString()
+    .padStart(2, "0")}:${segundosRestantes.toString().padStart(2, "0")}`;
+};
+
+export const currency = (number) => {
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 2,
+  }).format(number);
 };

@@ -13,7 +13,7 @@ export default function Options({
         {options.map((option) => (
           <div
             key={option}
-            className={`hover:bg-accent hover:text-accent-foreground border border-border transition-all duration-200 text-center cursor-pointer rounded-lg p-2 shadow-xl ${option === value ? "bg-accent text-accent-foreground" : ""}`}
+            className={`hover:bg-accent hover:text-accent-foreground border border-border transition-all duration-200 text-center cursor-pointer rounded-lg p-2 shadow-md ${option === value ? "bg-accent text-accent-foreground" : ""}`}
             onClick={() => setOption(option)}
           >
             {option}

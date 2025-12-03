@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import userRouter from "./routes/userRouter.js";
 import membresiaRouter from "./routes/membresiaRouter.js";
+import ventaRouter from "./routes/ventaRouter.js"
 import membresiaTipoRouter from "./routes/membresiaTipoRouter.js";
 import ejercicioRouter from "./routes/ejercicioRouter.js";
 import rutinaRouter from "./routes/rutinaRouter.js";
@@ -33,6 +34,7 @@ app.use("/api/membresia", membresiaRouter);
 app.use("/api/membresiaTipo", membresiaTipoRouter);
 app.use("/api/ejercicio", ejercicioRouter);
 app.use("/api/producto", productoRouter)
+app.use("/api/venta", ventaRouter)
 app.use("/api/rutina", rutinaRouter);
 app.use("/api/entrenamiento", entrenamientoRouter);
 app.use("/api/news", newsRouter);

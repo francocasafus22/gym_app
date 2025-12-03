@@ -1,13 +1,16 @@
 import { Search } from "lucide-react";
 import TablaProductos from "../../components/TablaProductos";
-import { useQuery } from "@tanstack/react-query";
-import { getAllProductos } from "../../api/GymAPI";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { createVenta, getAllProductos } from "../../api/GymAPI";
 import Loading from "../../components/Loading";
 import { useState } from "react";
 import Pagination from "../../components/Pagination";
 import Modal from "../../components/Modal"
 import AgregarProductoForm from "../../components/forms-modal/AgregarProductoForm";
 import useCart from "../../hooks/useCart";
+import { toast } from "sonner";
+import CrearVentaForm from "../../components/forms-modal/CrearVentaForm";
+import { currency } from "../../utils/formatText";
 
 const VentasPage = () => {
 
@@ -15,6 +18,7 @@ const VentasPage = () => {
     const [query, setQuery] = useState("")
     const [lastQuery, setLastQuery] = useState("")
     const [isOpenAgregar, setIsOpenAgregar] = useState(false)
+    const [isOpenVenta, setIsOpenVenta] = useState(false)
     const {cart, deleteProduct} = useCart()
 
     const {data,isLoading, refetch} = useQuery({
@@ -23,6 +27,7 @@ const VentasPage = () => {
         retry: 1,
         refetchOnWindowFocus: false
     })
+
 
     const handleSubmit = (e) => {
         e.preventDefault()                  
@@ -71,23 +76,23 @@ const VentasPage = () => {
                 }
                 </div>
             </div>
-            <div className='border-l pt-10 border-border md:w-1/5'>
-                <p className='text-4xl font-bold text-center mb-5'>Carrito</p>
-
-                <div className="space-y-3 px-4">
+            <div className='border-l pt-10 flex flex-col px-3 space-y-2 border-border md:w-1/5'>
+                <p className='text-4xl font-bold text-center'>Carrito</p>
+                {cart.length > 0 && <button className="text-center bg-accent w-full rounded-lg text-accent-foreground font-medium py-1 hover:bg-accent-hover cursor-pointer transition-all duration-200" onClick={()=>setIsOpenVenta(!isOpenVenta)}>Completar Compra</button>}
+                <div className="space-y-3">
                     {cart.length === 0 && (
                     <p className="text-center text-muted-foreground">Carrito vacío</p>
                     )}
 
                     {cart.map((p) => (
                     <div 
-                        key={p.productId}
-                        className="relative group border border-border rounded-xl p-3 shadow-sm transition-all duration-300 hover:bg-accent hover:text-primary"
+                        key={p.producto}
+                        className="relative group border border-border rounded-xl px-4 py-2 shadow-sm transition-all duration-300 hover:bg-accent hover:text-primary"
                     >
                         {/* BOTÓN X */}
                         <button
                             onClick={() => deleteProduct(p)}
-                            className="absolute right-0 top-0 group-hover:left-0 group-hover:bottom-0 pr-1 group-hover:p-0 text-sm opacity-100 text-secondary group-hover:text-3xl group-hover:opacity-100 transition-opacity duration-200 hover:text-primary font-black"
+                            className="absolute right-0 top-0 group-hover:left-0 group-hover:bottom-0 px-2 py-1 group-hover:p-0 text-sm opacity-100 text-secondary group-hover:text-3xl group-hover:opacity-100 transition-opacity duration-200 hover:text-primary font-black"
                         >
                             ✕
                         </button>
@@ -97,15 +102,15 @@ const VentasPage = () => {
                         </p>
 
                         <div className="flex justify-between items-center">
-                            <p className="text-accent group-hover:text-primary font-bold text-lg">${p.precio * p.quantity}</p>
+                            <p className="text-accent group-hover:text-primary font-bold text-lg">{currency(p.total)}</p>
 
                             <span className="text-sm text-muted-foreground">
-                            x {p.quantity}
+                            x {p.cantidad}
                             </span>
                         </div>
                         
                         </div>
-                        <p className="text-border font-bold text-sm">Unidad: ${p.precio}</p>
+                        <p className="text-border font-bold text-sm">Unidad: {currency(p.precio)}</p>
                     </div>
                     ))}
                 </div>
@@ -114,6 +119,12 @@ const VentasPage = () => {
             {
                 isOpenAgregar ? <Modal isOpen={isOpenAgregar} onClose={()=>setIsOpenAgregar(false)}>
                     <AgregarProductoForm onClose={()=>setIsOpenAgregar(false)}/>
+                </Modal> : null
+            }  
+
+            {
+                isOpenVenta ? <Modal isOpen={isOpenVenta} onClose={()=>setIsOpenVenta(false)}>
+                    <CrearVentaForm onClose={()=>setIsOpenVenta(false)}/>
                 </Modal> : null
             }  
         </div>
