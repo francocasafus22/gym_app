@@ -6,42 +6,42 @@ const benefits = [
     title: "Equipamiento de Última Generación",
     description:
       "Accede a las máquinas más avanzadas del mercado. Tecnología de punta para maximizar tus resultados y llevar tu entrenamiento al siguiente nivel.",
-    image: "/public/SPARTAN_3.jpg",
+    image: "/SPARTAN_3.jpg",
   },
   {
     id: 2,
     title: "Entrenadores Certificados",
     description:
       "Nuestro equipo de profesionales certificados te guiará en cada paso. Planes personalizados diseñados específicamente para alcanzar tus objetivos.",
-    image: "/public/SPARTAN_2.jpg",
+    image: "/SPARTAN_2.jpg",
   },
   {
     id: 3,
     title: "Clases Grupales Energéticas",
     description:
       "Únete a sesiones dinámicas de CrossFit, spinning, yoga y más. Entrena con una comunidad motivada que te impulsa a superarte cada día.",
-    image: "/public/SPARTAN_6.jpg",
+    image: "/SPARTAN_6.jpg",
   },
   {
     id: 4,
     title: "Zona de Recuperación",
     description:
       "Sauna, jacuzzi y área de estiramiento para tu recuperación muscular. Cuida tu cuerpo después de cada entrenamiento intenso.",
-    image: "/public/SPARTAN_4.jpg",
+    image: "/SPARTAN_4.jpg",
   },
   {
     id: 5,
     title: "Nutrición Personalizada",
     description:
       "Asesoría nutricional incluida en tu membresía. Planes alimenticios adaptados a tus metas de fitness y estilo de vida.",
-    image: "/public/SPARTAN_5.jpg",
+    image: "/SPARTAN_5.jpg",
   },
   {
     id: 6,
     title: "Horarios Flexibles 24/7",
     description:
       "Entrena cuando quieras, sin restricciones. Acceso las 24 horas del día, los 7 días de la semana para adaptarnos a tu agenda.",
-    image: "/public/SPARTAN_7.jpg",
+    image: "/SPARTAN_7.jpg",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function HomeBenefits() {
           </h1>
           {/* Logo debajo del texto */}
           <img
-            src="/public/logoSolo.png"
+            src="/logoSolo.png"
             alt="Logo Spartan Gym"
             className="mt-8 mx-auto h-20 w-auto"
           />

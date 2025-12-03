@@ -36,7 +36,7 @@ export default function NewsFeed() {
             }}
         >
             {newsItems.map((item) => (
-                <NewsCard key={item._id} title={item.title} image="/public/logoSolo.png" />
+                <NewsCard key={item._id} title={item.title} image="/logoSolo.png" />
             ))}
         </div>
     );
