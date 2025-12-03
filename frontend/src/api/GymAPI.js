@@ -313,3 +313,27 @@ export async function editProducto({productoId, formData}){
     }
   }
 }
+
+// Venta
+
+export async function getVentas(){
+  try {
+    const { data } = await api.get(`/venta`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
+
+export async function createVenta({productos, metodo}){
+  try {
+    const { data } = await api.post(`/venta`, {productos, metodo});
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
