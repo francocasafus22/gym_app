@@ -60,4 +60,27 @@ export default class ProductoController{
         }
     }
 
+    static async edit (req,res){
+        try {
+            const {productoId} = req.params
+
+            const producto = await Producto.findById(productoId);
+
+            if(!producto){
+                const error = new Error("Producto no encontrado");
+                res.status(404).json({error: error.message})
+                return
+            }
+
+            Object.assign(producto, req.body);
+
+            await producto.save()
+
+            res.json({message: "Producto editado correctamente"})
+        } catch (error) {
+            console.error("[EDIT PRODUCTO] Error: ", error.message);
+            res.status(500).json({error: "Hubo un error al editar el producto"})
+        }
+    }
+
 }

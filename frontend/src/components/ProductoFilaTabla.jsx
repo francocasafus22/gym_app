@@ -1,7 +1,7 @@
 import {useState } from "react";
 
 
-export default function ProductoFilaTabla({ p, onOpenDelete }) {
+export default function ProductoFilaTabla({ p, onOpenDelete, onOpenEdit, onOpenAdd }) {
     
 
     return (    
@@ -30,21 +30,21 @@ export default function ProductoFilaTabla({ p, onOpenDelete }) {
                 <button
                 type="button"
                 className="px-3 py-1 rounded-md bg-gray-100 hover:brightness-90 transition-all duration-200 text-sm text-secondary cursor-pointer"
-                onClick={()=>{}}
+                onClick={()=>onOpenEdit(p)}
                 >
                 Editar
                 </button>
                 <button
                 type="button"
                 className="px-3 py-1 rounded-md bg-red-500 text-white hover:brightness-90 text-sm cursor-pointer"
-                onClick={()=>onOpenDelete(p._id)}
+                onClick={()=>onOpenDelete(p)}
                 >
                 Borrar
                 </button>
                 <button
                 type="button"
                 className="px-3 py-1 rounded-md bg-secondary text-white hover:brightness-90 transition-all duration-200 text-sm cursor-pointer"
-                onClick={() => handleDelete(p._id)}
+                onClick={() => onOpenAdd(p)}
                 >
                 Agregar
                 </button>

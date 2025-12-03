@@ -2,12 +2,16 @@ import ProductoFilaTabla from "./ProductoFilaTabla";
 import Modal from "./Modal";
 import DeleteProductoForm from "./forms-modal/DeleteProductoForm";
 import { useEffect, useState } from "react";
+import EditProductoForm from "./forms-modal/EditProductForm";
+import useCart from "../hooks/useCart";
 
 export default function TablaProductos({ data }) {             
     
 
     const [isOpenDelete, setIsOpenDelete] = useState(false)
+    const [isOpenEdit, setIsOpenEdit] = useState(false)
     const [productoSeleccionado, setProductoSeleccionado]  = useState(null)    
+    const {addProduct} = useCart()
 
     return (            
             
@@ -44,7 +48,11 @@ export default function TablaProductos({ data }) {
                 </tr>
                 ) : (
                 data.productos.map((p) => (
-                    <ProductoFilaTabla p={p} key={p._id} onOpenDelete={(p)=>{setProductoSeleccionado(p); setIsOpenDelete(!isOpenDelete)}}/>
+                    <ProductoFilaTabla p={p} key={p._id} 
+                    onOpenDelete={(p)=>{setProductoSeleccionado(p); setIsOpenDelete(!isOpenDelete)}} 
+                    onOpenEdit={p=>{setProductoSeleccionado(p); setIsOpenEdit(!isOpenEdit)}}
+                    onOpenAdd={p=>addProduct(p)}
+                    />
                 ))
                 )}
             </tbody>
@@ -53,10 +61,18 @@ export default function TablaProductos({ data }) {
             {isOpenDelete && (
                 <Modal isOpen={isOpenDelete} onClose={() => setIsOpenDelete(false)}>
                     
-                    <DeleteProductoForm productoId={productoSeleccionado} onClose={()=>setIsOpenDelete(false)}/>
+                    <DeleteProductoForm productoId={productoSeleccionado._id} onClose={()=>setIsOpenDelete(false)}/>
 
                 </Modal>
             )}
+
+            {
+                isOpenEdit && (
+                    <Modal isOpen={isOpenEdit} onClose={()=>setIsOpenEdit(false)}>
+                        <EditProductoForm producto={productoSeleccionado} onClose={()=>setIsOpenEdit(false)}/>
+                    </Modal>
+                )
+            }
 
         </div>    
         
