@@ -7,7 +7,6 @@ const DashboardPage = () => {
     const [msg, setMsg] = useState(null);
     const [error, setError] = useState(null);
 
-
     const token = localStorage.getItem('AUTH_TOKEN');
 
     const handleSubmit = async (e) => {
@@ -54,36 +53,115 @@ const DashboardPage = () => {
     };
 
     return (
-        <div style={{ maxWidth: 700, margin: '0 auto', padding: 20 }}>
-            <h2>Dashboard - Crear Publicación</h2>
+        <div
+            style={{
+                maxWidth: 700,
+                margin: "0 auto",
+                padding: 24,
+                background: "#ffffff",
+            }}
+        >
+            <h2
+                style={{
+                    fontSize: "28px",
+                    fontWeight: "700",
+                    marginBottom: "20px",
+                    color: "#111",
+                }}
+            >
+                Dashboard — Crear Publicación
+            </h2>
 
-            <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 10 }}>
-                <label>
-                    Título
+            <form
+                onSubmit={handleSubmit}
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "18px",
+                    background: "#fafafa",
+                    padding: "24px",
+                    borderRadius: "12px",
+                    border: "1px solid #e5e7eb",
+                    boxShadow: "0 3px 10px rgba(0,0,0,0.06)",
+                }}
+            >
+                <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <span style={{ fontWeight: 600, color: "#333" }}>Título</span>
                     <input
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Título de la publicación"
                         required
+                        style={{
+                            padding: "10px 12px",
+                            borderRadius: "8px",
+                            border: "1px solid #d1d5db",
+                            fontSize: "15px",
+                            background: "#fff",
+                            outline: "none",
+                            transition: "0.2s",
+                        }}
+                        onFocus={(e) => (e.target.style.borderColor = "#6366f1")}
+                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
                     />
                 </label>
 
-                <label>
-                    Image URL (opcional)
+                <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                    <span style={{ fontWeight: 600, color: "#333" }}>Imagen (opcional)</span>
                     <input
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
                         placeholder="https://..."
+                        style={{
+                            padding: "10px 12px",
+                            borderRadius: "8px",
+                            border: "1px solid #d1d5db",
+                            fontSize: "15px",
+                            background: "#fff",
+                            outline: "none",
+                            transition: "0.2s",
+                        }}
+                        onFocus={(e) => (e.target.style.borderColor = "#6366f1")}
+                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
                     />
                 </label>
 
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Creando...' : 'Crear Publicación'}
+                <button
+                    type="submit"
+                    disabled={loading}
+                    style={{
+                        background: "#6366f1",
+                        color: "white",
+                        padding: "10px 18px",
+                        borderRadius: "8px",
+                        border: "none",
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        cursor: "pointer",
+                        boxShadow: "0 3px 10px rgba(99,102,241,0.3)",
+                        transition: "0.3s",
+                    }}
+                    onMouseOver={(e) =>
+                        (e.target.style.boxShadow = "0 6px 18px rgba(99,102,241,0.45)")
+                    }
+                    onMouseOut={(e) =>
+                        (e.target.style.boxShadow = "0 3px 10px rgba(99,102,241,0.3)")
+                    }
+                >
+                    {loading ? "Creando..." : "Crear Publicación"}
                 </button>
             </form>
 
-            {msg && <p style={{ color: 'green' }}>{msg}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {msg && (
+                <p style={{ color: "green", marginTop: "16px", fontWeight: 600 }}>
+                    {msg}
+                </p>
+            )}
+            {error && (
+                <p style={{ color: "red", marginTop: "16px", fontWeight: 600 }}>
+                    {error}
+                </p>
+            )}
         </div>
     );
 };

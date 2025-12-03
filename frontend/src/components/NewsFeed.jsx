@@ -24,7 +24,17 @@ export default function NewsFeed() {
     if (loading) return <p>Cargando noticias...</p>;
 
     return (
-        <div className="news-feed">
+        <div
+            className="news-feed"
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+                padding: "20px",
+                maxWidth: "600px",
+                margin: "0 auto",
+            }}
+        >
             {newsItems.map((item) => (
                 <NewsCard key={item._id} title={item.title} image={item.image} />
             ))}
