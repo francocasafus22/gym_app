@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 const DashboardPage = () => {
     const [title, setTitle] = useState('');
-    const [image, setImage] = useState('');
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState(null);
     const [error, setError] = useState(null);
@@ -30,7 +29,7 @@ const DashboardPage = () => {
                 },
                 body: JSON.stringify({
                     title: title.trim(),
-                    image: image.trim()
+                    image: "default.jpg"    // ← ACA LE MANDAMOS LA IMAGEN FIJA
                 })
             });
 
@@ -39,10 +38,9 @@ const DashboardPage = () => {
                 throw new Error(data.message || 'Error en la petición');
             }
 
-            const created = await res.json();
+            await res.json();
             setMsg('Publicación creada correctamente');
             setTitle('');
-            setImage('');
 
         } catch (err) {
             console.error(err);
@@ -101,27 +99,7 @@ const DashboardPage = () => {
                             outline: "none",
                             transition: "0.2s",
                         }}
-                        onFocus={(e) => (e.target.style.borderColor = "#6366f1")}
-                        onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
-                    />
-                </label>
-
-                <label style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    <span style={{ fontWeight: 600, color: "#333" }}>Imagen (opcional)</span>
-                    <input
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        placeholder="https://..."
-                        style={{
-                            padding: "10px 12px",
-                            borderRadius: "8px",
-                            border: "1px solid #d1d5db",
-                            fontSize: "15px",
-                            background: "#fff",
-                            outline: "none",
-                            transition: "0.2s",
-                        }}
-                        onFocus={(e) => (e.target.style.borderColor = "#6366f1")}
+                        onFocus={(e) => (e.target.style.borderColor = "#DC2626")}
                         onBlur={(e) => (e.target.style.borderColor = "#d1d5db")}
                     />
                 </label>
@@ -130,7 +108,7 @@ const DashboardPage = () => {
                     type="submit"
                     disabled={loading}
                     style={{
-                        background: "#6366f1",
+                        background: "#DC2626",
                         color: "white",
                         padding: "10px 18px",
                         borderRadius: "8px",
@@ -138,14 +116,14 @@ const DashboardPage = () => {
                         fontSize: "16px",
                         fontWeight: "600",
                         cursor: "pointer",
-                        boxShadow: "0 3px 10px rgba(99,102,241,0.3)",
+                        boxShadow: "0 3px 10px rgba(220,38,38,0.36)",
                         transition: "0.3s",
                     }}
                     onMouseOver={(e) =>
-                        (e.target.style.boxShadow = "0 6px 18px rgba(99,102,241,0.45)")
+                        (e.target.style.boxShadow = "0 6px 18px rgba(220,38,38,0.55)")
                     }
                     onMouseOut={(e) =>
-                        (e.target.style.boxShadow = "0 3px 10px rgba(99,102,241,0.3)")
+                        (e.target.style.boxShadow = "0 3px 10px rgba(220,38,38,0.36)")
                     }
                 >
                     {loading ? "Creando..." : "Crear Publicación"}

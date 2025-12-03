@@ -14,6 +14,7 @@ export const getNewsItems = async (req, res) => {
 export const createNewsItem = async (req, res) => {
   try {
     const { title, image } = req.body;
+    
 
     const news = await News.create({
       title,
