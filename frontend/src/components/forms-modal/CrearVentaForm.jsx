@@ -11,7 +11,7 @@ import {currency} from "../../utils/formatText"
 
 export default function CrearVentaForm({ onClose }){
 
-    
+    const queryClient = useQueryClient()
     const {cart, clearCart} = useCart()
     const [metodo, setMetodo] = useState("Efectivo");  
     const [efectivo, setEfectivo] = useState("")
@@ -19,10 +19,11 @@ export default function CrearVentaForm({ onClose }){
 
     const { mutate } = useMutation({
         mutationFn: createVenta,
-        onSuccess: (data) => {      
+        onSuccess: async (data) => {      
         toast.success(data.message);
+        await queryClient.invalidateQueries(["productos"])
+        clearCart();
         onClose();
-        clearCart()
         },
         onError: (data) => {
         toast.error(data.error);
