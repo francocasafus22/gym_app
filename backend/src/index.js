@@ -19,10 +19,23 @@ connectDB();
 updateMembresias.start();
 const PORT = process.env.PORT || 3000;
 
-console.log("FRONTEND desde ENV:", `"${process.env.FRONTEND}"`);
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://spartangymapp.netlify.app"
+];
 
 const corsOptions = {
-  origin: `${process.env.FRONTEND}`,
+  origin: function (origin, callback) {
+    // Permite requests sin origin (tipo Postman)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("CORS bloqueado: origin no permitido " + origin));
+    }
+  },
   methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
