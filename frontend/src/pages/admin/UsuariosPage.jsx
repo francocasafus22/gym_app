@@ -23,6 +23,7 @@ const UsuariosPage = () => {
 
   const handleQuery = (e) => {
     e.preventDefault();
+    setCurrentPage(1)
     refetch();
   };
 
