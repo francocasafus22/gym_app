@@ -41,7 +41,7 @@ const DashboardPage = () => {
                 },
                 body: JSON.stringify({
                     title: title.trim(),
-                    image: "default.jpg"    // ← ACA LE MANDAMOS LA IMAGEN FIJA
+                    image: "default.jpg"
                 })
             });
 
