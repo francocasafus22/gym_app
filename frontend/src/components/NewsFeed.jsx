@@ -8,7 +8,6 @@ export default function NewsFeed() {
     useEffect(() => {
         async function fetchNews() {
             try {
-                console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
 
                 const res = await fetch(`${import.meta.env.VITE_API_URL}/news`);
                 const data = await res.json();

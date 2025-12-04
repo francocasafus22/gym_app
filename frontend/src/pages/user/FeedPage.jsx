@@ -33,25 +33,10 @@ export default function HomePage() {
   const newsItems = [
     {
       id: 1,
-      title: "Promo 2x1 en nuevos ingresantes (3x1 en mujeres)",
-      image: "/img1.jpg",
-    },
-    {
-      id: 2,
-      title: "Viernes cerrado 26/10 — feriado nacional",
-      image: "/img2.jpg",
-    },
-    {
-      id: 3,
-      title: "Competencia de Halloween",
-      image: "/img3.jpg",
+      title: "NOTICIAS SPARTAN GYM",
+      image: "/logoConLetras.png",
     },
 
-    {
-      id: 5,
-      title: "Nuevo equipamiento de cardio",
-      image: "/img5.jpg",
-    },
   ];
 
   return (
@@ -181,9 +166,7 @@ export default function HomePage() {
         </h2>
         <ul className="space-y-2">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {newsItems.map((item) => (
-              <NewsCard key={item.id} title={item.title} image={item.image} />
-            ))}
+            {newsItems.map((item) => (<NewsCard key={item.id} title={item.title} image={item.image} />))}
           </div>
         </ul>
         <Link
