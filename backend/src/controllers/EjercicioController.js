@@ -50,10 +50,6 @@ export default class EjercicioController {
         nombre: { $regex: q, $options: "i" },
       });
 
-      if (!ejercicios || ejercicios.length === 0) {
-        return res.status(404).json({ error: "Ejercicio no encontrado" });
-      }
-
       res.status(200).json({
         ejercicios,
         total,

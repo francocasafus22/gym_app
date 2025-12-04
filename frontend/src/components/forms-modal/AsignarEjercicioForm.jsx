@@ -75,6 +75,7 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
           className="flex flex-row items-center gap-2"
           onSubmit={(e) => {
             e.preventDefault();
+            setCurrentPage(1)
             refetch();
           }}
         >
@@ -100,7 +101,7 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-5">
+           {data.ejercicios.length == 0 ? <p className="text-border text-center">No hay ejercicios</p> : ( <><div className="grid grid-cols-2 md:grid-cols-2 gap-5">
               {data.ejercicios.map((ejercicio) => (
                 <div
                   className={`border border-border ${ejercicioSelected === ejercicio._id ? "bg-accent" : ""} hover:border-accent transition-all duration-200 cursor-pointer rounded-lg p-2 flex justify-center items-center text-center`}
@@ -117,7 +118,7 @@ export default function AsignarEjercicioForm({ onClose, rutinaId, dia }) {
               currentPage={data.currentPage}
               totalPages={data.totalPages}
               onPageChange={(page) => setCurrentPage(page)}
-            />
+            /></>)}
           </>
         )}
 
