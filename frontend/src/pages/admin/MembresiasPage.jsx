@@ -24,11 +24,7 @@ const MembresiasPage = () => {
               <MembresiaTipoCard key={data.nombre} data={data} />
             ))}
 
-          <button className="border-border border-1 shadow-xl h-90 flex flex-col  text-center rounded-3xl hover:brightness-90 cursor-pointer transition-all duration-300 ease-in-out">
-            <div className="flex flex-col justify-center items-center h-full p-5 rounded-t-3xl ">
-              <Plus size={100} strokeWidth={1} className="text-accent" />
-            </div>
-          </button>
+         
         </div>
       )}
     </div>
