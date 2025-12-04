@@ -17,7 +17,7 @@ import {
   fechaDiaMesAño,
 } from "../../utils/formatText";
 import { useQuery } from "@tanstack/react-query";
-import { getStats } from "../../api/GymAPI";
+import { getAllPublicaciones, getStats } from "../../api/GymAPI";
 
 export default function HomePage() {
   // Recibe el user del layout
@@ -30,29 +30,12 @@ export default function HomePage() {
     refetchOnWindowFocus: false,
   });
 
-  const newsItems = [
-    {
-      id: 1,
-      title: "Promo 2x1 en nuevos ingresantes (3x1 en mujeres)",
-      image: "/img1.jpg",
-    },
-    {
-      id: 2,
-      title: "Viernes cerrado 26/10 — feriado nacional",
-      image: "/img2.jpg",
-    },
-    {
-      id: 3,
-      title: "Competencia de Halloween",
-      image: "/img3.jpg",
-    },
-
-    {
-      id: 5,
-      title: "Nuevo equipamiento de cardio",
-      image: "/img5.jpg",
-    },
-  ];
+  const {data: publicaciones, isLoading: isLoadingPublicaciones} = useQuery({
+    queryKey: ["publicaciones"],
+    queryFn: getAllPublicaciones,
+    retry: 1,
+    refetchOnWindowFocus: false
+  })
 
   return (
     <div className="container mx-auto  text-secondary p-6 flex flex-col gap-6 ">
@@ -180,9 +163,9 @@ export default function HomePage() {
           <Newspaper className="text-accent" /> Novedades
         </h2>
         <ul className="space-y-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {newsItems.map((item) => (
-              <NewsCard key={item.id} title={item.title} image={item.image} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {isLoadingPublicaciones ? <p>Cargando</p> : publicaciones.map((item) => (
+              <NewsCard key={item.id} title={item.title} image={"/logoSolo.png"} />
             ))}
           </div>
         </ul>

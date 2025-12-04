@@ -1,12 +1,24 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { getAllPublicaciones } from '../../api/GymAPI';
+import Loading from '../../components/Loading';
+import { toast } from 'sonner';
 
 const DashboardPage = () => {
     const [title, setTitle] = useState('');
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState(null);
     const [error, setError] = useState(null);
+    const queryClient = useQueryClient()
 
     const token = localStorage.getItem('AUTH_TOKEN');
+
+    const {data, isLoading: isLoadingPublicaciones, isError, error: errorPublicaciones} = useQuery({
+        queryKey: ["publicaciones"],
+        queryFn: ()=>getAllPublicaciones(),
+        retry: 1,
+        refetchOnWindowFocus: false
+    })
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -19,9 +31,9 @@ const DashboardPage = () => {
         }
 
         setLoading(true);
-
+   
         try {
-            const res = await fetch('http://localhost:4000/api/news', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/news`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,7 +51,7 @@ const DashboardPage = () => {
             }
 
             await res.json();
-            setMsg('Publicación creada correctamente');
+            toast.success(msg)
             setTitle('');
 
         } catch (err) {
@@ -47,18 +59,12 @@ const DashboardPage = () => {
             setError(err.message || 'Error');
         } finally {
             setLoading(false);
+            queryClient.invalidateQueries(["publicacione"])
         }
     };
 
     return (
-        <div
-            style={{
-                maxWidth: 700,
-                margin: "0 auto",
-                padding: 24,
-                background: "#ffffff",
-            }}
-        >
+        <div className='max-w-xl flex flex-col my-10 mx-auto px-5 md:px-0'>
             <h2
                 style={{
                     fontSize: "28px",
@@ -139,6 +145,35 @@ const DashboardPage = () => {
                 <p style={{ color: "red", marginTop: "16px", fontWeight: 600 }}>
                     {error}
                 </p>
+            )}
+
+            {isLoadingPublicaciones ? <p>Cargando</p> : (
+            
+            <div className='flex flex-col gap-5 mt-5'>
+                {data.map(p=>
+                <div 
+                key={p._id}
+                className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-all"
+            >
+
+                <div className="p-4 flex flex-col gap-2">
+                    <h3 className="text-lg font-semibold text-gray-900">
+                        {p.title}
+                    </h3>
+
+                    <p className="text-sm text-gray-500">
+                        Fecha : {new Date(p.createdAt).toLocaleDateString("es-AR")}
+                    </p>
+                   
+                </div>
+            </div>
+            
+            
+            )
+            
+            }
+            </div>
+            
             )}
         </div>
     );

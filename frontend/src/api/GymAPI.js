@@ -337,3 +337,16 @@ export async function createVenta({productos, metodo}){
     }
   }
 }
+
+// Publicaciones
+
+export async function getAllPublicaciones() {
+    try {
+    const { data } = await api.get(`/news`);
+    return data;
+  } catch (error) {
+    if (isAxiosError(error) && error.response) {
+      throw new Error(error.response.data.error);
+    }
+  }
+}
