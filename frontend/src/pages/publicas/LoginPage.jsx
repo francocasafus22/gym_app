@@ -63,7 +63,7 @@ export default function Login() {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen ">
         {/* Lado izquierdo con fondo */}
-        <div className=" flex justify-center items-center  border-accent pt-5 md:py-0 ">
+        <div className=" flex justify-center items-center  border-accent py-5 md:py-0 ">
           <div
             className=" w-2/4
            md:w-1/2 overflow-hidden "
