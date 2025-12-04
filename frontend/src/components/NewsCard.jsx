@@ -50,22 +50,29 @@ export default function NewsCard({ title, image }) {
 
       {/* IMAGEN PRINCIPAL */}
       {image && (
-        <img
-          src={image}
-          alt={title}
+        <div
           style={{
-            width: "100%",
-            height: "auto",
-            borderRadius: "0",
-            marginBottom: "12px",
-            marginTop: "12px",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "16px",
+            marginBottom: "16px",
           }}
-        />
+        >
+          <img
+            src={image}
+            alt={title}
+            style={{
+              maxWidth: "40%",
+              borderRadius: "12px",
+              objectFit: "cover",              
+            }}
+          />
+        </div>
       )}
 
       {/* TÍTULO */}
       <div style={{ padding: "0 16px 16px 16px" }}>
-        <h3 style={{ margin: 0, fontSize: "18px", fontWeight: "700" }}>
+        <h3 style={{ margin: 0, fontSize: "16px", fontWeight: "700" }}>
           {title}
         </h3>
       </div>
