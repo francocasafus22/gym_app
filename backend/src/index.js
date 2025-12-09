@@ -25,7 +25,7 @@ const FRONTEND = process.env.FRONTEND
 const corsOptions = {
   origin: function (origin, callback) {
   
-    if (NODE_ENV === "dev") {
+    if (process.env.NODE_ENV === "dev") {
       if (!origin) return callback(null, true);
       return callback(null, true); // permitir sin origin en dev
     }
