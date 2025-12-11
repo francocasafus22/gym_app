@@ -44,13 +44,12 @@ Todo integrado en una plataforma real usada día a día en Spartan Gym.
 
 
 <div align="center">
-  <img src="https://res.cloudinary.com/db2upqpdq/image/upload/v1765416749/capturas_desktop-admin_kbo16d.png" width="96%"/>
+  <img src="https://res.cloudinary.com/db2upqpdq/image/upload/v1765416749/capturas_desktop-admin_kbo16d.png" width="90%"/>
   <br/><br/>
-
-  <div style="display: flex; justify-content: center; align-items: center;">
-    <img src="https://res.cloudinary.com/db2upqpdq/image/upload/v1765416749/capturas_mobile_user_iwjtib.png" height="350px" />
-    <img src="https://res.cloudinary.com/db2upqpdq/image/upload/v1765416749/captura_dekstop_user_rtobr7.png" height="350px" />
-  </div>
+  <img src="https://res.cloudinary.com/db2upqpdq/image/upload/v1765416749/capturas_mobile_user_iwjtib.png" width="50%"/>
+  <br/><br/>
+  <img src="https://res.cloudinary.com/db2upqpdq/image/upload/v1765416749/captura_dekstop_user_rtobr7.png" width="90%" />
+  
 </div>
 
 
